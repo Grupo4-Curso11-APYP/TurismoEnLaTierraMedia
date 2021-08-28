@@ -3,60 +3,38 @@ package turismoEnLaTierraMediaGrupo4;
 import java.util.Objects;
 
 public class Usuario {
-	private int tiempoParaVisita;
-	private double presupuesto;
-	private TipoDeAtraccion atraccionFavorita;
-	private  Atraccion [] usuarioAtraccion;
+	private String nombre;
+	private float presupuesto;
+	private float tiempoDisponible;
+	private TipoAtraccion tipoFavorito;
+	private Atraccion [] atracciones;
+	private PromocionBase [] promociones;
 	
 	
 
-	public Usuario(int tiempoParaVisita, double presupuesto, TipoDeAtraccion atraccionFavorita) {
-		super();
-		this.tiempoParaVisita = tiempoParaVisita;
+	public Usuario(String nombre, float presupuesto, float tiempoDisponible, TipoAtraccion tipoFavorito) {
+		this.tiempoDisponible = tiempoDisponible;
 		this.presupuesto = presupuesto;
-		this.atraccionFavorita = atraccionFavorita;
-		this.usuarioAtraccion = new Atraccion[0];
+		this.tipoFavorito = tipoFavorito;
+		this.atracciones = new Atraccion[0];
+		this.promociones = new PromocionPorcentual[0];
 	}
 
-	public int getTiempoParaVisita() {
-		return tiempoParaVisita;
+	public int getTiempoDisponible() {
+		return this.tiempoDisponible;
 	}
 
 	public double getPresupuesto() {
-		return presupuesto;
+		return this.presupuesto;
 	}
 
-	public TipoDeAtraccion getAtraccionFavorita() {
-		return atraccionFavorita;
+	public TipoAtraccion getTipoFavorito() {
+		return this.tipoFavorito;
 	}
-
 	
-
-	public Atraccion[] getUsuarioAtraccion() {
-		return usuarioAtraccion;
-	}
-
-	public void setUsuarioAtraccion(Atraccion[] usuarioAtraccion) {
-		this.usuarioAtraccion = usuarioAtraccion;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(atraccionFavorita, presupuesto, tiempoParaVisita);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Usuario other = (Usuario) obj;
-		return Objects.equals(atraccionFavorita, other.atraccionFavorita)
-				&& Double.doubleToLongBits(presupuesto) == Double.doubleToLongBits(other.presupuesto)
-				&& tiempoParaVisita == other.tiempoParaVisita;
+	public String Itinerario() {
+		
+		return "algo";
 	}
 
 }
