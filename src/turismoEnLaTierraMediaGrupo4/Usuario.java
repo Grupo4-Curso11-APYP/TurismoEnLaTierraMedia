@@ -10,12 +10,12 @@ public class Usuario {
 	
 	
 
-	public Usuario(int tiempoParaVisita, double presupuesto, TipoDeAtraccion atraccionFavorita,int indice) {
+	public Usuario(int tiempoParaVisita, double presupuesto, TipoDeAtraccion atraccionFavorita) {
 		super();
 		this.tiempoParaVisita = tiempoParaVisita;
 		this.presupuesto = presupuesto;
 		this.atraccionFavorita = atraccionFavorita;
-		this.usuarioAtraccion = new Atraccion[indice];
+		this.usuarioAtraccion = new Atraccion[0];
 	}
 
 	public int getTiempoParaVisita() {
