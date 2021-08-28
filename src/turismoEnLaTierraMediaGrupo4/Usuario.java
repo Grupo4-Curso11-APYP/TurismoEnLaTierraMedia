@@ -13,18 +13,19 @@ public class Usuario {
 	
 
 	public Usuario(String nombre, float presupuesto, float tiempoDisponible, TipoAtraccion tipoFavorito) {
-		this.tiempoDisponible = tiempoDisponible;
+		this.nombre = nombre;
 		this.presupuesto = presupuesto;
+		this.tiempoDisponible = tiempoDisponible;
 		this.tipoFavorito = tipoFavorito;
 		this.atracciones = new Atraccion[0];
 		this.promociones = new PromocionPorcentual[0];
 	}
 
-	public int getTiempoDisponible() {
+	public float getTiempoDisponible() {
 		return this.tiempoDisponible;
 	}
 
-	public double getPresupuesto() {
+	public float getPresupuesto() {
 		return this.presupuesto;
 	}
 
