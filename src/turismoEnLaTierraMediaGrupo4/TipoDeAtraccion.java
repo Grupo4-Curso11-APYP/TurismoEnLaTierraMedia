@@ -1,5 +1,5 @@
 package turismoEnLaTierraMediaGrupo4;
 
-public enum TipoDeAtraccion {
-          
+public enum TipoAtraccion {
+          AVENTURA, DEGUSTACION, PAISAJE
 }
