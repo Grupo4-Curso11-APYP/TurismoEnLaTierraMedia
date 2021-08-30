@@ -2,8 +2,8 @@ package turismoEnLaTierraMediaGrupo4;
 
 import java.util.Objects;
 
-public class Atraccion implements Comparable<Atraccion> {
 
+public class Atraccion{
 	protected int costo;
 	protected int tiempo;
 	protected int cupoDisponible;
@@ -69,10 +69,7 @@ public class Atraccion implements Comparable<Atraccion> {
 	        }
 	       //Se debe tirar excepción o algo acá
 	    }
-	
-	@Override
-	public int compareTo(Atraccion o) {
-		  return new Integer(this.getCosto()).compareTo(o.getCosto());
-	}
+
+
 
 }

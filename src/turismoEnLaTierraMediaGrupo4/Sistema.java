@@ -23,16 +23,19 @@ public class Sistema {
 	public Usuario[] sugerir(Usuario usuario) {
 		Usuario[] lista = new Usuario[usuarios.length];
 
+		
+		  
 		for (Usuario usuario1 : lista) {	
 			for (int i = 0; i < lista.length; i++) {
 				try {
+					while(!atraccion[i].llena()) {
 					if ((usuario1.getTipoFavorito().equals(usuario.getPromociones()[i].getTipo()))
 							&& (usuario1.getPresupuesto()) >= usuario.getPromociones()[i].getCosto()
 							&& usuario1.getTiempoDisponible() >= usuario.getPromociones()[i].getTiempo()) {
 
 						lista[i] = usuario1;
 
-					}
+					}}
 				} catch (ArrayIndexOutOfBoundsException a) {
 					System.out.println("la posicion a la cual esta queriendo acceder esta fuera del limite del array");
 				}
@@ -41,8 +44,10 @@ public class Sistema {
 		return lista;
 }
 	
-	
-	public void ordenar(Comparator c) {
+	/*
+	 * @Param c  se pasa por parametro el criterio por el cual se va a ordenar
+	 */
+	public void ordenar(Comparator<Atraccion> c) {
 		Arrays.sort(atraccion, c);;
 	}
 	
