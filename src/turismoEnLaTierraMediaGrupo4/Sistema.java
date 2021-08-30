@@ -1,11 +1,14 @@
 package turismoEnLaTierraMediaGrupo4;
 
-public class Sistema {
+import java.util.Arrays;
+import java.util.Comparator;
 
+public class Sistema {
+ protected Atraccion [] atraccion;
 	protected Usuario[] usuarios;
 
 	public Sistema(int numAtracciones, int numPromociones, int numUsuarios) {
-
+     this.atraccion = new Atraccion[numAtracciones];
 		this.usuarios = new Usuario[numUsuarios];
 	}
 
@@ -20,8 +23,7 @@ public class Sistema {
 	public Usuario[] sugerir(Usuario usuario) {
 		Usuario[] lista = new Usuario[usuarios.length];
 
-		for (int j = 0; j < usuarios.length; j++) {
-			Usuario usuario1 = usuarios[j];
+		for (Usuario usuario1 : lista) {	
 			for (int i = 0; i < lista.length; i++) {
 				try {
 					if ((usuario1.getTipoFavorito().equals(usuario.getPromociones()[i].getTipo()))
@@ -34,10 +36,16 @@ public class Sistema {
 				} catch (ArrayIndexOutOfBoundsException a) {
 					System.out.println("la posicion a la cual esta queriendo acceder esta fuera del limite del array");
 				}
-			}
-		}
+			}}
+		
 		return lista;
+}
+	
+	
+	public void ordenar(Comparator c) {
+		Arrays.sort(atraccion, c);;
 	}
+	
 
 	// errores que veo tanto en esta como la de joa es que al iinvocar getCosto() no
 	// se sabe a que promocion esta dirigiendose

@@ -72,8 +72,7 @@ public class Atraccion implements Comparable<Atraccion> {
 	
 	@Override
 	public int compareTo(Atraccion o) {
-		// TODO Auto-generated method stub
-		return 0;
+		  return new Integer(this.getCosto()).compareTo(o.getCosto());
 	}
 
 }
