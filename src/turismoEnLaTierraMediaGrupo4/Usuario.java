@@ -6,11 +6,12 @@ public class Usuario {
 	private String nombre;
 	private float presupuesto;
 	private float tiempoDisponible;
-	private TipoAtraccion tipoFavorito;
-	private Atraccion [] atracciones;
+	private TipoAtraccion  tipoFavorito;
+	private Atraccion[]  atracciones;
 	private PromocionBase [] promociones;
 	
-	
+
+
 
 	public Usuario(String nombre, float presupuesto, float tiempoDisponible, TipoAtraccion tipoFavorito) {
 		this.nombre = nombre;
@@ -33,9 +34,26 @@ public class Usuario {
 		return this.tipoFavorito;
 	}
 	
+	
+	public Atraccion[] getAtracciones() {
+		return atracciones;
+	}
+
+
+
+	public PromocionBase [] getPromociones() {
+		return promociones;
+	}
+	
+	
+	
+	
+	// se mostrara un resumen del itinerario del usuario , posiblemente se guarde en un archivo  
 	public String Itinerario() {
 		
 		return "algo";
 	}
+	
+	
 
 }

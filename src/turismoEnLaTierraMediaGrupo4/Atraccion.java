@@ -4,53 +4,45 @@ import java.util.Objects;
 
 public class Atraccion implements Comparable<Atraccion> {
 
-	protected int costoDeVisita;
-	protected double promedioDeVisita;
-	protected int cupoDePersonas;
-	private TipoDeAtraccion tipoAtraccion;
-	private String nombreAtraccion;
-	private Usuario usuario;
+	protected int costo;
+	protected int tiempo;
+	protected int cupoDisponible;
+	private TipoAtraccion tipoAtraccion;
+	private String nombre;
+	
 
-	public Atraccion(int costoDeVisita, double promedioDeVisita, int cupoDePersonas, TipoDeAtraccion tipoAtraccion,
-			String nombreAtraccion, Usuario usuario) {
-		
-		this.costoDeVisita = costoDeVisita;
-		this.promedioDeVisita = promedioDeVisita;
-		this.cupoDePersonas = cupoDePersonas;
+
+
+	public Atraccion(int costo, int tiempo, int cupoDisponible, TipoAtraccion tipoAtraccion, String nombre,
+			Usuario usuario) {
+		super();
+		this.costo = costo;
+		this.tiempo = tiempo;
+		this.cupoDisponible = cupoDisponible;
 		this.tipoAtraccion = tipoAtraccion;
-		this.nombreAtraccion = nombreAtraccion;
-		this.usuario = usuario;
+		this.nombre = nombre;
+	
 	}
 
-	public int getCostoDeVisita() {
-		return costoDeVisita;
+	public double getTiempo() {
+		return tiempo;
 	}
 
-	public double getPromedioDeVisita() {
-		return promedioDeVisita;
+	public int getCosto() {
+		return costo;
 	}
 
-	public int getCupoDePersonas() {
-		return cupoDePersonas;
+	public int getCupoDisponible() {
+		return cupoDisponible;
 	}
 
-	public TipoDeAtraccion getTipoAtraccion() {
-		return tipoAtraccion;
-	}
-
-	public String getNombreAtraccion() {
-		return nombreAtraccion;
-	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
 	
 	
-
+	
+	
 	@Override
 	public int hashCode() {
-		return Objects.hash(costoDeVisita, cupoDePersonas, nombreAtraccion, promedioDeVisita, usuario);
+		return Objects.hash(costo, nombre, tiempo, tipoAtraccion);
 	}
 
 	@Override
@@ -62,26 +54,26 @@ public class Atraccion implements Comparable<Atraccion> {
 		if (getClass() != obj.getClass())
 			return false;
 		Atraccion other = (Atraccion) obj;
-		return costoDeVisita == other.costoDeVisita && Objects.equals(cupoDePersonas, other.cupoDePersonas)
-				&& Objects.equals(nombreAtraccion, other.nombreAtraccion)
-				&& Double.doubleToLongBits(promedioDeVisita) == Double.doubleToLongBits(other.promedioDeVisita)
-				&& Objects.equals(usuario, other.usuario);
+		return costo == other.costo && Objects.equals(nombre, other.nombre) && tiempo == other.tiempo
+				&& tipoAtraccion == other.tipoAtraccion;
 	}
 
+	
+	   public boolean llena() {
+	        return (this.cupoDisponible <= 0);
+	    }
+
+	    public void reservarCupo() {
+	        if (!this.llena()) {
+	            this.cupoDisponible -= 1;
+	        }
+	       //Se debe tirar excepción o algo acá
+	    }
+	
 	@Override
 	public int compareTo(Atraccion o) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
-	public String toString() {
-		return "Atraccion [costoDeVisita=" + costoDeVisita + ", promedioDeVida=" + promedioDeVisita + ", cupoDePersonas="
-				+ cupoDePersonas + ", tipoAtraccion=" + tipoAtraccion + ", nombreAtraccion=" + nombreAtraccion
-				+ ", usuario=" + usuario + "]";
-	}
-
-	
-	
-	
 }
