@@ -5,11 +5,13 @@ import java.util.Comparator;
 public class MayorCostoDeAtraccion  implements Comparator<Atraccion>{
 
 	
-	@SuppressWarnings("deprecation")
+	
 	@Override
 	public int compare(Atraccion o1, Atraccion o2) {
 
-		  return new Integer( o1.getCosto()).compareTo( o2.getCosto());
+		// corregi el metodo ya que investigue en javaDoc  que la manera en  que yo lo hacia estaba  obsoleta 
+		
+		  return Integer.compare(o1.getCosto(), o2.getCosto());
 	}
 
 

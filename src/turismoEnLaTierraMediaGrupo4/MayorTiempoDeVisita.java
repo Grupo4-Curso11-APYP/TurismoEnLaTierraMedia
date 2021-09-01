@@ -4,11 +4,11 @@ import java.util.Comparator;
 
 public class MayorTiempoDeVisita  implements Comparator<Atraccion>{
 
-	@SuppressWarnings("deprecation")
+	
 	@Override
 	public int compare(Atraccion o1, Atraccion o2) {
 
-		  return new Double( o1.getTiempo()).compareTo( o2.getTiempo());
+		  return Double.compare(o1.getTiempo(), o2.getTiempo());
 	}
 
 }
