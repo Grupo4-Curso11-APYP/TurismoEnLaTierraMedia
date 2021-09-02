@@ -17,5 +17,7 @@ public class MayorCostoDeAtraccion  implements Comparator<Atraccion>{
 	// Esa manera ordena de menor a mayor, según nos enseñaron para ordenar de mayor a menor tendría que ser así si no me equivoco: 
 	// return -1 * new MayorCostoDeAtraccion().compare(o1, o2);
 
+	// no hace falta porque hacer todo eso (tambien es valido) pero con cambiar el orden de ordenacion ya los compara distinto ,
+	//es decir en ves de poner o1.compare.o2  simplemente lo damos vuelta
 
 }
