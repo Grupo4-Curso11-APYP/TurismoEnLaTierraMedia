@@ -1,17 +1,23 @@
 package turismoEnLaTierraMediaGrupo4;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.Scanner;
 
 public class Sistema {
 	protected List<Atraccion> atraccion;
 	protected List<Usuario> usuarios;
 	protected List<PromocionBase> promocion;
 
+	/*
+	 * Se inicializan las listas en ArrayList<>
+	 */
 	public Sistema() {
 		this.atraccion = new ArrayList<>();
 		this.promocion = new ArrayList<>();
@@ -42,23 +48,34 @@ public class Sistema {
 	}
 
 	/*
-	 * @Param c se pasa por parametro el criterio por el cual se va a ordenar
+	 * se ordena por criterio de Mayor Costo De Atraccion
 	 */
 	public void ordenarPorCostoDeAtraccion() {
-	Collections.sort(atraccion,new MayorCostoDeAtraccion());
+		Collections.sort(atraccion, new MayorCostoDeAtraccion());
 
 	}
-	
+
+	/*
+	 * se ordena por criterio de Mayor Tiempo De Visita
+	 */
 	public void ordenarPorTiempoDeVisita() {
-		Collections.sort(atraccion,new MayorTiempoDeVisita());
+		Collections.sort(atraccion, new MayorTiempoDeVisita());
 
-		}
+	}
 
+	/*
+	 * @Param usuario se pasa por parametro un usuario el cual se va a agregar a la
+	 * lista
+	 * 
+	 */
 	public void nuevoUsuario(Usuario usuario) {
 		usuarios.add(usuario);
 
 	}
-
+/*
+ * @Param atrac  se pasa por parametro una atraccion la  cual se va a agregar a la
+	 * lista
+ */
 	public void nuevaAtraccion(Atraccion atrac) {
 		atraccion.add(atrac);
 
@@ -82,19 +99,28 @@ public class Sistema {
 				&& Objects.equals(usuarios, other.usuarios);
 	}
 
+	/*
+	 *  devuelve la lista de atracciones
+	 */
 	public List<Atraccion> getAtraccion() {
 		return atraccion;
 	}
 
+	/*
+	 *  devuelve la lista de usuarios
+	 */
 	public List<Usuario> getUsuarios() {
-//		for (int i = 0; i < usuarios.size(); i++) {
-//			
-//			
-//		}
+
 		return usuarios;
 	}
 
+	
+	 /*
+	  *  
+	  */
 	public List<PromocionBase> getPromocion() {
+		
+		
 		return promocion;
 	}
 
@@ -106,6 +132,7 @@ public class Sistema {
 	public void nuevaPromocionPorcentual(String string, List<Atraccion> listAtraccion, int descuento,
 			TipoAtraccion aventura) {
 		promocion.add(new PromocionPorcentual(string, listAtraccion, aventura, descuento));
+		
 
 	}
 
@@ -121,4 +148,37 @@ public class Sistema {
 
 	}
 
+ 
+	public void obtenerPromocion(String archivo){
+		List<PromocionPorcentual> listaPromocion = new ArrayList<>();
+		Scanner sc = null;
+		try {
+			sc = new Scanner(new File(archivo));
+
+			while (sc.hasNext()) {
+				// leo cada linea del archivo
+				String linea = sc.nextLine();
+				String datos[] = linea.split(",");
+				// creo una Persona a partir de los datos leídos de la línea.
+				String nombre= datos[0];
+//				Atraccion atracci = datos[1];
+			  int descuento = Integer.parseInt(datos[2]);
+			  String tipo  = datos[3];
+				// agrego esa persona a la lista, siempre y cuando no esté repetida
+			  
+//			PromocionPorcentual pp = new PromocionPorcentual(nombre, atracci, tipo, descuento);
+
+//				if ( ! listaPromocion.contains(pp)) {
+//					 listaPromocion.add(pp);
+//			}
+		}} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		// cierro el archivo
+		sc.close();
+
+		
+	}
+	
+	
 }
