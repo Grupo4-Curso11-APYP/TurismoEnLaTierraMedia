@@ -2,6 +2,7 @@ package turismoEnLaTierraMediaGrupo4;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
@@ -43,10 +44,15 @@ public class Sistema {
 	/*
 	 * @Param c se pasa por parametro el criterio por el cual se va a ordenar
 	 */
-	public void ordenar(Comparator<Atraccion> c) {
-		atraccion.sort(c);
+	public void ordenarPorCostoDeAtraccion() {
+	Collections.sort(atraccion,new MayorCostoDeAtraccion());
 
 	}
+	
+	public void ordenarPorTiempoDeVisita() {
+		Collections.sort(atraccion,new MayorTiempoDeVisita());
+
+		}
 
 	public void nuevoUsuario(Usuario usuario) {
 		usuarios.add(usuario);

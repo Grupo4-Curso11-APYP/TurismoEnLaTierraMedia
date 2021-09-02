@@ -76,14 +76,32 @@ public class SistemaTest {
 	public void agregarNuevaPromocionAxBAlSistema() {
 
 		List<Atraccion> listAtraccion = new  ArrayList<>(); 
-        Atraccion atraccionGratis = new Atraccion("Gratis", 10, 3.5, 10, TipoAtraccion.AVENTURA);
+        Atraccion atraccionGratis = new Atraccion("Gratis", 10, 3.5, 8, TipoAtraccion.AVENTURA);
 		sistema.nuevaPromocionAxB("Pack aventura", listAtraccion, TipoAtraccion.AVENTURA,atraccionGratis);
 
 		assertEquals("Pack aventura", sistema.getPromocion().get(0).getNombre());
 	}
 	
 	
+	@Test
+	public void  deberiaOrdenarLasAtraccionesPorMayorCosto() {
+	     
+		Atraccion a1 = new Atraccion("Minas Tirith", 5, 2.5, 25, TipoAtraccion.PAISAJE);
+		Atraccion a2 = new Atraccion(" La Casona", 2, 1.5, 10, TipoAtraccion.DEGUSTACION);
+		sistema.ordenarPorCostoDeAtraccion();
+		assertEquals(true,a1.equals(sistema.getAtraccion().get(0)) );
+		assertEquals(true, a2.equals(sistema.getAtraccion().get(2)));
+	}
 	
-	
+
+	@Test
+	public void  deberiaOrdenarLasAtraccionesPorMayorTiempo() {
+	     
+		Atraccion a1 = new Atraccion("Minas Tirith", 5, 2.5, 25, TipoAtraccion.PAISAJE);
+		Atraccion a2 = new Atraccion(" La Casona", 2, 1.5, 10, TipoAtraccion.DEGUSTACION);
+		sistema.ordenarPorTiempoDeVisita();
+		assertEquals(true,a1.equals(sistema.getAtraccion().get(1)) );
+		assertEquals(true, a2.equals(sistema.getAtraccion().get(0)));
+	}
 	
 }
