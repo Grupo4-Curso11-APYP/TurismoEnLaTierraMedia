@@ -11,7 +11,7 @@ public class MayorCostoDeAtraccion  implements Comparator<Atraccion>{
 
 		// corregi el metodo ya que investigue en javaDoc  que la manera en  que yo lo hacia estaba  obsoleta 
 		
-		  return Integer.compare(o1.getCosto(), o2.getCosto());
+		  return Integer.compare(o2.getCosto(), o1.getCosto());
 	}
 	
 	// Esa manera ordena de menor a mayor, según nos enseñaron para ordenar de mayor a menor tendría que ser así si no me equivoco: 
