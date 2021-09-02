@@ -18,6 +18,6 @@ public class MayorCostoDeAtraccion  implements Comparator<Atraccion>{
 	// return -1 * new MayorCostoDeAtraccion().compare(o1, o2);
 
 	// no hace falta porque hacer todo eso (tambien es valido) pero con cambiar el orden de ordenacion ya los compara distinto ,
-	//es decir en ves de poner o1.compare.o2  simplemente lo damos vuelta
+	//es decir en ves de poner o1.compare.o2  simplemente lo damos vuelta y ahora que vamos a usar arraylist mas facil todavia porque tenemos ReverseOrder() para usar 
 
 }
