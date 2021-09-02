@@ -1,33 +1,30 @@
 package turismoEnLaTierraMediaGrupo4;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class PromocionBase {
 
 	private String nombre;
-	protected Atraccion[] packAtracciones;
+	protected List<Atraccion> packAtracciones;
 	private TipoAtraccion tipo;
 
-	// las clases abstractas no instancian por lo que solo iniciaria el array en el
-	// constructor
-	public PromocionBase(int numAtraccionesEnPromo) {
-		this.packAtracciones = new Atraccion[numAtraccionesEnPromo];
-
+	
+	public PromocionBase(String nombre,List<Atraccion> atraccion, TipoAtraccion tipo) {
+	this.packAtracciones = atraccion;
+    this.nombre = nombre;
+    this.tipo = tipo;
 	}
 
+	public PromocionBase() {
+		this.packAtracciones = new ArrayList<>();
+	}
 	
 	
 // metodo para agregar atracciones al packDeAtracciones  
 	
 	public void agregar(Atraccion a) {
-		// Crear nuevoArray con length = array.length + 1
-		Atraccion[] arrayAuxiliar = new Atraccion[packAtracciones.length + 1];
-		// Copiar los valores de array en otro array nuevoArray
-		for (int i = 0; i < packAtracciones.length; i++) {
-			arrayAuxiliar[i] = packAtracciones[i];
-		}
-		// Poner el nuevo valor en nuevoArray
-		arrayAuxiliar[arrayAuxiliar.length - 1] = a;
-		// Sobreescribir el valor de array
-		this.packAtracciones = arrayAuxiliar;
+	 packAtracciones.add(a);
 	}
 
 	public String getNombre() {
@@ -59,8 +56,8 @@ public abstract class PromocionBase {
 	public boolean llena() {
 		boolean atraccion = false;
 
-    	for(int i = 0; i < packAtracciones.length; i++){
-    	    if(packAtracciones[i].cupoDisponible <= 0){
+   for (Atraccion atra : packAtracciones) {
+	    	    if(atra.cupoDisponible <= 0){
     	        atraccion = true;
     	    }
     	}

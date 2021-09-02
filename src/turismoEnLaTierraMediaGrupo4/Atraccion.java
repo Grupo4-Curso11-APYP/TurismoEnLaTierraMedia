@@ -5,24 +5,21 @@ import java.util.Objects;
 
 public class Atraccion{
 	protected int costo;
-	protected int tiempo;
+	protected double tiempo;
 	protected int cupoDisponible;
 	private TipoAtraccion tipoAtraccion;
 	private String nombre;
 	
 
+public Atraccion(String nombre,int costo,double tiempo,int cupoDisponible,TipoAtraccion tipo) {
+	this.nombre = nombre;
+	this.costo = costo;
+	this.tiempo = tiempo;
+	this.cupoDisponible =   cupoDisponible;
+	this.tipoAtraccion = tipo;
+}
 
 
-	public Atraccion(int costo, int tiempo, int cupoDisponible, TipoAtraccion tipoAtraccion, String nombre,
-			Usuario usuario) {
-		super();
-		this.costo = costo;
-		this.tiempo = tiempo;
-		this.cupoDisponible = cupoDisponible;
-		this.tipoAtraccion = tipoAtraccion;
-		this.nombre = nombre;
-	
-	}
 
 	public double getTiempo() {
 		return tiempo;

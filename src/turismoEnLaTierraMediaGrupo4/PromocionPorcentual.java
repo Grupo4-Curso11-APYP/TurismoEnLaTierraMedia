@@ -1,14 +1,15 @@
 package turismoEnLaTierraMediaGrupo4;
 
+import java.util.List;
+
 public class PromocionPorcentual extends PromocionBase {
+
 	private double descuento;
 
-    public PromocionPorcentual(int numAtraccionesEnPromo, 
-             double descuento) {
-        super(numAtraccionesEnPromo);
-//        this.packAtracciones = new Atraccion[numAtraccionesEnPromo];  no es necesario inicializar el array cada vez que se crea una clase ya que se inicializo en la clase padre
-        this.descuento = descuento;
-    }
+	public PromocionPorcentual(String nombre, List<Atraccion> packAtracciones,TipoAtraccion tipo,double descuento ) {
+		super(nombre, packAtracciones, tipo);
+		this.descuento = descuento;
+	}
 
     
     // realiza  el descuento porcentual   para un pack de atracciones 

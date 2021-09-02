@@ -1,16 +1,19 @@
 package turismoEnLaTierraMediaGrupo4;
 
-public class PromocionesAxB extends PromocionBase {
+import java.util.List;
+
+public class PromocionAxB extends PromocionBase {
 
 	private Atraccion atraccionGratis;
 
-	public PromocionesAxB(String nombre, int numAtraccionesEnPromo, TipoAtraccion tipo, Atraccion atraccionGratis) {
-		super(numAtraccionesEnPromo);
+	
 
+	
+	public PromocionAxB(String nombre, List<Atraccion> atraccion, TipoAtraccion tipo,Atraccion atraccionGratis) {
+		super(nombre, atraccion, tipo);
 		this.atraccionGratis = atraccionGratis;
 	}
 
-	
 	// se calcula el descuento de estas promociones y a su vez  se le deposita a usuario una nueva atraccion 
 	@Override
 	public double getCosto() {
@@ -38,21 +41,20 @@ public class PromocionesAxB extends PromocionBase {
 		return null;
 	}
 
-	@Override
-	public boolean llena() {
-		boolean atraccion = false;
-
-		for (int i = 0; i < packAtracciones.length; i++) {
-			if (packAtracciones[i].cupoDisponible <= 0 && getAtraccionGratis().cupoDisponible <= 0) {
-				atraccion = true;
-			}
-		}
-		if (atraccion == false) {
-			System.out.println("Array is full");
-
-		}
-		return atraccion;
-	}
+//	@Override
+//	public boolean llena() {
+//		boolean atraccion = false;
+//
+//		for (Atraccion atraccion : packAtracciones) {
+//
+//		
+//			if (packAtracciones[i].cupoDisponible <= 0 && getAtraccionGratis().cupoDisponible <= 0) {
+//				atraccion = true;
+//			}
+//		}
+//	
+//		return atraccion;
+//	}
 
 	public Atraccion getAtraccionGratis() {
 		return atraccionGratis;

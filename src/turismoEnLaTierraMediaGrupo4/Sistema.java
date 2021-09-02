@@ -1,58 +1,118 @@
 package turismoEnLaTierraMediaGrupo4;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
+import java.util.Objects;
 
 public class Sistema {
-	protected Atraccion[] atraccion;
-	protected Usuario[] usuarios;
-	protected PromocionBase[] promocion;
+	protected List<Atraccion> atraccion;
+	protected List<Usuario> usuarios;
+	protected List<PromocionBase> promocion;
 
-	public Sistema(int numAtracciones, int numPromociones, int numUsuarios) {
-		this.atraccion = new Atraccion[numAtracciones];
-		this.usuarios = new Usuario[numUsuarios];
-		this.promocion = new PromocionBase[numPromociones];
+	public Sistema() {
+		this.atraccion = new ArrayList<>();
+		this.promocion = new ArrayList<>();
+		this.usuarios = new ArrayList<>();
 	}
 
 	/*
-	 * @Param  se pasa por parametro una lista de usuarios 
-	 *  @Variable  cant  sirve para cuando se cumple la condicion valla contrando todas las que cumplen
-	 *  @variable indice  es para que pueda recorrer el segundo arrayy donde se van a guardar las sugerencias 
-	 *  ahora si funciona xdxd
+	 * @Param se pasa por parametro una lista de usuarios
+	 * 
+	 * @Variable cant sirve para cuando se cumple la condicion valla contrando todas
+	 * las que cumplen
+	 * 
+	 * @variable indice es para que pueda recorrer el segundo arrayy donde se van a
+	 * guardar las sugerencias ahora si funciona xdxd
 	 */
-	public Usuario[] sugerir(Usuario usuarioList[]) {
-		int cant = 0;
-		int indice = 0;
-		for (Usuario usuario1 : usuarioList) {
-			for (PromocionBase pr : promocion) {
-				while(!pr.llena()) {
-				if ((usuario1.getTipoFavorito().equals(pr.getTipo())) && (usuario1.getPresupuesto()) >= pr.getCosto()
-						&& usuario1.getTiempoDisponible() >= pr.getTiempo()) {
-					cant++;
-				}
-			}}}	
-		this.usuarios =new Usuario[cant];
-		for (Usuario usuario2 : usuarioList) {
-		for(PromocionBase pr2 : promocion) {		
-			if ((usuario2.getTipoFavorito().equals(pr2.getTipo())) && (usuario2.getPresupuesto()) >= pr2.getCosto()
-					&& usuario2.getTiempoDisponible() >= pr2.getTiempo()) {
-				usuarios[indice] = usuario2;
-				indice++;
-			}	
-		}}
+	public List<Usuario> sugerir(Usuario usuario) {
+		List<Usuario> usuari = new ArrayList<>();
 
-		return usuarios;
+		for (PromocionBase pr : promocion) {
+			if ((usuario.getTipoFavorito().equals(pr.getTipo())) && (usuario.getPresupuesto()) >= pr.getCosto()
+					&& usuario.getTiempoDisponible() >= pr.getTiempo()) {
+				usuari.add(usuario);
+			}
+		}
+
+		return usuari;
+
 	}
 
 	/*
 	 * @Param c se pasa por parametro el criterio por el cual se va a ordenar
 	 */
 	public void ordenar(Comparator<Atraccion> c) {
-		Arrays.sort(atraccion, c);
-		;
+		atraccion.sort(c);
+
 	}
 
-	// errores que veo tanto en esta como la de joa es que al iinvocar getCosto() no
-	// se sabe a que promocion esta dirigiendose
+	public void nuevoUsuario(Usuario usuario) {
+		usuarios.add(usuario);
+
+	}
+
+	public void nuevaAtraccion(Atraccion atrac) {
+		atraccion.add(atrac);
+
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(atraccion, promocion, usuarios);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Sistema other = (Sistema) obj;
+		return Objects.equals(atraccion, other.atraccion) && Objects.equals(promocion, other.promocion)
+				&& Objects.equals(usuarios, other.usuarios);
+	}
+
+	public List<Atraccion> getAtraccion() {
+		return atraccion;
+	}
+
+	public List<Usuario> getUsuarios() {
+//		for (int i = 0; i < usuarios.size(); i++) {
+//			
+//			
+//		}
+		return usuarios;
+	}
+
+	public List<PromocionBase> getPromocion() {
+		return promocion;
+	}
+
+	@Override
+	public String toString() {
+		return "Sistema [atraccion=" + atraccion + ", usuarios=" + usuarios + ", promocion=" + promocion + "]";
+	}
+
+	public void nuevaPromocionPorcentual(String string, List<Atraccion> listAtraccion, int descuento,
+			TipoAtraccion aventura) {
+		promocion.add(new PromocionPorcentual(string, listAtraccion, aventura, descuento));
+
+	}
+
+	public void nuevaPromocionAbsoluta(String string, List<Atraccion> listAtraccion, int monto,
+			TipoAtraccion aventura) {
+		promocion.add(new PromocionAbsoluta(string, listAtraccion, aventura, monto));
+
+	}
+
+	public void nuevaPromocionAxB(String string, List<Atraccion> listAtraccion, TipoAtraccion aventura,
+			Atraccion atraccionGratis) {
+		promocion.add(new PromocionAxB(string, listAtraccion, aventura, atraccionGratis));
+
+	}
 
 }
