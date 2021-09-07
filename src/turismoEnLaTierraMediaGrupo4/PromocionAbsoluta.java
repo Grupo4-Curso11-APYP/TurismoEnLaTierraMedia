@@ -6,7 +6,7 @@ public class PromocionAbsoluta extends PromocionBase {
 
 	private double monto;
 
-	public PromocionAbsoluta(String nombre,List<Atraccion> packAtracciones, TipoAtraccion tipo, double monto) {
+	public PromocionAbsoluta(String nombre,Atraccion []packAtracciones, TipoAtraccion tipo, double monto) {
 		super(nombre, packAtracciones, tipo);
 		this.monto = monto;
 	}
@@ -32,5 +32,7 @@ public class PromocionAbsoluta extends PromocionBase {
 	public double getMonto() {
 		return monto;
 	}
+
+	
 
 }

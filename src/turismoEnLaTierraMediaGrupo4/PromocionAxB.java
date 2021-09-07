@@ -9,7 +9,7 @@ public class PromocionAxB extends PromocionBase {
 	
 
 	
-	public PromocionAxB(String nombre, List<Atraccion> atraccion, TipoAtraccion tipo,Atraccion atraccionGratis) {
+	public PromocionAxB(String nombre, Atraccion[] atraccion, TipoAtraccion tipo,Atraccion atraccionGratis) {
 		super(nombre, atraccion, tipo);
 		this.atraccionGratis = atraccionGratis;
 	}
@@ -41,23 +41,31 @@ public class PromocionAxB extends PromocionBase {
 		return null;
 	}
 
-//	@Override
-//	public boolean llena() {
-//		boolean atraccion = false;
-//
-//		for (Atraccion atraccion : packAtracciones) {
-//
-//		
-//			if (packAtracciones[i].cupoDisponible <= 0 && getAtraccionGratis().cupoDisponible <= 0) {
-//				atraccion = true;
-//			}
-//		}
-//	
-//		return atraccion;
-//	}
+
+	
 
 	public Atraccion getAtraccionGratis() {
 		return atraccionGratis;
 	}
+
+
+	public boolean hayCupo() {
+
+		return ((this.packAtracciones[0].getCupoDisponible() > 0) && 
+				(this.packAtracciones[1].getCupoDisponible() > 0) && this.atraccionGratis.getCupoDisponible() >0);
+	}
+	
+	@Override 
+	public void reservarCupo() {
+		for (Atraccion atraccion : packAtracciones) {
+			atraccion.cupoDisponible -= 1;
+			
+		}
+		atraccionGratis.cupoDisponible -=1;
+	}
+
+
+
+	
 
 }

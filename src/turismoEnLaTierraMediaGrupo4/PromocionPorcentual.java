@@ -6,7 +6,7 @@ public class PromocionPorcentual extends PromocionBase {
 
 	private double descuento;
 
-	public PromocionPorcentual(String nombre, List<Atraccion> packAtracciones,TipoAtraccion tipo,double descuento ) {
+	public PromocionPorcentual(String nombre, Atraccion [] packAtracciones,TipoAtraccion tipo,double descuento ) {
 		super(nombre, packAtracciones, tipo);
 		this.descuento = descuento;
 	}
@@ -34,6 +34,8 @@ public class PromocionPorcentual extends PromocionBase {
     public double getDescuento() {
         return descuento;
     }
+
+
 
 }
 
