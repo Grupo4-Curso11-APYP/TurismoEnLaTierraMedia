@@ -1,7 +1,9 @@
 package turismoEnLaTierraMediaGrupo4;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public abstract class PromocionBase implements Ofertable {
 
@@ -54,7 +56,7 @@ public abstract class PromocionBase implements Ofertable {
 			atraccion.cupoDisponible -= 1;
 			}
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -76,5 +78,9 @@ public abstract class PromocionBase implements Ofertable {
 		return Objects.equals(nombre, other.nombre) && Arrays.equals(packAtracciones, other.packAtracciones)
 				&& Double.doubleToLongBits(tiempo) == Double.doubleToLongBits(other.tiempo) && tipo == other.tipo;
 	}
+	
+
+	
+	
 	
 }

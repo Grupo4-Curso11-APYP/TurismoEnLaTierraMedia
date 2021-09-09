@@ -1,6 +1,7 @@
 package turismoEnLaTierraMediaGrupo4;
 
 import java.util.List;
+import java.util.Objects;
 
 public class PromocionAxB extends PromocionBase {
 
@@ -26,7 +27,7 @@ public class PromocionAxB extends PromocionBase {
 
 	@Override
 	public Double getTiempo() {
-		float tiempo = 0;
+		double tiempo = 0;
 		for (Atraccion atraccion : this.packAtracciones) {
 			tiempo += atraccion.getTiempo();
 		}
@@ -83,6 +84,7 @@ public class PromocionAxB extends PromocionBase {
 		PromocionAxB other = (PromocionAxB) obj;
 		return Objects.equals(atraccionGratis, other.atraccionGratis);
 	}
+
 
 	
 
