@@ -40,9 +40,9 @@ public class Sistema {
 						&& usu.getTiempoDisponible() >= ofertable.getTiempo() && !(usu.getOfertables().contains(ofertable))) {
 				}
 					Scanner sc = new Scanner(System.in);
-					System.out.println("Ingrese S para aceptar");
+					System.out.println("Presione S para aceptar o cualquier letra para continuar recibiendo sugerencias");
 					char ingreso = sc.next().charAt(0);
-					if(ingreso == 's') {
+					if(ingreso == 's' || ingreso == 'S') {
 					usu.comprarOfertable(ofertable);
 					ofertable.reservarCupo();
 
@@ -52,9 +52,7 @@ public class Sistema {
 		}}
 	
 
-	/*
-	 * se ordena por criterio de Mayor Costo De Atraccion
-	 */
+	
 	public void ordenarOfertasSegunPreferencia(TipoAtraccion t) {
 		Collections.sort(ofertableList, new OfertaSegunPreferencia(t));
 	}
