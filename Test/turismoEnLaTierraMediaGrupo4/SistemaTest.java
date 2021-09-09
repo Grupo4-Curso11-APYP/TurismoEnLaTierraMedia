@@ -53,6 +53,11 @@ public class SistemaTest {
 		p2 = new PromocionAbsoluta("packDegusticion", atraccion2, TipoAtraccion.DEGUSTACION, 36);
 		p3 = new PromocionAxB("packPaisaje", atraccion3, TipoAtraccion.PAISAJE, atraccionGratis);
 	}
+	
+	@Test
+	public void queSistemaNoSeCreeNull() {
+		assertNotNull(sistema);
+	}
 
 	@Test
 	public void agregarNuevoUsuarioAlSistema() {
