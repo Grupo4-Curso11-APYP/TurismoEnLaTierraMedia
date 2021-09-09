@@ -12,26 +12,15 @@ public class PromocionAbsoluta extends PromocionBase {
 		this.monto = monto;
 	}
 
-	// se realiza el descuento absoluto para esta promocion
 	@Override
 	public Double getCosto() {
-		double precioFinal = 0;
-		for (Atraccion atraccion : this.packAtracciones) {
-			precioFinal += atraccion.getCosto();
-		}
-
-		precioFinal -= this.getMonto();
-		return precioFinal;
+		return monto;
 	}
 
 	@Override
 	public String ToString() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	public double getMonto() {
-		return monto;
 	}
 
 	@Override
