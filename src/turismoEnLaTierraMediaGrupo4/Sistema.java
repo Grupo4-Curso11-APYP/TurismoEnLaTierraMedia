@@ -39,8 +39,7 @@ public class Sistema {
 						&& !(usu.getOfertables().contains(ofertable))) {
 
 					Scanner sc = new Scanner(System.in);
-					System.out
-							.println("Presione S para aceptar o cualquier letra "
+					System.out.println("Presione S para aceptar o cualquier letra "
 									+ "para continuar recibiendo sugerencias");
 					char ingreso = sc.next().charAt(0);
 					if (ingreso == 's' || ingreso == 'S') {
