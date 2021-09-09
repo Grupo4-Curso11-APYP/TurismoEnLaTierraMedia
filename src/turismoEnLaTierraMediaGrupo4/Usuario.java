@@ -43,10 +43,15 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return "Usuario [nombre=" + nombre + ", presupuesto=" + presupuesto + ","
-				+ " tiempoDisponible=" + tiempoDisponible
-				+ ", tipoFavorito=" + tipoFavorito + ", ofertables=" 
-				+ ofertables + "]";
+		double horas = 0;
+		double costoFinal = 0;
+		for (Ofertable ofertable: ofertables) {
+			horas += ofertable.getTiempo();
+			costoFinal += ofertable.getCosto();
+		}
+		return "[Su itinerario final es:" + ofertables + ". Le tomará un total "
+				+ "de:" + horas + "horas; con un costo final de:" + costoFinal 
+				+ "monedas.]";
 	}
 
 	private double restarTiempo(double tiempo) {
