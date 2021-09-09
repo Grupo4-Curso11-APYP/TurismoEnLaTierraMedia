@@ -11,7 +11,7 @@ public class Usuario  {
 	private TipoAtraccion tipoFavorito;
 	private List<Ofertable> ofertables;
 
-	public Usuario(String nombre,int presupuesto, double tiempoDisponible, TipoAtraccion tipoFavorito) {
+	public Usuario(String nombre,double presupuesto, double tiempoDisponible, TipoAtraccion tipoFavorito) {
 		this.nombre = nombre;
 		this.presupuesto = presupuesto;
 		this.tiempoDisponible = tiempoDisponible;

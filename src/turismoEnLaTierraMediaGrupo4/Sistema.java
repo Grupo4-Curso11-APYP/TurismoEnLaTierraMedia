@@ -34,27 +34,27 @@ public class Sistema {
 		for (Usuario usu : usuarios) {
 			ordenarOfertasSegunPreferencia(usu.getTipoFavorito());
 			for (Ofertable ofertable : ofertableList) {
-	
-				if (ofertable.getTipo().equals(usu.getTipoFavorito()) && ofertable.hayCupo()
+
+				if (ofertable.getTipo().equals(usu.getTipoFavorito()) 
+						&& ofertable.hayCupo()
 						&& usu.getPresupuesto() >= ofertable.getCosto()
-						&& usu.getTiempoDisponible() >= ofertable.getTiempo() && !(usu.getOfertables().contains(ofertable))) {
+						&& usu.getTiempoDisponible() >= ofertable.getTiempo()
+						&& !(usu.getOfertables().contains(ofertable))) {
 				}
-					Scanner sc = new Scanner(System.in);
-					System.out.println("Ingrese S para aceptar");
-					char ingreso = sc.next().charAt(0);
-					if(ingreso == 's') {
+				Scanner sc = new Scanner(System.in);
+				System.out.println("Presione S para aceptar o cualquier letra "
+						+ "para continuar recibiendo sugerencias");
+				char ingreso = sc.next().charAt(0);
+				if (ingreso == 's' || ingreso == 'S') {
 					usu.comprarOfertable(ofertable);
 					ofertable.reservarCupo();
 
 				}
 
 			}
-		}}
-	
+		}
+	}
 
-	/*
-	 * se ordena por criterio de Mayor Costo De Atraccion
-	 */
 	public void ordenarOfertasSegunPreferencia(TipoAtraccion t) {
 		Collections.sort(ofertableList, new OfertaSegunPreferencia(t));
 	}
@@ -96,9 +96,9 @@ public class Sistema {
 		return usuarios;
 	}
 
-public List<Ofertable> getOfertableList(){
-	return ofertableList;
-}
+	public List<Ofertable> getOfertableList() {
+		return ofertableList;
+	}
 	/*
 	 *  
 	 */
