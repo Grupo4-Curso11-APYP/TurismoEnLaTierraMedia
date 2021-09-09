@@ -7,15 +7,14 @@ public class PromocionAxB extends PromocionBase {
 
 	private Atraccion atraccionGratis;
 
-	
-
-	
-	public PromocionAxB(String nombre, Atraccion[] atraccion, TipoAtraccion tipo,Atraccion atraccionGratis) {
+	public PromocionAxB(String nombre, Atraccion[] atraccion, TipoAtraccion tipo,
+			Atraccion atraccionGratis) {
 		super(nombre, atraccion, tipo);
 		this.atraccionGratis = atraccionGratis;
 	}
 
-	// se calcula el descuento de estas promociones y a su vez  se le deposita a usuario una nueva atraccion 
+	// se calcula el descuento de estas promociones y a su vez se le deposita a
+	// usuario una nueva atraccion
 	@Override
 	public Double getCosto() {
 		double precioFinal = 0;
@@ -42,25 +41,24 @@ public class PromocionAxB extends PromocionBase {
 		return null;
 	}
 
-
 	public Atraccion getAtraccionGratis() {
 		return atraccionGratis;
 	}
 
-
 	public boolean hayCupo() {
 
-		return ((this.packAtracciones[0].getCupoDisponible() > 0) && 
-				(this.packAtracciones[1].getCupoDisponible() > 0) && this.atraccionGratis.getCupoDisponible() >0);
+		return ((this.packAtracciones[0].getCupoDisponible() > 0) 
+				&& (this.packAtracciones[1].getCupoDisponible() > 0)
+				&& this.atraccionGratis.getCupoDisponible() > 0);
 	}
-	
-	@Override 
+
+	@Override
 	public void reservarCupo() {
 		for (Atraccion atraccion : packAtracciones) {
 			atraccion.cupoDisponible -= 1;
-			
+
 		}
-		atraccionGratis.cupoDisponible -=1;
+		atraccionGratis.cupoDisponible -= 1;
 	}
 
 	@Override
@@ -82,9 +80,5 @@ public class PromocionAxB extends PromocionBase {
 		PromocionAxB other = (PromocionAxB) obj;
 		return Objects.equals(atraccionGratis, other.atraccionGratis);
 	}
-
-
-
-	
 
 }

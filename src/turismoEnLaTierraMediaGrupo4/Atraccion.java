@@ -17,7 +17,6 @@ public class Atraccion implements Ofertable {
 		this.tipoAtraccion = tipo;
 	}
 
-
 	public int getCupoDisponible() {
 		return cupoDisponible;
 	}
@@ -44,8 +43,6 @@ public class Atraccion implements Ofertable {
 				&& tipoAtraccion == other.tipoAtraccion;
 	}
 
-	
-
 	public void reservarCupo() {
 		if (this.hayCupo()) {
 			this.cupoDisponible -= 1;
@@ -55,13 +52,13 @@ public class Atraccion implements Ofertable {
 
 	@Override
 	public Double getCosto() {
-		
+
 		return this.costo;
 	}
 
 	@Override
 	public TipoAtraccion getTipo() {
-		
+
 		return this.tipoAtraccion;
 	}
 
@@ -70,17 +67,10 @@ public class Atraccion implements Ofertable {
 		return this.cupoDisponible > 0;
 	}
 
-
 	@Override
 	public Double getTiempo() {
-	
+
 		return this.tiempo;
 	}
-	
-	
 
-
-	
-	
-	
 }

@@ -7,12 +7,11 @@ public class PromocionAbsoluta extends PromocionBase {
 
 	private double monto;
 
-	public PromocionAbsoluta(String nombre,Atraccion []packAtracciones, TipoAtraccion tipo, double monto) {
+	public PromocionAbsoluta(String nombre, Atraccion[] packAtracciones, TipoAtraccion tipo, double monto) {
 		super(nombre, packAtracciones, tipo);
 		this.monto = monto;
 	}
 
-	// se realiza el descuento absoluto para esta promocion
 	@Override
 	public Double getCosto() {
 		return monto;
@@ -43,7 +42,5 @@ public class PromocionAbsoluta extends PromocionBase {
 		PromocionAbsoluta other = (PromocionAbsoluta) obj;
 		return Double.doubleToLongBits(monto) == Double.doubleToLongBits(other.monto);
 	}
-
-	
 
 }

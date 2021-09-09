@@ -1,6 +1,5 @@
 package turismoEnLaTierraMediaGrupo4;
 
-import java.util.List;
 import java.util.Objects;
 
 public class PromocionPorcentual extends PromocionBase {
@@ -57,9 +56,6 @@ public class PromocionPorcentual extends PromocionBase {
 		PromocionPorcentual other = (PromocionPorcentual) obj;
 		return Double.doubleToLongBits(descuento) == Double.doubleToLongBits(other.descuento);
 	}
-    
-    
-
 
 
 }

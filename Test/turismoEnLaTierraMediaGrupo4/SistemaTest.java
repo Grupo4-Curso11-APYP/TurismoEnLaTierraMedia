@@ -66,7 +66,9 @@ public class SistemaTest {
 	}
 
 	@Test
-	public void ComparadorOrdenaPorTipoLuegoClaseLuegoCostoLuegoTiempo() {
+
+	public void comparadorOrdenaPorTipoLuegoClaseLuegoCostoLuegoTiempo() {
+
 		sistema.ofertableList.add(a1);
 		sistema.ofertableList.add(a2);
 		sistema.ofertableList.add(p1);
@@ -74,13 +76,13 @@ public class SistemaTest {
 		sistema.ofertableList.add(p3);
 
 		sistema.ordenarOfertasSegunPreferencia(TipoAtraccion.AVENTURA);
-
-		assertEquals(true, p1.equals(sistema.getOfertableList().get(0))); // primero promo1
-		assertEquals(true, a2.equals(sistema.getOfertableList().get(1))); // 2do atracción 2
-		assertEquals(true, p2.equals(sistema.getOfertableList().get(2))); // 3ro promo 2
-		assertEquals(true, p3.equals(sistema.getOfertableList().get(3))); // 4to promo 3
-		assertEquals(true, a1.equals(sistema.getOfertableList().get(4))); // 5to atracción 1
-
+		
+		assertEquals(true, p1.equals(sistema.getOfertableList().get(0))); //primero promo 1
+		assertEquals(true, a2.equals(sistema.getOfertableList().get(1))); //2do atracciÃ³n 2
+		assertEquals(true, p2.equals(sistema.getOfertableList().get(2))); //3ro promo 2
+		assertEquals(true, p3.equals(sistema.getOfertableList().get(3))); //4to promo 3
+		assertEquals(true, a1.equals(sistema.getOfertableList().get(4))); //5to atracciÃ³n 1
+		
 	}
 
 //	@Test

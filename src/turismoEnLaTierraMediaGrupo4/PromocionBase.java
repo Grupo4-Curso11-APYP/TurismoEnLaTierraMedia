@@ -10,7 +10,8 @@ public abstract class PromocionBase implements Ofertable {
 	private TipoAtraccion tipo;
 	private double tiempo;
 
-	public PromocionBase(String nombre, Atraccion[] atraccion, TipoAtraccion tipo) {
+	public PromocionBase(String nombre, Atraccion[] atraccion, 
+			TipoAtraccion tipo) {
 		this.packAtracciones = atraccion;
 		this.nombre = nombre;
 		this.tipo = tipo;
@@ -73,10 +74,11 @@ public abstract class PromocionBase implements Ofertable {
 		if (getClass() != obj.getClass())
 			return false;
 		PromocionBase other = (PromocionBase) obj;
-		return Objects.equals(nombre, other.nombre) && Arrays.equals(packAtracciones, other.packAtracciones)
-				&& Double.doubleToLongBits(tiempo) == Double.doubleToLongBits(other.tiempo) && tipo == other.tipo;
+		return Objects.equals(nombre, other.nombre) 
+				&& Arrays.equals(packAtracciones, other.packAtracciones)
+				&& Double.doubleToLongBits(tiempo) == 
+				Double.doubleToLongBits(other.tiempo) && tipo == other.tipo;
 	}
-	
 	
 	
 }

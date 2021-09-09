@@ -27,9 +27,6 @@ public class Sistema {
 		this.usuarios = new ArrayList<>();
 	}
 
-	/*
-	 * 
-	 */
 	public void sugerir() {
 		for (Usuario usu : usuarios) {
 			ordenarOfertasSegunPreferencia(usu.getTipoFavorito());
@@ -40,14 +37,16 @@ public class Sistema {
 						&& usu.getPresupuesto() >= ofertable.getCosto()
 						&& usu.getTiempoDisponible() >= ofertable.getTiempo()
 						&& !(usu.getOfertables().contains(ofertable))) {
-				}
-				Scanner sc = new Scanner(System.in);
-				System.out.println("Presione S para aceptar o cualquier letra "
-						+ "para continuar recibiendo sugerencias");
-				char ingreso = sc.next().charAt(0);
-				if (ingreso == 's' || ingreso == 'S') {
-					usu.comprarOfertable(ofertable);
-					ofertable.reservarCupo();
+
+					Scanner sc = new Scanner(System.in);
+					System.out
+							.println("Presione S para aceptar o cualquier letra "
+									+ "para continuar recibiendo sugerencias");
+					char ingreso = sc.next().charAt(0);
+					if (ingreso == 's' || ingreso == 'S') {
+						usu.comprarOfertable(ofertable);
+						ofertable.reservarCupo();
+					}
 
 				}
 
@@ -60,8 +59,8 @@ public class Sistema {
 	}
 
 	/*
-	 * @Param usuario se pasa por parametro un usuario el cual se va a agregar a la
-	 * lista
+	 * @Param usuario se pasa por parametro un usuario el cual se va a agregar 
+	 * a la lista
 	 * 
 	 */
 	public void nuevoUsuario(Usuario usuario) {
