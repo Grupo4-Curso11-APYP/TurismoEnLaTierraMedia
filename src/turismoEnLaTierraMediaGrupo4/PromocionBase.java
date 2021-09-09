@@ -23,13 +23,11 @@ public abstract class PromocionBase implements Ofertable {
 	/*
 	 * get costo se encargara de calcular los descuentos en cada promocion
 	 */
-	public double getCosto() {
-		return 0;
-	}
+	public abstract Double getCosto();
 
 	public abstract String ToString();
 
-	public double getTiempo() {
+	public Double getTiempo() {
 		this.tiempo = 0;
 		for (Atraccion atraccion : this.packAtracciones) {
 			tiempo += atraccion.getTiempo();
@@ -55,6 +53,28 @@ public abstract class PromocionBase implements Ofertable {
 		for (Atraccion atraccion : packAtracciones) {
 			atraccion.cupoDisponible -= 1;
 			}
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Arrays.hashCode(packAtracciones);
+		result = prime * result + Objects.hash(nombre, tiempo, tipo);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PromocionBase other = (PromocionBase) obj;
+		return Objects.equals(nombre, other.nombre) && Arrays.equals(packAtracciones, other.packAtracciones)
+				&& Double.doubleToLongBits(tiempo) == Double.doubleToLongBits(other.tiempo) && tipo == other.tipo;
 	}
 	
 }
