@@ -1,6 +1,7 @@
 package turismoEnLaTierraMediaGrupo4;
 
 import java.util.List;
+import java.util.Objects;
 
 public class PromocionAxB extends PromocionBase {
 
@@ -16,8 +17,8 @@ public class PromocionAxB extends PromocionBase {
 
 	// se calcula el descuento de estas promociones y a su vez  se le deposita a usuario una nueva atraccion 
 	@Override
-	public double getCosto() {
-		float precioFinal = 0;
+	public Double getCosto() {
+		double precioFinal = 0;
 		for (Atraccion atraccion : this.packAtracciones) {
 			precioFinal += atraccion.getCosto();
 		}
@@ -25,8 +26,8 @@ public class PromocionAxB extends PromocionBase {
 	}
 
 	@Override
-	public double getTiempo() {
-		float tiempo = 0;
+	public Double getTiempo() {
+		double tiempo = 0;
 		for (Atraccion atraccion : this.packAtracciones) {
 			tiempo += atraccion.getTiempo();
 		}
@@ -62,6 +63,26 @@ public class PromocionAxB extends PromocionBase {
 			
 		}
 		atraccionGratis.cupoDisponible -=1;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(atraccionGratis);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PromocionAxB other = (PromocionAxB) obj;
+		return Objects.equals(atraccionGratis, other.atraccionGratis);
 	}
 
 

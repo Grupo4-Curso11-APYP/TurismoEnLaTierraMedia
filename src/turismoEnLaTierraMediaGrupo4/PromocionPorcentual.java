@@ -1,6 +1,7 @@
 package turismoEnLaTierraMediaGrupo4;
 
 import java.util.List;
+import java.util.Objects;
 
 public class PromocionPorcentual extends PromocionBase {
 
@@ -14,8 +15,8 @@ public class PromocionPorcentual extends PromocionBase {
     
     // realiza  el descuento porcentual   para un pack de atracciones 
     @Override
-    public double getCosto() {
-        float precioFinal = 0;
+    public Double getCosto() {
+        double precioFinal = 0;
         for (Atraccion atraccion:this.packAtracciones) {
             precioFinal += atraccion.getCosto();
         }
@@ -34,6 +35,30 @@ public class PromocionPorcentual extends PromocionBase {
     public double getDescuento() {
         return descuento;
     }
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(descuento);
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PromocionPorcentual other = (PromocionPorcentual) obj;
+		return Double.doubleToLongBits(descuento) == Double.doubleToLongBits(other.descuento);
+	}
+    
+    
 
 
 

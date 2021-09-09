@@ -54,7 +54,7 @@ public class Atraccion implements Ofertable {
 	}
 
 	@Override
-	public double getCosto() {
+	public Double getCosto() {
 		
 		return this.costo;
 	}
@@ -72,7 +72,7 @@ public class Atraccion implements Ofertable {
 
 
 	@Override
-	public double getTiempo() {
+	public Double getTiempo() {
 	
 		return this.tiempo;
 	}
