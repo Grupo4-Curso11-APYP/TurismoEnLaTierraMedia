@@ -6,12 +6,12 @@ import java.util.Objects;
 
 public class Usuario  {
 	private String nombre;
-	private int presupuesto;
-	private double  tiempoDisponible;
+	private double presupuesto;
+	private double tiempoDisponible;
 	private TipoAtraccion tipoFavorito;
 	private List<Ofertable> ofertables;
 
-	public Usuario(String nombre,int presupuesto, double tiempoDisponible, TipoAtraccion tipoFavorito) {
+	public Usuario(String nombre,double presupuesto, double tiempoDisponible, TipoAtraccion tipoFavorito) {
 		this.nombre = nombre;
 		this.presupuesto = presupuesto;
 		this.tiempoDisponible = tiempoDisponible;
@@ -24,7 +24,7 @@ public class Usuario  {
 		return this.tiempoDisponible;
 	}
 
-	public int getPresupuesto() {
+	public double getPresupuesto() {
 		return this.presupuesto;
 	}
 
@@ -52,18 +52,18 @@ public class Usuario  {
 		return this.tiempoDisponible  -=tiempo;
 	}
 	
-	private  int restarPresupuesto(int monto) {
+	private double restarPresupuesto(double monto) {
 		return this.presupuesto-= monto;
 	}
 	
 	
 	public void comprarOfertable(Ofertable o) {
-      double tiempoO = o.getTiempo();
-      int presupuesto = (int) o.getCosto();
+      	double tiempoO = o.getTiempo();
+      	double presupuesto = o.getCosto();
      
-      restarTiempo(tiempoO);
-      restarPresupuesto(presupuesto);
-      ofertables.add(o);
+      	restarTiempo(tiempoO);
+      	restarPresupuesto(presupuesto);
+      	ofertables.add(o);
 		
 	}
 
