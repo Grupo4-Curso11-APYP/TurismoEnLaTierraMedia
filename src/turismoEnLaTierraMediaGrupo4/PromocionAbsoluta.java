@@ -13,8 +13,8 @@ public class PromocionAbsoluta extends PromocionBase {
 
 	// se realiza el descuento absoluto para esta promocion
 	@Override
-	public double getCosto() {
-		float precioFinal = 0;
+	public Double getCosto() {
+		double precioFinal = 0;
 		for (Atraccion atraccion : this.packAtracciones) {
 			precioFinal += atraccion.getCosto();
 		}
@@ -33,6 +33,24 @@ public class PromocionAbsoluta extends PromocionBase {
 		return monto;
 	}
 
-	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(monto);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PromocionAbsoluta other = (PromocionAbsoluta) obj;
+		return Double.doubleToLongBits(monto) == Double.doubleToLongBits(other.monto);
+	}
 
 }
