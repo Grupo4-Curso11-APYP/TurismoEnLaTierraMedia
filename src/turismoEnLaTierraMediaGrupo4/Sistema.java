@@ -45,6 +45,7 @@ public class Sistema {
 					if (ingreso == 's' || ingreso == 'S') {
 						usu.comprarOfertable(ofertable);
 						ofertable.reservarCupo();
+						usu.toString(); //muestra el itinerario del usuario.
 					}
 
 				}
