@@ -7,14 +7,16 @@ public class PromocionAxB extends PromocionBase {
 
 	private Atraccion atraccionGratis;
 
-	public PromocionAxB(String nombre, Atraccion[] atraccion, TipoAtraccion tipo,
-			Atraccion atraccionGratis) {
+	public PromocionAxB(String nombre, Atraccion[] atraccion, TipoAtraccion tipo, Atraccion atraccionGratis) {
 		super(nombre, atraccion, tipo);
 		this.atraccionGratis = atraccionGratis;
 	}
 
-	// se calcula el descuento de estas promociones y a su vez se le deposita a
-	// usuario una nueva atraccion
+	/*
+	 * se calcula el descuento de estas promociones y a su vez se le deposita a
+	 * usuario una nueva atraccion
+	 */
+
 	@Override
 	public Double getCosto() {
 		double precioFinal = 0;
@@ -24,6 +26,9 @@ public class PromocionAxB extends PromocionBase {
 		return precioFinal;
 	}
 
+	/*
+	 * calcula el tiempo que necesita el usuario para adiquir una promocion
+	 */
 	@Override
 	public Double getTiempo() {
 		double tiempo = 0;
@@ -35,23 +40,27 @@ public class PromocionAxB extends PromocionBase {
 		return tiempo;
 	}
 
-	@Override
-	public String ToString() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	/*
+	 * se espera que devuelva una atraccion gratis
+	 */
 
 	public Atraccion getAtraccionGratis() {
 		return atraccionGratis;
 	}
 
+	/*
+	 * pregunta si hay cupo disponible tanto en el pack de atracciones como en la
+	 * promocion que se otorga gratis
+	 */
 	public boolean hayCupo() {
 
-		return ((this.packAtracciones[0].getCupoDisponible() > 0) 
-				&& (this.packAtracciones[1].getCupoDisponible() > 0)
+		return ((this.packAtracciones[0].getCupoDisponible() > 0) && (this.packAtracciones[1].getCupoDisponible() > 0)
 				&& this.atraccionGratis.getCupoDisponible() > 0);
 	}
 
+	/*
+	 * si hay cupo disponible en la atraccion gratis se resta un cupo
+	 */
 	@Override
 	public void reservarCupo() {
 		for (Atraccion atraccion : packAtracciones) {
@@ -79,6 +88,12 @@ public class PromocionAxB extends PromocionBase {
 			return false;
 		PromocionAxB other = (PromocionAxB) obj;
 		return Objects.equals(atraccionGratis, other.atraccionGratis);
+	}
+
+	@Override
+	public String ToString() {
+
+		return "PromocionAxB [atraccionGratis=" + atraccionGratis + "]";
 	}
 
 }

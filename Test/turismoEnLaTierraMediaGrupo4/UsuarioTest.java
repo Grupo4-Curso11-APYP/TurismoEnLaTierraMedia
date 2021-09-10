@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class UsuarioTest {
-	
+
 	Usuario u1;
 	Atraccion a1;
 
@@ -20,7 +20,7 @@ public class UsuarioTest {
 	public void queUsuarioNuevoCreadoNoEsNull() {
 		assertNotNull(u1);
 	}
-	
+
 	@Test
 	public void comprarRestaPresupuestoYTiempoDelUsuarioYSeGuardaOfertable() {
 		assertEquals(8, u1.getPresupuesto(), 0);

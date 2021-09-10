@@ -7,20 +7,33 @@ public class PromocionAbsoluta extends PromocionBase {
 
 	private double monto;
 
-	public PromocionAbsoluta(String nombre, Atraccion[] packAtracciones, TipoAtraccion tipo, double monto) {
+	public PromocionAbsoluta(String nombre,Atraccion []packAtracciones, TipoAtraccion tipo, double monto) {
 		super(nombre, packAtracciones, tipo);
 		this.monto = monto;
 	}
 
+	/*
+	 * calcula  el descuento que se le aplica a esta promocion
+	 */
 	@Override
 	public Double getCosto() {
-		return monto;
+		double precioFinal = 0;
+		for (Atraccion atraccion : this.packAtracciones) {
+			precioFinal += atraccion.getCosto();
+		}
+
+		precioFinal -= this.getMonto();
+		return precioFinal;
 	}
 
 	@Override
 	public String ToString() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public double getMonto() {
+		return monto;
 	}
 
 	@Override
@@ -43,4 +56,5 @@ public class PromocionAbsoluta extends PromocionBase {
 		return Double.doubleToLongBits(monto) == Double.doubleToLongBits(other.monto);
 	}
 
+	
 }

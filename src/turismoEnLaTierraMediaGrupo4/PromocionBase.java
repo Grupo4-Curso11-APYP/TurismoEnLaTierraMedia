@@ -1,22 +1,28 @@
 package turismoEnLaTierraMediaGrupo4;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public abstract class PromocionBase implements Ofertable {
 
 	private String nombre;
-	protected Atraccion[] packAtracciones;// posiblemente se cambie a un array
+	protected Atraccion[] packAtracciones;
 	private TipoAtraccion tipo;
 	private double tiempo;
 
-	public PromocionBase(String nombre, Atraccion[] atraccion, 
-			TipoAtraccion tipo) {
+	
+	
+	public PromocionBase(String nombre, Atraccion[] atraccion, TipoAtraccion tipo) {
 		this.packAtracciones = atraccion;
 		this.nombre = nombre;
 		this.tipo = tipo;
 	}
 
+	/*
+	 * se espera que devuelva el nombre
+	 */
 	public String getNombre() {
 		return nombre;
 	}
@@ -28,6 +34,9 @@ public abstract class PromocionBase implements Ofertable {
 
 	public abstract String ToString();
 
+	/*
+	 * calcula el tiempo que necesita el usuario para adiquir una promocion
+	 */
 	public Double getTiempo() {
 		this.tiempo = 0;
 		for (Atraccion atraccion : this.packAtracciones) {
@@ -41,7 +50,9 @@ public abstract class PromocionBase implements Ofertable {
 		return tipo;
 	}
 
-	// indica si la estructura esta llena
+	/*
+	 * pregunta si hay cupo disponible
+	 */
 	@Override
 	public boolean hayCupo() {
 
@@ -74,11 +85,12 @@ public abstract class PromocionBase implements Ofertable {
 		if (getClass() != obj.getClass())
 			return false;
 		PromocionBase other = (PromocionBase) obj;
-		return Objects.equals(nombre, other.nombre) 
-				&& Arrays.equals(packAtracciones, other.packAtracciones)
-				&& Double.doubleToLongBits(tiempo) == 
-				Double.doubleToLongBits(other.tiempo) && tipo == other.tipo;
+		return Objects.equals(nombre, other.nombre) && Arrays.equals(packAtracciones, other.packAtracciones)
+				&& Double.doubleToLongBits(tiempo) == Double.doubleToLongBits(other.tiempo) && tipo == other.tipo;
 	}
+	
+
+
 	
 	
 }

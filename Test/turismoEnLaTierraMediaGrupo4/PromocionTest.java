@@ -45,14 +45,11 @@ public class PromocionTest {
 
 		// Promociones
 
-		aventuraPorcentual = new PromocionPorcentual
-				("Pack aventura", porcentual, TipoAtraccion.AVENTURA, 20);
+		aventuraPorcentual = new PromocionPorcentual("Pack aventura", porcentual, TipoAtraccion.AVENTURA, 20);
 
-		degustacionAbsoluta = new PromocionAbsoluta
-				("Pack de degustación", absoluta, TipoAtraccion.DEGUSTACION, 36);
+		degustacionAbsoluta = new PromocionAbsoluta("Pack de degustación", absoluta, TipoAtraccion.DEGUSTACION, 36);
 
-		paisajeAxB = new PromocionAxB
-				("Pack paisajes", aXb, TipoAtraccion.PAISAJE, aGratis);
+		paisajeAxB = new PromocionAxB("Pack paisajes", aXb, TipoAtraccion.PAISAJE, aGratis);
 	}
 
 	@Test
@@ -143,5 +140,4 @@ public class PromocionTest {
 		assertEquals(14, a6.getCupoDisponible());
 		assertEquals(31, aGratis.getCupoDisponible());
 	}
-
 }

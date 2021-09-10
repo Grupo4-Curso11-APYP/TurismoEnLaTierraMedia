@@ -10,6 +10,10 @@ public class OfertaSegunPreferencia implements Comparator<Ofertable> {
 		this.tipo = tipo;
 	}
 
+	/*
+	 * @Param o1 o2 se comparan las ofertas priorizando las promociones , despues se
+	 * compara por atraccion mas cara , y por ultimo por tiempo de visita
+	 */
 	@Override
 	public int compare(Ofertable o1, Ofertable o2) {
 
@@ -19,12 +23,10 @@ public class OfertaSegunPreferencia implements Comparator<Ofertable> {
 					return o2.getTiempo().compareTo(o1.getTiempo()); // prioriza mayor tiempo al estar o2 primero.
 				}
 				return o2.getCosto().compareTo(o1.getCosto()); // prioriza mayor costo al estar o2 primero.
-
 			}
 		}
 
 		return o1.getTipo().compareTo(o2.getTipo());
-
 	}
 
 }

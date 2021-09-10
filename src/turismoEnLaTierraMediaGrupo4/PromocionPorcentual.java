@@ -1,40 +1,42 @@
 package turismoEnLaTierraMediaGrupo4;
 
+import java.util.List;
 import java.util.Objects;
 
 public class PromocionPorcentual extends PromocionBase {
 
 	private double descuento;
 
-	public PromocionPorcentual(String nombre, Atraccion [] packAtracciones,TipoAtraccion tipo,double descuento ) {
+	public PromocionPorcentual(String nombre, Atraccion[] packAtracciones, TipoAtraccion tipo, double descuento) {
 		super(nombre, packAtracciones, tipo);
 		this.descuento = descuento;
 	}
 
-    
-    // realiza  el descuento porcentual   para un pack de atracciones 
-    @Override
-    public Double getCosto() {
-        double precioFinal = 0;
-        for (Atraccion atraccion:this.packAtracciones) {
-            precioFinal += atraccion.getCosto();
-        }
+	// realiza el descuento porcentual para un pack de atracciones
+	@Override
+	public Double getCosto() {
+		double precioFinal = 0;
+		for (Atraccion atraccion : this.packAtracciones) {
+			precioFinal += atraccion.getCosto();
+		}
 
-        precioFinal -= precioFinal / 100 * this.getDescuento();
+		precioFinal -= precioFinal / 100 * this.getDescuento();
 
-        return precioFinal;
-    }
+		return precioFinal;
+	}
 
-    @Override
-    public String ToString() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	@Override
+	public String ToString() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    public double getDescuento() {
-        return descuento;
-    }
-
+	/*
+	 * se espera que devuelva el descuento
+	 */
+	public double getDescuento() {
+		return descuento;
+	}
 
 	@Override
 	public int hashCode() {
@@ -43,7 +45,6 @@ public class PromocionPorcentual extends PromocionBase {
 		result = prime * result + Objects.hash(descuento);
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -57,7 +58,4 @@ public class PromocionPorcentual extends PromocionBase {
 		return Double.doubleToLongBits(descuento) == Double.doubleToLongBits(other.descuento);
 	}
 
-
 }
-
-
