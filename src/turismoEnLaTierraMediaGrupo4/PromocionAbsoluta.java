@@ -12,7 +12,9 @@ public class PromocionAbsoluta extends PromocionBase {
 		this.monto = monto;
 	}
 
-	// se realiza el descuento absoluto para esta promocion
+	/*
+	 * calcula  el descuento que se le aplica a esta promocion
+	 */
 	@Override
 	public Double getCosto() {
 		double precioFinal = 0;
