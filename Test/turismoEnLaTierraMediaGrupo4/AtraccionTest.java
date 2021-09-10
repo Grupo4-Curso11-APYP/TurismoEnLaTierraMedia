@@ -12,7 +12,7 @@ import org.junit.Test;
 public class AtraccionTest {
 
 	Atraccion a1;
-
+// creacion de before
 	@Before
 	public void setUp() {
 		a1 = new Atraccion("Minas Tirith", 5, 2.5, 25, TipoAtraccion.PAISAJE);
