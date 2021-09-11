@@ -47,7 +47,8 @@ public class Sistema {
 				if (ingreso == 's') {
 					usu.comprarOfertable(ofertable);
 					ofertable.reservarCupo();
-/*Hola*/
+					usu.toString();
+
 				}
 
 			}
