@@ -98,7 +98,7 @@ public abstract class ManejadorArchivos {
 		return atraccion;
 	}
 
-	public static List<Ofertable> obtenerPromocionPorcentual() {
+	public static List<Ofertable> obtenerPromocionPorcentual(Sistema sistema) {
 		File archivo = null;
 		FileReader fr = null;
 		BufferedReader br = null;
@@ -114,11 +114,14 @@ public abstract class ManejadorArchivos {
 			while (linea != null) {
 				String[] datosPromosP = linea.split(",");
 				String nombre = datosPromosP[0];
-				String[] atraccionString = datosPromosP[1].split(";");
-				Atraccion[] atraccion = new Atraccion[atraccionString.length];
+				String[] atraccionesString = datosPromosP[1].split(";");
+				Atraccion[] atracciones = new Atraccion[atraccionesString.length];
+				for (int i = 0; i < atraccionesString.length; i++) {
+					atracciones[i] = (Atraccion) sistema.getAtraccionPorNombre(atraccionesString[i]);
+				}
 				TipoAtraccion tipo = TipoAtraccion.valueOf(TipoAtraccion.class, datosPromosP[3].trim().toUpperCase());
 				int descuento = Integer.parseInt(datosPromosP[4]);
-				promoP.add(new PromocionPorcentual(nombre, atraccion, tipo, descuento));
+				promoP.add(new PromocionPorcentual(nombre, atracciones, tipo, descuento));
 				linea = br.readLine();
 			}
 
