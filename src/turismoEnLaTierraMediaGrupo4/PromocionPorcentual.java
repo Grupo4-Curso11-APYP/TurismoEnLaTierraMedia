@@ -1,5 +1,6 @@
 package turismoEnLaTierraMediaGrupo4;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -25,10 +26,12 @@ public class PromocionPorcentual extends PromocionBase {
 		return precioFinal;
 	}
 
+
 	@Override
-	public String ToString() {
-		// TODO Auto-generated method stub
-		return null;
+	public String toString() {
+		return getNombre() + ": " + "descuento: " + descuento + ", precio: " 
+		+ getCosto() + ", duracion: " + getTiempo() + ", tipo: " + getTipo()
+		+ ", atracciones incluidas: " + Arrays.toString(packAtracciones);
 	}
 
 	/*

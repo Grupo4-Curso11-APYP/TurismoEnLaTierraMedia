@@ -1,5 +1,6 @@
 package turismoEnLaTierraMediaGrupo4;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -91,9 +92,11 @@ public class PromocionAxB extends PromocionBase {
 	}
 
 	@Override
-	public String ToString() {
-
-		return "PromocionAxB [atraccionGratis=" + atraccionGratis + "]";
+	public String toString() {
+		return getNombre() + ": " + "precio: " + getCosto() + ", duracion: " 
+		+ getTiempo() + ", tipo: " + getTipo() + ", atracción gratis: " +
+		getAtraccionGratis() + ", atracciones incluidas: " 
+		+ Arrays.toString(packAtracciones);
 	}
 
 }

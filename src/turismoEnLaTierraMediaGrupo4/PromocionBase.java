@@ -32,8 +32,6 @@ public abstract class PromocionBase implements Ofertable {
 	 */
 	public abstract Double getCosto();
 
-	public abstract String ToString();
-
 	/*
 	 * calcula el tiempo que necesita el usuario para adiquir una promocion
 	 */

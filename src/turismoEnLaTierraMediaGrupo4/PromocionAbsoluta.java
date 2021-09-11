@@ -1,5 +1,6 @@
 package turismoEnLaTierraMediaGrupo4;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -7,33 +8,24 @@ public class PromocionAbsoluta extends PromocionBase {
 
 	private double monto;
 
-	public PromocionAbsoluta(String nombre,Atraccion []packAtracciones, TipoAtraccion tipo, double monto) {
+	public PromocionAbsoluta(String nombre, Atraccion[] packAtracciones, TipoAtraccion tipo, double monto) {
 		super(nombre, packAtracciones, tipo);
 		this.monto = monto;
 	}
 
 	/*
-	 * calcula  el descuento que se le aplica a esta promocion
+	 * getCosto devuelve el monto final
 	 */
 	@Override
 	public Double getCosto() {
-		double precioFinal = 0;
-		for (Atraccion atraccion : this.packAtracciones) {
-			precioFinal += atraccion.getCosto();
-		}
-
-		precioFinal -= this.getMonto();
-		return precioFinal;
+		return monto;
 	}
 
 	@Override
-	public String ToString() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public double getMonto() {
-		return monto;
+	public String toString() {
+		return getNombre() + ": " + "precio: " + getCosto() + ", duracion: " 
+				+ getTiempo() + ", tipo: " + getTipo()
+				+ ", atracciones incluidas: " + Arrays.toString(packAtracciones);
 	}
 
 	@Override
@@ -56,5 +48,4 @@ public class PromocionAbsoluta extends PromocionBase {
 		return Double.doubleToLongBits(monto) == Double.doubleToLongBits(other.monto);
 	}
 
-	
 }
