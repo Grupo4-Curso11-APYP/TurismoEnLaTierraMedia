@@ -231,7 +231,7 @@ public abstract class ManejadorArchivos {
 	public static void main(String[] args) {
 		Sistema sis = new Sistema();
 
-		sis.agregarPromociones((PromocionBase) ManejadorArchivos.obtenerPromocionPorcentual());
+		sis.agregarPromociones((PromocionBase) ManejadorArchivos.obtenerPromocionPorcentual(sis));
 		sis.agregarPromociones((PromocionBase) ManejadorArchivos.obtenerPromocionAbsoluta());
   
 	}
