@@ -124,4 +124,13 @@ public class Sistema {
 		return "Sistema [ofertas=" + ofertableList + ", usuarios=" + usuarios + "  ]";
 	}
 
+	public Ofertable getAtraccionPorNombre(String nombre) {
+		for (int i = 0; i < 8; i++) {
+			if (ofertableList.get(i).getNombre().equals(nombre)) {
+				return ofertableList.get(i);
+			}
+		}
+		return null;
+	}
+
 }

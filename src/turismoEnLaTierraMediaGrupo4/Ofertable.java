@@ -26,4 +26,9 @@ public interface Ofertable {
 	 * si hay cupo , resta un cupo disponible , para simular la reservacion
 	 */
 	public void reservarCupo();
+	
+	/*
+	 * devuelve el nombre del ofertable.
+	 */
+	public String getNombre();
 }

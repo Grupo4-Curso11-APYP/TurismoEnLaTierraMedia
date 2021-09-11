@@ -23,6 +23,7 @@ public abstract class PromocionBase implements Ofertable {
 	/*
 	 * se espera que devuelva el nombre
 	 */
+	@Override
 	public String getNombre() {
 		return nombre;
 	}

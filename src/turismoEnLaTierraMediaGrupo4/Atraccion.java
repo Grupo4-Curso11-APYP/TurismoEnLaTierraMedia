@@ -31,6 +31,7 @@ public class Atraccion implements Ofertable {
 	/*
 	 * se espera que devuelva el nombre
 	 */
+	@Override
 	public String getNombre() {
 		return this.nombre;
 	}
