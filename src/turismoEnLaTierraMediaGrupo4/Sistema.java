@@ -48,7 +48,6 @@ public class Sistema {
 					usu.comprarOfertable(ofertable);
 					ofertable.reservarCupo();
 					usu.toString();
-
 				}
 
 			}
