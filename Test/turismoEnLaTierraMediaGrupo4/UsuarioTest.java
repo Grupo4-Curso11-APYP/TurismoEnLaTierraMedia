@@ -9,6 +9,10 @@ public class UsuarioTest {
 
 	Usuario u1;
 	Atraccion a1;
+	Atraccion a5;
+	Atraccion a6;
+	Atraccion aGratis;
+	PromocionBase paisajeAxB;
 
 	@Before
 	public void setUp() throws Exception {
@@ -29,6 +33,34 @@ public class UsuarioTest {
 		assertEquals(3, u1.getPresupuesto(), 0);
 		assertEquals(7.5, u1.getTiempoDisponible(), 0);
 		assertEquals(true, a1.equals(u1.getOfertables().get(0)));
+	}
+	
+	@Test
+	public void toStringMuestraLosDatosCorrectamente() {
+		a5 = new Atraccion("Minas Tirith", 5, 2.5, 25, TipoAtraccion.PAISAJE);
+		a6 = new Atraccion("Abismo de Helm", 5, 2, 15, TipoAtraccion.PAISAJE);
+		aGratis = new Atraccion("Erebor", 12, 3, 32, TipoAtraccion.PAISAJE);
+		
+		Atraccion[] aXb = new Atraccion[2];
+		aXb[0] = a5;
+		aXb[1] = a6;
+		
+		paisajeAxB = new PromocionAxB("Pack paisajes", aXb, TipoAtraccion.PAISAJE, aGratis);
+		
+		u1.comprarOfertable(a1);
+		u1.comprarOfertable(paisajeAxB);
+		u1.toString();
+		String esperado =  "Su itinerario final es:\n[Minas Tirith: precio: 5.0,"
+				+ " duracion: 2.5, tipo: PAISAJE, Pack paisajes: precio: 10.0,"
+				+ " duracion: 7.5, tipo: PAISAJE, atracción gratis: Erebor: "
+				+ "precio: 12.0, duracion: 3.0, tipo: PAISAJE, atracciones "
+				+ "incluidas: [Minas Tirith: precio: 5.0, duracion: 2.5, tipo: "
+				+ "PAISAJE, Abismo de Helm: precio: 5.0, duracion: 2.0, tipo: "
+				+ "PAISAJE]].\nLe tomará un total de: 10.0 horas; con un costo "
+				+ "final de: 15 monedas.";
+		assertEquals(esperado, u1.toString());
+		System.out.println(u1.toString());
+		
 	}
 
 }

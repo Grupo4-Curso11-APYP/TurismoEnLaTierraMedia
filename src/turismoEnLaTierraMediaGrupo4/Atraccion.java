@@ -99,4 +99,10 @@ public class Atraccion implements Ofertable {
 		return this.tiempo;
 	}
 
+	@Override
+	public String toString() {
+		return getNombre() + ": " + "precio: " + getCosto() + ", duracion: " 
+				+ getTiempo() + ", tipo: " + getTipo();
+	}
+	
 }
