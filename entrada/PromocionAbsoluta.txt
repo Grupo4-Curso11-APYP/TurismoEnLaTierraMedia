@@ -1,2 +1,0 @@
-packDegusticion,La casona;La Comarca,DEGUSTACION,36
-packDegusticion,El Limbo;Azkaban,DEGUSTACION,45

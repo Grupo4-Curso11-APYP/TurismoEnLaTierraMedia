@@ -65,7 +65,7 @@ public class Usuario  {
 			}
 			return "Su itinerario final es:\n" + ofertables + ".\nLe tomará un total "
 					+ "de: " + horas + " horas; con un costo final de: " + (int)costoFinal 
-					+ " monedas.";
+					+ " monedas." + '\n';
 		}
 
 	

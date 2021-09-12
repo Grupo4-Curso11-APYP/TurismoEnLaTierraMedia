@@ -6,9 +6,9 @@ import java.util.Objects;
 
 public class PromocionPorcentual extends PromocionBase {
 
-	private double descuento;
+	private int descuento;
 
-	public PromocionPorcentual(String nombre, Atraccion[] packAtracciones, TipoAtraccion tipo, double descuento) {
+	public PromocionPorcentual(String nombre, Atraccion[] packAtracciones, TipoAtraccion tipo, int descuento) {
 		super(nombre, packAtracciones, tipo);
 		this.descuento = descuento;
 	}
@@ -29,15 +29,20 @@ public class PromocionPorcentual extends PromocionBase {
 
 	@Override
 	public String toString() {
-		return getNombre() + ": " + "descuento: " + descuento + ", precio: " 
+		var aux = '\n'  + getNombre() + ": " + "descuento: " + descuento + ", precio: " 
 		+ getCosto() + ", duracion: " + getTiempo() + ", tipo: " + getTipo()
-		+ ", atracciones incluidas: " + Arrays.toString(packAtracciones);
+		+ ", atracciones incluidas: " + '\n';
+		
+		for (Atraccion atraccion : packAtracciones) {
+			aux += atraccion.toString();
+		}
+		return aux;
 	}
 
 	/*
 	 * se espera que devuelva el descuento
 	 */
-	public double getDescuento() {
+	public int getDescuento() {
 		return descuento;
 	}
 

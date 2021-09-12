@@ -93,10 +93,13 @@ public class PromocionAxB extends PromocionBase {
 
 	@Override
 	public String toString() {
-		return getNombre() + ": " + "precio: " + getCosto() + ", duracion: " 
-		+ getTiempo() + ", tipo: " + getTipo() + ", atracción gratis: " +
-		getAtraccionGratis() + ", atracciones incluidas: " 
-		+ Arrays.toString(packAtracciones);
+		var aux = '\n' + getNombre() + ": " + "precio: " + getCosto() + ", duracion: " 
+				+ getTiempo() + ", tipo: " + getTipo() + ", atracciones incluidas: \n";
+		for (Atraccion atraccion : packAtracciones) {
+			aux += atraccion.toString();
+		}
+		aux += "Atracción gratis: " + atraccionGratis;
+		return aux;
 	}
 
 }

@@ -20,6 +20,10 @@ public class Atraccion implements Ofertable {
 		this.cupoDisponible = cupoDisponible;
 		this.tipoAtraccion = tipo;
 	}
+	
+	public Atraccion(String nombre ) {
+		this.nombre = nombre;
+	}
 
 	/*
 	 * se espera que devuelva el cupo disponible
@@ -103,7 +107,7 @@ public class Atraccion implements Ofertable {
 	@Override
 	public String toString() {
 		return getNombre() + ": " + "precio: " + getCosto() + ", duracion: " 
-				+ getTiempo() + ", tipo: " + getTipo();
+				+ getTiempo() + ", tipo: " + getTipo() + '\n';
 	}
 	
 }

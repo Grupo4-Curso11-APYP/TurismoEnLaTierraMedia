@@ -71,18 +71,16 @@ public class Sistema {
 		usuarios.add(usuario);
 	}
 
-	/*
-	 * @param promocion se encarga de agregar una promocion a la lista de ofertables
-	 */
-	public void agregarPromociones(PromocionBase promocion) {
-		ofertableList.add(promocion);
+	public void agregarUsuariosDesdeArchivo() {
+		this.usuarios = ManejadorArchivos.obtenerUsuarioDesdeArchivo();
 	}
 
-	/*
-	 * @Param atraccion se encarga de agregar una atraccion a la lista de ofertables
-	 */
-	public void agregarAtraccion(Atraccion atraccion) {
-		ofertableList.add(atraccion);
+	public void agregarOfertables() {
+		this.ofertableList.addAll(ManejadorArchivos.cargarPromociones(this.ofertableList));
+	}
+
+	public void agregarAtraccion() {
+		this.ofertableList.addAll(ManejadorArchivos.obtenerAtraccionesPorAchivo());
 	}
 
 	@Override
@@ -121,7 +119,11 @@ public class Sistema {
 	 */
 	@Override
 	public String toString() {
-		return "Sistema [ofertas=" + ofertableList + ", usuarios=" + usuarios + "  ]";
+		var aux = "Sistema ofertas: \n";
+		for (var ofertable : ofertableList) {
+			aux += ofertable.toString();
+		}
+		return aux;
 	}
 
 	public Ofertable getAtraccionPorNombre(String nombre) {
@@ -131,6 +133,14 @@ public class Sistema {
 			}
 		}
 		return null;
+	}
+
+	public static void main(String[] args) {
+		Sistema sistema = new Sistema();
+		sistema.agregarAtraccion();
+		sistema.agregarOfertables();
+		sistema.agregarUsuariosDesdeArchivo();
+		System.out.println(sistema.toString());
 	}
 
 }

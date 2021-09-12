@@ -23,9 +23,13 @@ public class PromocionAbsoluta extends PromocionBase {
 
 	@Override
 	public String toString() {
-		return getNombre() + ": " + "precio: " + getCosto() + ", duracion: " 
+		var aux = '\n' + getNombre() + ": " + "precio: " + getCosto() + ", duracion: " 
 				+ getTiempo() + ", tipo: " + getTipo()
-				+ ", atracciones incluidas: " + Arrays.toString(packAtracciones);
+				+ ", atracciones incluidas: \n";
+		for (Atraccion atraccion : packAtracciones) {
+			aux += atraccion.toString();
+		}
+		return aux;
 	}
 
 	@Override
