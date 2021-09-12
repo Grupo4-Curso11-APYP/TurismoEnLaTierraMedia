@@ -11,6 +11,7 @@ public class PromocionAbsoluta extends PromocionBase {
 	public PromocionAbsoluta(String nombre, Atraccion[] packAtracciones, TipoAtraccion tipo, double monto) {
 		super(nombre, packAtracciones, tipo);
 		this.monto = monto;
+		
 	}
 
 	/*
@@ -21,11 +22,19 @@ public class PromocionAbsoluta extends PromocionBase {
 		return monto;
 	}
 
+	
+
+
+	
+
 	@Override
 	public String toString() {
-		return getNombre() + ": " + "precio: " + getCosto() + ", duracion: " 
-				+ getTiempo() + ", tipo: " + getTipo()
-				+ ", atracciones incluidas: " + Arrays.toString(packAtracciones);
+	String	res =" ";
+		for (Atraccion atraccion : packAtracciones) {
+			res = "PromocionAbsoluta :nombre=" + getNombre() +  atraccion.toString2() +
+					 ", getTipo()=" + getTipo() +" monto="+monto;
+		}
+		return res;
 	}
 
 	@Override

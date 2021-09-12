@@ -13,6 +13,8 @@ public class PromocionAxB extends PromocionBase {
 		this.atraccionGratis = atraccionGratis;
 	}
 
+	
+	
 	/*
 	 * se calcula el descuento de estas promociones y a su vez se le deposita a
 	 * usuario una nueva atraccion
@@ -93,10 +95,18 @@ public class PromocionAxB extends PromocionBase {
 
 	@Override
 	public String toString() {
-		return getNombre() + ": " + "precio: " + getCosto() + ", duracion: " 
-		+ getTiempo() + ", tipo: " + getTipo() + ", atracción gratis: " +
-		getAtraccionGratis() + ", atracciones incluidas: " 
-		+ Arrays.toString(packAtracciones);
+		String	res =" ";
+		for (Atraccion atraccion : packAtracciones) {
+			res = "PromocionAxB: nombre=" + getNombre() +" "+  atraccion.toString2() +
+					 ", getTipo()=" + getTipo() +" "+"atraccionGratis=" + atraccionGratis;
+		}
+		return res;
 	}
+
+	
+
+
+
+    
 
 }

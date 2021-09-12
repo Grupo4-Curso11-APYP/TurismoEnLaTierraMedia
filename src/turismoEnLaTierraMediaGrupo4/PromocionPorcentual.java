@@ -11,6 +11,7 @@ public class PromocionPorcentual extends PromocionBase {
 	public PromocionPorcentual(String nombre, Atraccion[] packAtracciones, TipoAtraccion tipo, double descuento) {
 		super(nombre, packAtracciones, tipo);
 		this.descuento = descuento;
+		this.packAtracciones = packAtracciones;
 	}
 
 	// realiza el descuento porcentual para un pack de atracciones
@@ -27,11 +28,16 @@ public class PromocionPorcentual extends PromocionBase {
 	}
 
 
+	
+
 	@Override
 	public String toString() {
-		return getNombre() + ": " + "descuento: " + descuento + ", precio: " 
-		+ getCosto() + ", duracion: " + getTiempo() + ", tipo: " + getTipo()
-		+ ", atracciones incluidas: " + Arrays.toString(packAtracciones);
+		String	res =" ";
+		for (Atraccion atraccion : packAtracciones) {
+			res = "PromocionPorcentual: nombre=" + getNombre() +" "+  atraccion.toString2() +
+					 ", getTipo()=" + getTipo() +" "+"descuento:=" + descuento;
+		}
+		return res;
 	}
 
 	/*
@@ -60,5 +66,7 @@ public class PromocionPorcentual extends PromocionBase {
 		PromocionPorcentual other = (PromocionPorcentual) obj;
 		return Double.doubleToLongBits(descuento) == Double.doubleToLongBits(other.descuento);
 	}
+
+	
 
 }

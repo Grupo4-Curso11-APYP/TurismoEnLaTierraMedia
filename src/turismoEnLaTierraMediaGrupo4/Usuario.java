@@ -54,8 +54,8 @@ public class Usuario  {
 /*
  * se muestran todos los datos del usuario
  */
-	@Override
-	public String toString() {
+	
+	public String Itinerario() {
 		
 			double horas = 0;
 			double costoFinal = 0;
@@ -69,6 +69,12 @@ public class Usuario  {
 		}
 
 	
+	@Override
+	public String toString() {
+		return " nombre=" + nombre + ", presupuesto=" + presupuesto + ", tiempoDisponible=" + tiempoDisponible
+				+ ", tipoFavorito=" + tipoFavorito ;
+	}
+
 	/*
 	 * @Param tiempo
 	 *  metodo privado para calcular el tiempo que gasta un usuario

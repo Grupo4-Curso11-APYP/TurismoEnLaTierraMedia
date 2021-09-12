@@ -1,6 +1,6 @@
 package turismoEnLaTierraMediaGrupo4;
 
-import java.io.BufferedReader;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -13,10 +13,13 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
+
+
 public class Sistema {
 
 	protected List<Usuario> usuarios;
 	protected List<Ofertable> ofertableList;
+
 
 	/*
 	 * Se inicializan las listas en ArrayList<>
@@ -67,24 +70,37 @@ public class Sistema {
 	 * lista
 	 * 
 	 */
-	public void agregarUsuario(Usuario usuario) {
-		usuarios.add(usuario);
+	public void agregarUsuariosDesdeArchivo() {
+		this.usuarios = ManejadorArchivos.obtenerUsuarioDesdeArchivo();
 	}
 
 	/*
 	 * @param promocion se encarga de agregar una promocion a la lista de ofertables
 	 */
-	public void agregarPromociones(PromocionBase promocion) {
-		ofertableList.add(promocion);
+	public void agregarPromocionPorcentual() {
+		this.ofertableList = ManejadorArchivos.obtenerPromocionPorcentual();
+		
 	}
 
+	public void agregarPromocionAbsoluta() {
+		this.ofertableList = ManejadorArchivos.obtenerPromocionAbsoluta();
+		
+	}
+	public void agregarPromocionAxB() {
+		this.ofertableList = ManejadorArchivos.obtenerPromocionAxB();
+		
+	}
+	
 	/*
 	 * @Param atraccion se encarga de agregar una atraccion a la lista de ofertables
 	 */
-	public void agregarAtraccion(Atraccion atraccion) {
-		ofertableList.add(atraccion);
+	public void agregarAtraccion() {
+	 this.ofertableList = ManejadorArchivos.obtenerAtraccionesPorAchivo();
 	}
 
+
+	
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(ofertableList, usuarios);
@@ -121,7 +137,23 @@ public class Sistema {
 	 */
 	@Override
 	public String toString() {
-		return "Sistema [ofertas=" + ofertableList + ", usuarios=" + usuarios + "  ]";
+		return "Sistema [ofertas= " + ofertableList    
+			+	", usuarios=" + usuarios.toString() + "  ]";
 	}
 
+	public static void main(String[] args) {
+		Sistema sistema = new Sistema();
+		
+		sistema.agregarUsuariosDesdeArchivo();
+		System.out.println(sistema.toString());
+//		sistema.agregarAtraccion();
+//		System.out.println(sistema.toString());
+//		sistema.agregarPromocionPorcentual();
+//		System.out.println(sistema.toString());
+//		sistema.agregarPromocionAbsoluta();
+//		System.out.println(sistema.toString());
+//		sistema.agregarPromocionAxB();
+//		System.out.println(sistema.toString());
+	}
+	
 }

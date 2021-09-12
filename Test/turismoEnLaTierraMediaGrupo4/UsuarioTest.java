@@ -62,5 +62,4 @@ public class UsuarioTest {
 		System.out.println(u1.toString());
 		
 	}
-
 }

@@ -1,2 +1,2 @@
-packAventura,Parque De la Costa;Moria,AVENTURA,20
-packAventura,Grifindor;Cueva del Horrocrux,AVENTURA,25
+packAventura,Parque De la Costa;Moria,aventura,20
+packAventura,Grifindor;Cueva del Horrocrux,aventura,25
