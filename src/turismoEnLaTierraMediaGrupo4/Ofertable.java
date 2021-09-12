@@ -27,5 +27,12 @@ public interface Ofertable {
 	 */
 	public void reservarCupo();
 	
-	public  String  getNombre ();
+
+
+
+	/*
+	 * devuelve el nombre del ofertable.
+	 */
+	public String getNombre();
+
 }

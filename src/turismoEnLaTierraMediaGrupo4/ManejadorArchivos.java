@@ -118,6 +118,7 @@ public abstract class ManejadorArchivos {
 				String[] datosPromosP = linea.split(",");
 				
 				String nombre = datosPromosP[0];
+
 				
 				String[] atraccionesString = datosPromosP[1].split(";");
 				
@@ -129,6 +130,9 @@ public abstract class ManejadorArchivos {
 //				}
 				TipoAtraccion tipo = TipoAtraccion.valueOf(TipoAtraccion.class, datosPromosP[2].trim().toUpperCase());
 				int descuento = Integer.parseInt(datosPromosP[3]);
+
+				
+
 				promoP.add(new PromocionPorcentual(nombre, atracciones, tipo, descuento));
 				linea = br.readLine();
 			}
@@ -247,8 +251,5 @@ public abstract class ManejadorArchivos {
 
 		return promoAxb;
 	}
-	
-
-
 
 }

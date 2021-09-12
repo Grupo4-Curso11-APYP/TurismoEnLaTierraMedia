@@ -141,19 +141,23 @@ public class Sistema {
 			+	", usuarios=" + usuarios.toString() + "  ]";
 	}
 
+
 	public static void main(String[] args) {
 		Sistema sistema = new Sistema();
 		
 		sistema.agregarUsuariosDesdeArchivo();
 		System.out.println(sistema.toString());
-//		sistema.agregarAtraccion();
-//		System.out.println(sistema.toString());
-//		sistema.agregarPromocionPorcentual();
-//		System.out.println(sistema.toString());
-//		sistema.agregarPromocionAbsoluta();
-//		System.out.println(sistema.toString());
-//		sistema.agregarPromocionAxB();
-//		System.out.println(sistema.toString());
+		sistema.agregarAtraccion();
+		System.out.println(sistema.toString());
+		sistema.agregarPromocionPorcentual();
+		System.out.println(sistema.toString());
+		sistema.agregarPromocionAbsoluta();
+		System.out.println(sistema.toString());
+		sistema.agregarPromocionAxB();
+		System.out.println(sistema.toString());
 	}
 	
+
+
+
 }
