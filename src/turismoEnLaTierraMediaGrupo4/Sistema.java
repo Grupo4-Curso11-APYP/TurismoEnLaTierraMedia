@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Sistema {
 
 	protected List<Usuario> usuarios;
-	protected List<Ofertable> ofertableList;
+	protected List<Ofertable> ofertableList; //contiene atracciones y promos.
 
 	/*
 	 * Se inicializan las listas en ArrayList<>
