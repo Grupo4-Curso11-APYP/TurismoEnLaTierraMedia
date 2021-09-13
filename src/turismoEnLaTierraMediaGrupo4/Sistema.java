@@ -1,14 +1,8 @@
 package turismoEnLaTierraMediaGrupo4;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
@@ -28,27 +22,31 @@ public class Sistema {
 	}
 
 	/*
-	 * metodo sugerir filtra las ofertas segun las posibilades de cada usuario una
-	 * vez elegida la oferta , el usuario confirmara y se guardara su compra
+	 * metodo sugerir utiliza el comparator para ordenar los ofertables que va
+	 * a sugerir a cada usuario del sistema hasta que al mismo no le quede dinero
+	 * o tiempo, siempre y cuando las atracciones tengan cupo y sin ofrecer un
+	 * ofertable de nuevo que ya haya sido adquirido. El usuario acepta mediante
+	 * una entrada de teclado y la sugerencia se guarda en su lista de ofertables
+	 * Se muestra itinerario y se genera un archivo de salida para cada usuario. 
 	 */
 	public void sugerir() throws IOException {
-		for (Usuario usu : usuarios) {
-			ordenarOfertasSegunPreferencia(usu.getTipoFavorito());
+		for (Usuario usuario : usuarios) {
+			ordenarOfertasSegunPreferencia(usuario.getTipoFavorito());
 			for (Ofertable ofertable : ofertableList) {
 
 				if (ofertable.hayCupo()
-						&& usu.getPresupuesto() >= ofertable.getCosto()
-						&& usu.getTiempoDisponible() >= ofertable.getTiempo()
-						&& !(usu.getOfertables().contains(ofertable))) {
+						&& usuario.getPresupuesto() >= ofertable.getCosto()
+						&& usuario.getTiempoDisponible() >= ofertable.getTiempo()
+						&& !(usuario.getOfertables().contains(ofertable))) {
 					System.out.println("Sugerencia diaria de " +
-						usu.getNombre() + ":");
+						usuario.getNombre() + ":");
 					System.out.println(ofertable);
 					Scanner sc = new Scanner(System.in);
 					System.out.println("Pulse S para aceptar la sugerencia o"
 							+ "cualquier otra letra para continuar");
 					char ingreso = sc.next().charAt(0);
 					if (ingreso == 's' || ingreso == 'S') {
-						usu.comprarOfertable(ofertable);
+						usuario.comprarOfertable(ofertable);
 						ofertable.reservarCupo();
 						
 				}
@@ -56,36 +54,46 @@ public class Sistema {
 				}
 
 			}
-			System.out.println(usu.toString());
-			EscribirItinerarios.salidaItinerario(usu);
+			System.out.println(usuario.toString());
+			EscribirItinerarios.salidaItinerario(usuario);
 		}
 	}
 
 	/*
-	 * @Param t se compara el tipo de atraccion con la atraccion favorita del
-	 * usuario se ordena la coleccion segun la preferencia del usuario
+	 * @Param favorita permite pasar el tipo de atraccion favorita del
+	 * usuario.
+	 * ordena la lista de ofertables segun preferencia del usuario y  otros 
+	 * criterios del comparator.
 	 */
-	public void ordenarOfertasSegunPreferencia(TipoAtraccion t) {
-		Collections.sort(ofertableList, new OfertaSegunPreferencia(t));
+	public void ordenarOfertasSegunPreferencia(TipoAtraccion favorita) {
+		Collections.sort(ofertableList, new OfertaSegunPreferencia(favorita));
 	}
 
 	/*
 	 * @Param usuario se pasa por parametro un usuario el cual se va a agregar a la
 	 * lista
-	 * 
 	 */
 	public void agregarUsuario(Usuario usuario) {
 		usuarios.add(usuario);
 	}
 
+	/*
+	 * Carga los usuarios en sistema
+	 */
 	public void agregarUsuariosDesdeArchivo() {
 		this.usuarios = ManejadorArchivos.obtenerUsuarioDesdeArchivo();
 	}
 
-	public void agregarOfertables() {
+	/*
+	 * Carga las promociones en sistema
+	 */
+	public void agregarPromociones() {
 		this.ofertableList.addAll(ManejadorArchivos.cargarPromociones(this.ofertableList));
 	}
 
+	/*
+	 * Carga las atracciones en sistema
+	 */
 	public void agregarAtraccion() {
 		this.ofertableList.addAll(ManejadorArchivos.obtenerAtraccionesPorAchivo());
 	}
@@ -115,7 +123,7 @@ public class Sistema {
 	}
 
 	/*
-	 * devuelve una lista de ofertables
+	 * devuelve la lista de ofertables
 	 */
 	public List<Ofertable> getOfertableList() {
 		return ofertableList;
@@ -133,10 +141,13 @@ public class Sistema {
 		return aux;
 	}
 
+	/*
+	 * metodo main ejecuta el programa.
+	 */
 	public static void main(String[] args) throws IOException {
 		Sistema sistema = new Sistema();
 		sistema.agregarAtraccion();
-		sistema.agregarOfertables();
+		sistema.agregarPromociones();
 		sistema.agregarUsuariosDesdeArchivo();
 		sistema.sugerir();
 	}
