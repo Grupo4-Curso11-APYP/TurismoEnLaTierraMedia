@@ -54,8 +54,8 @@ public class Usuario  {
 /*
  * se muestran todos los datos del usuario
  */
-	
-	public String Itinerario() {
+	@Override
+	public String toString() {
 		
 			double horas = 0;
 			double costoFinal = 0;
@@ -63,18 +63,21 @@ public class Usuario  {
 				horas += ofertable.getTiempo();
 				costoFinal += ofertable.getCosto();
 			}
-			return "Su itinerario final es:\n" + ofertables + ".\nLe tomará un total "
-					+ "de: " + horas + " horas; con un costo final de: " + (int)costoFinal 
-					+ " monedas.";
+			
+			var aux = '\n' + "Usuario: " + nombre + ", presupuesto: " + presupuesto
+					+ ", tiempo disponible: " + tiempoDisponible + ", tipo favorito: "
+					+ tipoFavorito + '\n' + "Su itinerario final le tomará un total "
+					+ "de: " + horas + " horas; con un costo final de: " 
+					+ (int)costoFinal + " monedas." 
+					+ '\n' + "Sugerencias incluidas:\n";
+			
+			for (Ofertable ofertable : ofertables) {
+				aux += ofertable.toString();
+			}
+			return aux;
 		}
 
 	
-	@Override
-	public String toString() {
-		return " nombre=" + nombre + ", presupuesto=" + presupuesto + ", tiempoDisponible=" + tiempoDisponible
-				+ ", tipoFavorito=" + tipoFavorito ;
-	}
-
 	/*
 	 * @Param tiempo
 	 *  metodo privado para calcular el tiempo que gasta un usuario

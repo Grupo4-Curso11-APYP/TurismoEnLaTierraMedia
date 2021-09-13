@@ -1,2 +1,0 @@
-packPaisaje,Erebor;Minas Tirith,paisaje,Abismo de Helm
-packPaisaje,Camino de la Serpiente;Kame house,paisaje,Corporacion capsula

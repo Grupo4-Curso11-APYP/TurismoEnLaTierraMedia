@@ -6,12 +6,11 @@ import java.util.Objects;
 
 public class PromocionPorcentual extends PromocionBase {
 
-	private double descuento;
+	private int descuento;
 
-	public PromocionPorcentual(String nombre, Atraccion[] packAtracciones, TipoAtraccion tipo, double descuento) {
+	public PromocionPorcentual(String nombre, Atraccion[] packAtracciones, TipoAtraccion tipo, int descuento) {
 		super(nombre, packAtracciones, tipo);
 		this.descuento = descuento;
-		this.packAtracciones = packAtracciones;
 	}
 
 	// realiza el descuento porcentual para un pack de atracciones
@@ -28,22 +27,22 @@ public class PromocionPorcentual extends PromocionBase {
 	}
 
 
-	
-
 	@Override
 	public String toString() {
-		String	res =" ";
+		var aux = '\n'  + getNombre() + ": " + "descuento: " + descuento + ", precio: " 
+		+ getCosto() + ", duracion: " + getTiempo() + ", tipo: " + getTipo()
+		+ ", atracciones incluidas: " + '\n';
+		
 		for (Atraccion atraccion : packAtracciones) {
-			res = "PromocionPorcentual: nombre=" + getNombre() +" "+  atraccion.toString2() +
-					 ", getTipo()=" + getTipo() +" "+"descuento:=" + descuento;
+			aux += atraccion.toString();
 		}
-		return res;
+		return aux;
 	}
 
 	/*
 	 * se espera que devuelva el descuento
 	 */
-	public double getDescuento() {
+	public int getDescuento() {
 		return descuento;
 	}
 
@@ -66,7 +65,5 @@ public class PromocionPorcentual extends PromocionBase {
 		PromocionPorcentual other = (PromocionPorcentual) obj;
 		return Double.doubleToLongBits(descuento) == Double.doubleToLongBits(other.descuento);
 	}
-
-	
 
 }

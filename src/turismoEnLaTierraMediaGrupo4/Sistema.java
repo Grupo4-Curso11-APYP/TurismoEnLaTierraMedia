@@ -1,6 +1,6 @@
 package turismoEnLaTierraMediaGrupo4;
 
-
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -13,13 +13,10 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
-
-
 public class Sistema {
 
 	protected List<Usuario> usuarios;
 	protected List<Ofertable> ofertableList;
-
 
 	/*
 	 * Se inicializan las listas en ArrayList<>
@@ -34,26 +31,33 @@ public class Sistema {
 	 * metodo sugerir filtra las ofertas segun las posibilades de cada usuario una
 	 * vez elegida la oferta , el usuario confirmara y se guardara su compra
 	 */
-	public void sugerir() {
+	public void sugerir() throws IOException {
 		for (Usuario usu : usuarios) {
 			ordenarOfertasSegunPreferencia(usu.getTipoFavorito());
 			for (Ofertable ofertable : ofertableList) {
 
-				if (ofertable.getTipo().equals(usu.getTipoFavorito()) && ofertable.hayCupo()
+				if (ofertable.hayCupo()
 						&& usu.getPresupuesto() >= ofertable.getCosto()
 						&& usu.getTiempoDisponible() >= ofertable.getTiempo()
 						&& !(usu.getOfertables().contains(ofertable))) {
+					System.out.println("Sugerencia diaria de " +
+						usu.getNombre() + ":");
+					System.out.println(ofertable);
+					Scanner sc = new Scanner(System.in);
+					System.out.println("Pulse S para aceptar la sugerencia o"
+							+ "cualquier otra letra para continuar");
+					char ingreso = sc.next().charAt(0);
+					if (ingreso == 's' || ingreso == 'S') {
+						usu.comprarOfertable(ofertable);
+						ofertable.reservarCupo();
+						
 				}
-				Scanner sc = new Scanner(System.in);
-				System.out.println("Ingrese S para aceptar");
-				char ingreso = sc.next().charAt(0);
-				if (ingreso == 's') {
-					usu.comprarOfertable(ofertable);
-					ofertable.reservarCupo();
-					usu.toString();
+				
 				}
 
 			}
+			System.out.println(usu.toString());
+			EscribirItinerarios.salidaItinerario(usu);
 		}
 	}
 
@@ -70,37 +74,22 @@ public class Sistema {
 	 * lista
 	 * 
 	 */
+	public void agregarUsuario(Usuario usuario) {
+		usuarios.add(usuario);
+	}
+
 	public void agregarUsuariosDesdeArchivo() {
 		this.usuarios = ManejadorArchivos.obtenerUsuarioDesdeArchivo();
 	}
 
-	/*
-	 * @param promocion se encarga de agregar una promocion a la lista de ofertables
-	 */
-	public void agregarPromocionPorcentual() {
-		this.ofertableList = ManejadorArchivos.obtenerPromocionPorcentual();
-		
+	public void agregarOfertables() {
+		this.ofertableList.addAll(ManejadorArchivos.cargarPromociones(this.ofertableList));
 	}
 
-	public void agregarPromocionAbsoluta() {
-		this.ofertableList = ManejadorArchivos.obtenerPromocionAbsoluta();
-		
-	}
-	public void agregarPromocionAxB() {
-		this.ofertableList = ManejadorArchivos.obtenerPromocionAxB();
-		
-	}
-	
-	/*
-	 * @Param atraccion se encarga de agregar una atraccion a la lista de ofertables
-	 */
 	public void agregarAtraccion() {
-	 this.ofertableList = ManejadorArchivos.obtenerAtraccionesPorAchivo();
+		this.ofertableList.addAll(ManejadorArchivos.obtenerAtraccionesPorAchivo());
 	}
 
-
-	
-	
 	@Override
 	public int hashCode() {
 		return Objects.hash(ofertableList, usuarios);
@@ -137,27 +126,19 @@ public class Sistema {
 	 */
 	@Override
 	public String toString() {
-		return "Sistema [ofertas= " + ofertableList    
-			+	", usuarios=" + usuarios.toString() + "  ]";
+		var aux = "Sistema ofertas: \n";
+		for (var ofertable : ofertableList) {
+			aux += ofertable.toString();
+		}
+		return aux;
 	}
 
-
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		Sistema sistema = new Sistema();
-		
-		sistema.agregarUsuariosDesdeArchivo();
-		System.out.println(sistema.toString());
 		sistema.agregarAtraccion();
-		System.out.println(sistema.toString());
-		sistema.agregarPromocionPorcentual();
-		System.out.println(sistema.toString());
-		sistema.agregarPromocionAbsoluta();
-		System.out.println(sistema.toString());
-		sistema.agregarPromocionAxB();
-		System.out.println(sistema.toString());
+		sistema.agregarOfertables();
+		sistema.agregarUsuariosDesdeArchivo();
+		sistema.sugerir();
 	}
-	
-
-
 
 }

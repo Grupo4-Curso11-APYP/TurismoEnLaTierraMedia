@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 public abstract class ManejadorArchivos {
 
 	public static List<Usuario> obtenerUsuarioDesdeArchivo() {
@@ -19,7 +17,7 @@ public abstract class ManejadorArchivos {
 		List<Usuario> usuarios = null;
 
 		try {
-			archivo = new File("C:\\Users\\Jere\\eclipse-workspace\\turismoEnlaEdadMedia.grupo4.tp1.arg\\entrada\\Usuario.txt");
+			archivo = new File("entrada/Usuario.txt");
 			fr = new FileReader(archivo);
 			br = new BufferedReader(fr);
 
@@ -54,8 +52,9 @@ public abstract class ManejadorArchivos {
 
 		return usuarios;
 	}
-
+	
 	public static List<Ofertable> obtenerAtraccionesPorAchivo() {
+		String path = new File("entrada/Atraccion.txt").getAbsolutePath();
 		File archivo = null;
 		FileReader fr = null;
 		BufferedReader br = null;
@@ -63,7 +62,7 @@ public abstract class ManejadorArchivos {
 		List<Ofertable> atraccion = null;
 
 		try {
-			archivo = new File("C:\\Users\\Jere\\eclipse-workspace\\turismoEnlaEdadMedia.grupo4.tp1.arg\\entrada\\Atraccion.txt");
+			archivo = new File(path);
 			fr = new FileReader(archivo);
 			br = new BufferedReader(fr);
 
@@ -99,95 +98,120 @@ public abstract class ManejadorArchivos {
 
 		return atraccion;
 	}
-
-	public static List<Ofertable> obtenerPromocionPorcentual() {
-		File archivo = null;
-		FileReader fr = null;
-		BufferedReader br = null;
-
-		List<Ofertable> promoP = null;
-		// PromocionPorcentual : nombre ,atraccion [] , tipoAtraccion , descuento
-		try {
-			archivo = new File("C:\\Users\\Jere\\eclipse-workspace\\turismoEnlaEdadMedia.grupo4.tp1.arg\\entrada\\PromocionesPorcentuales.txt");
-			fr = new FileReader(archivo);
-			br = new BufferedReader(fr);
-			promoP = new ArrayList<Ofertable>();
-			String linea = br.readLine();
-			while (linea != null) {
-				
-				String[] datosPromosP = linea.split(",");
-				
-				String nombre = datosPromosP[0];
-
-				
-				String[] atraccionesString = datosPromosP[1].split(";");
-				
-				Atraccion[] atracciones = new Atraccion[atraccionesString.length];
-				atracciones[0] = new Atraccion(atraccionesString[0]);
-				atracciones[1] = new Atraccion(atraccionesString[1]);
-//				for (int i = 0; i < atraccionesString.length; i++) {
-//					atracciones[i] = (Atraccion) sistema.filtrarAtraccionPorNombre(atraccionesString[i]);
-//				}
-				TipoAtraccion tipo = TipoAtraccion.valueOf(TipoAtraccion.class, datosPromosP[2].trim().toUpperCase());
-				int descuento = Integer.parseInt(datosPromosP[3]);
-
-				
-
-				promoP.add(new PromocionPorcentual(nombre, atracciones, tipo, descuento));
-				linea = br.readLine();
-			}
-
-			return promoP;
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (fr != null) {
-					fr.close();
-				}
-			} catch (Exception e2) {
-				e2.printStackTrace();
-
-			}
-		}
-
-		return promoP;
-	}
 	
+	public static List<Ofertable> cargarPromociones(List<Ofertable> ofertables){
 
-	public static List<Ofertable> obtenerPromocionAbsoluta() {
+		String path  = new File("entrada/Promociones.txt").getAbsolutePath();
 		File archivo = null;
 		FileReader fr = null;
 		BufferedReader br = null;
+		ArrayList<Ofertable> listaOfertables = null;
 
-		List<Ofertable> promoAbs = null;
-		// PromocionPorcentual : nombre ,atraccion [] , tipoAtraccion , descuento
-		try {
-			archivo = new File("C:\\Users\\Jere\\eclipse-workspace\\turismoEnlaEdadMedia.grupo4.tp1.arg\\entrada\\PromocionAbsoluta.txt");
+		try{
+			listaOfertables = new ArrayList<Ofertable>();
+			archivo = new File(path);
 			fr = new FileReader(archivo);
 			br = new BufferedReader(fr);
-			promoAbs = new ArrayList<Ofertable>();
+
+			// Carga las atracciones en la lista de ofertables y en caso de que sea una promocion,
+			// carga la linea en una lista de string que luego va a recorrer.
+
 			String linea = br.readLine();
 			while (linea != null) {
-				String[] datosPromosAbs = linea.split(",");
-				String nombre = datosPromosAbs[0];
-				String[] atraccionString = datosPromosAbs[1].split(";");
-				
-				Atraccion[] atraccion = new Atraccion[atraccionString.length];
-				atraccion[0] = new Atraccion(atraccionString[0]);
-				atraccion[1] = new Atraccion(atraccionString[1]);
-				TipoAtraccion tipo = TipoAtraccion.valueOf(TipoAtraccion.class, datosPromosAbs[2].trim().toUpperCase());
-				int descuento = Integer.parseInt(datosPromosAbs[3]);
-				promoAbs.add(new PromocionAbsoluta(nombre, atraccion, tipo, descuento));
+				if (linea.contains("Porcentual"))
+				{
+					String[] datosPromosP = linea.split(",");
+
+					String nombre = datosPromosP[1];
+					String[] atraccionesString = datosPromosP[2].split(";");
+
+					Atraccion[] atracciones = new Atraccion[atraccionesString.length];
+					atracciones[0] = new Atraccion(atraccionesString[0]);
+					atracciones[1] = new Atraccion(atraccionesString[1]);
+					for (int i = 0; i < atraccionesString.length; i++) {
+						for (var ofertable: ofertables) {
+
+							if(ofertable.getNombre().equals(atracciones[i].getNombre()))
+							{
+								atracciones[i] = (Atraccion) ofertable;
+							}
+						}
+					}
+
+					TipoAtraccion tipo = TipoAtraccion.valueOf(TipoAtraccion.class, datosPromosP[3].trim().toUpperCase());
+					int descuento = Integer.parseInt(datosPromosP[4]);
+
+					listaOfertables.add(new PromocionPorcentual(nombre, atracciones, tipo, descuento));
+				}
+
+				// Promociones Absolutas
+				if(linea.contains("Absoluta"))
+				{
+					String[] datosPromosAbs = linea.split(",");
+					String nombre = datosPromosAbs[1];
+					String[] atraccionesString = datosPromosAbs[2].split(";");
+
+					Atraccion[] atracciones = new Atraccion[atraccionesString.length];
+					atracciones[0] = new Atraccion(atraccionesString[0]);
+					atracciones[1] = new Atraccion(atraccionesString[1]);
+					for (int i = 0; i < atraccionesString.length; i++) {
+						for (var ofertable: ofertables) {
+
+							if(ofertable.getNombre().equals(atracciones[i].getNombre()))
+							{
+								atracciones[i] = (Atraccion) ofertable;
+							}
+						}
+					}
+
+					TipoAtraccion tipo = TipoAtraccion.valueOf(TipoAtraccion.class, datosPromosAbs[3].trim().toUpperCase());
+					int descuento = Integer.parseInt(datosPromosAbs[4]);
+					listaOfertables.add(new PromocionAbsoluta(nombre, atracciones, tipo, descuento));
+				}
+
+				// Promociones AxB
+				if(linea.contains("AxB"))
+				{
+					String[] datosPromos = linea.split(",");
+					String nombre = datosPromos[1];
+
+					String[] atraccionesString = datosPromos[2].split(";");
+					Atraccion[] atracciones = new Atraccion[atraccionesString.length];
+					atracciones[0] = new Atraccion(atraccionesString[0]);
+					atracciones[1] = new Atraccion(atraccionesString[1]);
+
+					for (int i = 0; i < atraccionesString.length; i++) {
+						for (var ofertable: ofertables) {
+
+							if(ofertable.getNombre().equals(atracciones[i].getNombre()))
+							{
+								atracciones[i] = (Atraccion) ofertable;
+							}
+						}
+					}
+
+					TipoAtraccion tipo = TipoAtraccion.valueOf(TipoAtraccion.class, datosPromos[3].trim().toUpperCase());
+					String nombreG = datosPromos[4];
+
+					Atraccion atracGratis = new Atraccion(nombreG);
+
+					for (var ofertable: ofertables) {
+						if (ofertable.getNombre().equals(atracGratis.getNombre()))
+							atracGratis = (Atraccion) ofertable;
+					}
+
+					listaOfertables.add(new PromocionAxB(nombre, atracciones, tipo, atracGratis));
+				}
 				linea = br.readLine();
 			}
 
-			return promoAbs;
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
+			return listaOfertables;
+		}
+		catch (IOException ex)
+		{
+			ex.printStackTrace();
+		}
+		finally {
 			try {
 				if (fr != null) {
 					fr.close();
@@ -197,59 +221,7 @@ public abstract class ManejadorArchivos {
 
 			}
 		}
-
-		return promoAbs;
-	}
-
-	public static List<Ofertable> obtenerPromocionAxB() {
-		File archivo = null;
-		FileReader fr = null;
-		BufferedReader br = null;
-
-		List<Ofertable> promoAxb = null;
-        
-		try {
-			archivo = new File("C:\\Users\\Jere\\eclipse-workspace\\turismoEnlaEdadMedia.grupo4.tp1.arg\\entrada\\PromocionAxB.txt");
-			fr = new FileReader(archivo);
-			br = new BufferedReader(fr);
-
-		
-			promoAxb = new  ArrayList<Ofertable>();
-			
-
-			String linea = br.readLine();
-			while (linea != null) {
-				String[] datosPromos = linea.split(",");
-             	String nombre = datosPromos[0];
-		
-				String[] atraccionString = datosPromos[1].split(";");
-				Atraccion[] atraccion = new Atraccion[atraccionString.length];	
-				atraccion[0] = new Atraccion(atraccionString[0]);
-				atraccion[1] = new Atraccion(atraccionString[1]);
-
-				TipoAtraccion tipo = TipoAtraccion.valueOf(TipoAtraccion.class, datosPromos[2].trim().toUpperCase());
-				String nombreG = datosPromos[3];
-                Atraccion atracGratis = new Atraccion(nombreG, 1, 5, 10, tipo);
-				promoAxb.add(new PromocionAxB(nombre, atraccion, tipo, atracGratis));
-				linea = br.readLine();
-			}
-
-			return promoAxb;
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (fr != null) {
-					fr.close();
-				}
-			} catch (Exception e2) {
-				e2.printStackTrace();
-
-			}
-		}
-
-		return promoAxb;
+		return  listaOfertables;
 	}
 
 }

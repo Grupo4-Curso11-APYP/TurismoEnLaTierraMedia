@@ -20,14 +20,6 @@ public abstract class PromocionBase implements Ofertable {
 		this.tipo = tipo;
 	}
 
-	
-	
-	public Atraccion[] getPackAtracciones() {
-		return packAtracciones;
-	}
-
-
-
 	/*
 	 * se espera que devuelva el nombre
 	 */
@@ -95,16 +87,8 @@ public abstract class PromocionBase implements Ofertable {
 		return Objects.equals(nombre, other.nombre) && Arrays.equals(packAtracciones, other.packAtracciones)
 				&& Double.doubleToLongBits(tiempo) == Double.doubleToLongBits(other.tiempo) && tipo == other.tipo;
 	}
-
-
-	@Override
-	public String toString() {
-		return "PromocionBase [nombre=" + nombre + ", packAtracciones=" + Arrays.toString(packAtracciones) + ", tipo="
-				+ tipo + ", tiempo=" + tiempo + "]";
-	}
 	
-     
-	
+
 
 	
 	

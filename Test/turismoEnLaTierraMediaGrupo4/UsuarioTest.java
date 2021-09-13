@@ -49,17 +49,20 @@ public class UsuarioTest {
 		
 		u1.comprarOfertable(a1);
 		u1.comprarOfertable(paisajeAxB);
-		u1.toString();
-		String esperado =  "Su itinerario final es:\n[Minas Tirith: precio: 5.0,"
-				+ " duracion: 2.5, tipo: PAISAJE, Pack paisajes: precio: 10.0,"
-				+ " duracion: 7.5, tipo: PAISAJE, atracción gratis: Erebor: "
-				+ "precio: 12.0, duracion: 3.0, tipo: PAISAJE, atracciones "
-				+ "incluidas: [Minas Tirith: precio: 5.0, duracion: 2.5, tipo: "
-				+ "PAISAJE, Abismo de Helm: precio: 5.0, duracion: 2.0, tipo: "
-				+ "PAISAJE]].\nLe tomará un total de: 10.0 horas; con un costo "
-				+ "final de: 15 monedas.";
+		System.out.println(u1.toString());
+		String esperado =  "\nUsuario: Eowyn, presupuesto: -7.0, tiempo "
+				+ "disponible: 0.0, tipo favorito: AVENTURA\n" 
+				+ "Su itinerario final le tomará un total "
+				+ "de: 10.0 horas; con un costo final de: 15 monedas.\n" 
+				+ "Sugerencias incluidas:\n" + "Minas Tirith: precio: 5.0,"
+				+ " duracion: 2.5, tipo: PAISAJE\n" + "\nPack paisajes: "
+				+ "precio: 10.0, duracion: 7.5, tipo: PAISAJE, atracciones incluidas: \n"
+				+ "Minas Tirith: precio: 5.0, duracion: 2.5, tipo: PAISAJE\n"
+				+ "Abismo de Helm: precio: 5.0, duracion: 2.0, tipo: PAISAJE\n"
+				+ "Atracción gratis: Erebor: precio: 12.0, duracion: 3.0, tipo: PAISAJE\n";
 		assertEquals(esperado, u1.toString());
 		System.out.println(u1.toString());
 		
 	}
+
 }

@@ -1,0 +1,4 @@
+Promocion - Absoluta,Pack Degustacion,Lothlorien;La Comarca,DEGUSTACION,36
+Promocion - AxB,Pack Paisaje,Erebor;Minas Tirith,paisaje,Abismo de Helm
+Promocion - Porcentual,Pack Aventura,Mordor;Moria,aventura,20
+Promocion - Porcentual,Pack Adrenalina,Mordor;Bosque Negro,aventura,25

@@ -1,12 +1,8 @@
-Minas Tirith,5,2.5,25,PAISAJE
-Parque De La costa",4,3.7,15,AVENTURA
-La Casona,2,1.5,10,DEGUSTACION
 Moria,10,2.4,6,AVENTURA
+Minas Tirith,5,2.5,25,PAISAJE
 La Comarca,6,3.5,150,DEGUSTACION
 Mordor,25,3,4,AVENTURA
-La Casona,2,1.5,10,DEGUSTACION
-Moria,10,2,6,AVENTURA
-La Comarca,3,6.5,150,DEGUSTACION
-Abismo de Helm,5,2,15,PAISAJE
-Erebor,12,3,32,PAISAJE
+Abismo de Helm,10,8,10,PAISAJE
+Lothlorien,35,1,30,DEGUSTACION
+Erebor,5,6.5,26,PAISAJE
 Bosque Negro,3,4,12,AVENTURA
