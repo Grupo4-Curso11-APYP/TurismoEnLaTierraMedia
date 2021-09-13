@@ -9,6 +9,11 @@ import java.util.List;
 
 public abstract class ManejadorArchivos {
 
+	/*
+	 * Lee los datos del archivo Usuario.txt
+	 * Instancia usuarios a partir de esos datos
+	 * Devuelve esos usuarios
+	 */
 	public static List<Usuario> obtenerUsuarioDesdeArchivo() {
 		File archivo = null;
 		FileReader fr = null;
@@ -53,20 +58,25 @@ public abstract class ManejadorArchivos {
 		return usuarios;
 	}
 	
+	/*
+	 * Lee los datos del archivo Atraccion.txt
+	 * Instancia atracciones a partir de esos datos
+	 * Devuelve esas atracciones
+	 */
 	public static List<Ofertable> obtenerAtraccionesPorAchivo() {
 		String path = new File("entrada/Atraccion.txt").getAbsolutePath();
 		File archivo = null;
 		FileReader fr = null;
 		BufferedReader br = null;
 
-		List<Ofertable> atraccion = null;
+		List<Ofertable> atracciones = null;
 
 		try {
 			archivo = new File(path);
 			fr = new FileReader(archivo);
 			br = new BufferedReader(fr);
 
-			atraccion = new ArrayList<Ofertable>();
+			atracciones = new ArrayList<Ofertable>();
 
 			String linea = br.readLine();
 			while (linea != null) {
@@ -77,11 +87,11 @@ public abstract class ManejadorArchivos {
 				int cupoDisponible = Integer.parseInt(datosAtraccion[3]);
 				TipoAtraccion tipo = TipoAtraccion.valueOf(TipoAtraccion.class, datosAtraccion[4].trim().toUpperCase());
 
-				atraccion.add(new Atraccion(nombre, presupuesto, tiempoDisponible, cupoDisponible, tipo));
+				atracciones.add(new Atraccion(nombre, presupuesto, tiempoDisponible, cupoDisponible, tipo));
 				linea = br.readLine();
 			}
 
-			return atraccion;
+			return atracciones;
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -96,9 +106,14 @@ public abstract class ManejadorArchivos {
 			}
 		}
 
-		return atraccion;
+		return atracciones;
 	}
 	
+	/*
+	 * Lee los datos del archivo Promociones.txt
+	 * Instancia las diferentes promociones a partir de esos datos
+	 * Devuelve esas promociones
+	 */
 	public static List<Ofertable> cargarPromociones(List<Ofertable> ofertables){
 
 		String path  = new File("entrada/Promociones.txt").getAbsolutePath();
@@ -113,11 +128,10 @@ public abstract class ManejadorArchivos {
 			fr = new FileReader(archivo);
 			br = new BufferedReader(fr);
 
-			// Carga las atracciones en la lista de ofertables y en caso de que sea una promocion,
-			// carga la linea en una lista de string que luego va a recorrer.
-
 			String linea = br.readLine();
 			while (linea != null) {
+				
+				//Distingue promociones porcentuales
 				if (linea.contains("Porcentual"))
 				{
 					String[] datosPromosP = linea.split(",");
@@ -144,7 +158,7 @@ public abstract class ManejadorArchivos {
 					listaOfertables.add(new PromocionPorcentual(nombre, atracciones, tipo, descuento));
 				}
 
-				// Promociones Absolutas
+				// Distingue promociones absolutas
 				if(linea.contains("Absoluta"))
 				{
 					String[] datosPromosAbs = linea.split(",");
@@ -169,7 +183,7 @@ public abstract class ManejadorArchivos {
 					listaOfertables.add(new PromocionAbsoluta(nombre, atracciones, tipo, descuento));
 				}
 
-				// Promociones AxB
+				// Distingue promociones AxB
 				if(linea.contains("AxB"))
 				{
 					String[] datosPromos = linea.split(",");
