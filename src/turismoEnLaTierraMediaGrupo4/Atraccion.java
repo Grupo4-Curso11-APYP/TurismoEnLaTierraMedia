@@ -10,7 +10,7 @@ public class Atraccion implements Ofertable {
 	private String nombre;
 
 	/*
-	 * @Param nombre , costo, tiempo , cupoDisponible , tipo se inicializan todos
+	 * @Param nombre , costo, tiempo , cupoDisponible y tipo se inicializan todos
 	 * los atributos de la atraccion
 	 */
 	public Atraccion(String nombre, double costo, double tiempo, int cupoDisponible, TipoAtraccion tipo) {
@@ -21,6 +21,11 @@ public class Atraccion implements Ofertable {
 		this.tipoAtraccion = tipo;
 	}
 	
+	/*
+	 * @param nombre permite pasar un nombre para inicializar el atributo nombre
+	 * Constructor auxiliar usado para comparar con el nombre de la lista de
+	 * ofertables.
+	 */
 	public Atraccion(String nombre ) {
 		this.nombre = nombre;
 	}
@@ -104,6 +109,10 @@ public class Atraccion implements Ofertable {
 		return this.tiempo;
 	}
 
+	/*
+	 * aplica toString a las atracciones para que se muestren en el formato 
+	 * requerido. Aplica un salto de línea con \n para mayor legibilidad.
+	 */
 	@Override
 	public String toString() {
 		return getNombre() + ": " + "precio: " + getCosto() + ", duracion: " 
