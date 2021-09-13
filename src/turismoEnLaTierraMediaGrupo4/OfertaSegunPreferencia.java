@@ -11,9 +11,10 @@ public class OfertaSegunPreferencia implements Comparator<Ofertable> {
 	}
 
 	/*
-	 * @Param o1 o2 se comparan las ofertas priorizando tipo, luego las
-	 *  promociones, después las más caras y por último las de mayor tiempo 
-	 *  de visita.
+	 * @Param o1 o2 pasa dos objetos ofertables
+	 * se comparan los ofertables priorizando tipo, luego las
+	 *  promociones, después los ofertables más caros y por último los de mayor 
+	 *  tiempo de visita.
 	 */
 	
 	@Override
@@ -49,7 +50,7 @@ public class OfertaSegunPreferencia implements Comparator<Ofertable> {
 			}
 			if (o1.getClass() != Atraccion.class && o2.getClass() != Atraccion.class){
 				if (o1.getCosto().compareTo(o2.getCosto()) == 0) {
-					return o2.getTiempo().compareTo(o1.getTiempo()); // prioriza mayor tiempo al estar o2 primero.
+					return o2.getTiempo().compareTo(o1.getTiempo());
 				}
 				return o2.getCosto().compareTo(o1.getCosto());
 			}
