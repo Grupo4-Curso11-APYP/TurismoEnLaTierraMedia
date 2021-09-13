@@ -9,7 +9,7 @@ public class Usuario  {
 	private double presupuesto;
 	private double tiempoDisponible;
 	private TipoAtraccion tipoFavorito;
-	private List<Ofertable> ofertables;
+	private List<Ofertable> ofertables; //Las sugerencias que va aceptando.
 
 	public Usuario(String nombre,double presupuesto, double tiempoDisponible, TipoAtraccion tipoFavorito) {
 		this.nombre = nombre;
@@ -52,7 +52,8 @@ public class Usuario  {
 	}
 	
 /*
- * se muestran todos los datos del usuario
+ * Muestra todos los datos del usuario mas sus ofertables aceptados en formato
+ * itinerario, calculando el tiempo y  costo total para completar su agenda.
  */
 	@Override
 	public String toString() {
@@ -80,24 +81,24 @@ public class Usuario  {
 	
 	/*
 	 * @Param tiempo
-	 *  metodo privado para calcular el tiempo que gasta un usuario
+	 *  metodo privado para restar un tiempo al atributo tiempoDisponible
 	 */
 	private double restarTiempo(double tiempo) {
 		return this.tiempoDisponible  -=tiempo;
 	}
 	/*
 	 *@Param monto
-	 *metodo privado para calcular cuanto presupuesto gasto el usuario 
+	 *metodo privado para restar un presupuesto al atributo presupuesto 
 	 */
 	private double restarPresupuesto(double monto) {
 		return this.presupuesto-= monto;
 	}
 	
 	/*
-	 * @Param o
-	 * una vez que el usuario compra una oferta sugerida 
-	 * se les restara el presupuesto y el tiempo de la oferta comprada 
-	 * una vez confirme la compra se guardara la oferta en una lista de ofertas
+	 * @Param o pasa el ofertable que el usuario va a comprar al aceptar sugerencia
+	 * una vez que el usuario compra un ofertable sugerido 
+	 * se le restara el presupuesto y el tiempo del ofertable comprado 
+	 * finalmente guarda el ofertable en su lista de ofertables
 	 */
 	public void comprarOfertable(Ofertable o) {
       	double tiempoO = o.getTiempo();
