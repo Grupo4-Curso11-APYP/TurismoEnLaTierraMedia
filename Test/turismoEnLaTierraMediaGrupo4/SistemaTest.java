@@ -83,12 +83,4 @@ public class SistemaTest {
 	
 	}
 
-//	@Test
-//	public void deberiaPoderLeerElArchivoPromocionPorcentual() {
-//		
-//		sistema.obtenerPromocion("C:\\Users\\Jere\\eclipse-workspace\\turismoEnlaEdadMedia.grupo4.tp1.arg\\src\\turismoEnLaTierraMediaGrupo4\\promocionesPorcentual");
-//		
-//		assertEquals(true, sistema.obtenerPromocion("C:\\Users\\Jere\\eclipse-workspace\\turismoEnlaEdadMedia.grupo4.tp1.arg\\src\\turismoEnLaTierraMediaGrupo4\\promocionesPorcentual"));
-//	}
-
 }
