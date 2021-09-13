@@ -31,26 +31,33 @@ public class Sistema {
 	 * metodo sugerir filtra las ofertas segun las posibilades de cada usuario una
 	 * vez elegida la oferta , el usuario confirmara y se guardara su compra
 	 */
-	public void sugerir() {
+	public void sugerir() throws IOException {
 		for (Usuario usu : usuarios) {
 			ordenarOfertasSegunPreferencia(usu.getTipoFavorito());
 			for (Ofertable ofertable : ofertableList) {
 
-				if (ofertable.getTipo().equals(usu.getTipoFavorito()) && ofertable.hayCupo()
+				if (ofertable.hayCupo()
 						&& usu.getPresupuesto() >= ofertable.getCosto()
 						&& usu.getTiempoDisponible() >= ofertable.getTiempo()
 						&& !(usu.getOfertables().contains(ofertable))) {
+					System.out.println("Sugerencia diaria de " +
+						usu.getNombre() + ":");
+					System.out.println(ofertable);
+					Scanner sc = new Scanner(System.in);
+					System.out.println("Pulse S para aceptar la sugerencia o"
+							+ "cualquier otra letra para continuar");
+					char ingreso = sc.next().charAt(0);
+					if (ingreso == 's' || ingreso == 'S') {
+						usu.comprarOfertable(ofertable);
+						ofertable.reservarCupo();
+						
 				}
-				Scanner sc = new Scanner(System.in);
-				System.out.println("Ingrese S para aceptar");
-				char ingreso = sc.next().charAt(0);
-				if (ingreso == 's') {
-					usu.comprarOfertable(ofertable);
-					ofertable.reservarCupo();
-					usu.toString();
+				
 				}
 
 			}
+			System.out.println(usu.toString());
+			EscribirItinerarios.salidaItinerario(usu);
 		}
 	}
 
@@ -126,21 +133,12 @@ public class Sistema {
 		return aux;
 	}
 
-	public Ofertable getAtraccionPorNombre(String nombre) {
-		for (int i = 0; i < 8; i++) {
-			if (ofertableList.get(i).getNombre().equals(nombre)) {
-				return ofertableList.get(i);
-			}
-		}
-		return null;
-	}
-
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		Sistema sistema = new Sistema();
 		sistema.agregarAtraccion();
 		sistema.agregarOfertables();
 		sistema.agregarUsuariosDesdeArchivo();
-		System.out.println(sistema.toString());
+		sistema.sugerir();
 	}
 
 }

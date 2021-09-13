@@ -63,9 +63,18 @@ public class Usuario  {
 				horas += ofertable.getTiempo();
 				costoFinal += ofertable.getCosto();
 			}
-			return "Su itinerario final es:\n" + ofertables + ".\nLe tomará un total "
-					+ "de: " + horas + " horas; con un costo final de: " + (int)costoFinal 
-					+ " monedas." + '\n';
+			
+			var aux = '\n' + "Usuario: " + nombre + ", presupuesto: " + presupuesto
+					+ ", tiempo disponible: " + tiempoDisponible + ", tipo favorito: "
+					+ tipoFavorito + '\n' + "Su itinerario final le tomará un total "
+					+ "de: " + horas + " horas; con un costo final de: " 
+					+ (int)costoFinal + " monedas." 
+					+ '\n' + "Sugerencias incluidas:\n";
+			
+			for (Ofertable ofertable : ofertables) {
+				aux += ofertable.toString();
+			}
+			return aux;
 		}
 
 	

@@ -11,22 +11,59 @@ public class OfertaSegunPreferencia implements Comparator<Ofertable> {
 	}
 
 	/*
-	 * @Param o1 o2 se comparan las ofertas priorizando las promociones , despues se
-	 * compara por atraccion mas cara , y por ultimo por tiempo de visita
+	 * @Param o1 o2 se comparan las ofertas priorizando tipo, luego las
+	 *  promociones, después las más caras y por último las de mayor tiempo 
+	 *  de visita.
 	 */
+	
 	@Override
 	public int compare(Ofertable o1, Ofertable o2) {
 
 		if (o1.getTipo().compareTo(o2.getTipo()) == 0) {
-			if (o1.getClass().getSimpleName().compareTo(o1.getClass().getSimpleName()) == 0) {
+			if (o1.getClass().getSimpleName().compareTo(o2.getClass().getSimpleName()) == 0) {
 				if (o1.getCosto().compareTo(o2.getCosto()) == 0) {
 					return o2.getTiempo().compareTo(o1.getTiempo()); // prioriza mayor tiempo al estar o2 primero.
 				}
 				return o2.getCosto().compareTo(o1.getCosto()); // prioriza mayor costo al estar o2 primero.
 			}
+			if (o1.getClass() != Atraccion.class)
+				return	-1;
+			if (o2.getClass() != Atraccion.class)
+				return 1;
+		}
+		if (o1.getTipo() == tipo || o2.getTipo() == tipo){
+			if (o1.getTipo() == tipo){
+				return -1;
+			} if (o2.getTipo() == tipo) {
+				return 1;
+			}
 		}
 
-		return o1.getTipo().compareTo(o2.getTipo());
+		if (o1.getClass() != Atraccion.class || o2.getClass() != Atraccion.class)
+		{
+			if (o1.getClass() != Atraccion.class && o2.getClass() == Atraccion.class){
+				return -1;
+			}
+			if (o2.getClass() != Atraccion.class && o2.getClass() == Atraccion.class) {
+				return 1;
+			}
+			if (o1.getClass() != Atraccion.class && o2.getClass() != Atraccion.class){
+				if (o1.getCosto().compareTo(o2.getCosto()) == 0) {
+					return o2.getTiempo().compareTo(o1.getTiempo()); // prioriza mayor tiempo al estar o2 primero.
+				}
+				return o2.getCosto().compareTo(o1.getCosto());
+			}
+		}
+
+		if (o1.getClass() != Atraccion.class)
+			return	-1;
+		if (o2.getClass() != Atraccion.class)
+			return 1;
+
+		if (o1.getCosto().compareTo(o2.getCosto()) == 0)
+			return o2.getTiempo().compareTo(o1.getTiempo());
+
+		return o2.getCosto().compareTo(o1.getCosto());
 	}
 
 }
