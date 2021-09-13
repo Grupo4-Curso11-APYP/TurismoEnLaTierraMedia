@@ -23,7 +23,7 @@ public interface Ofertable {
 	public boolean hayCupo();
 
 	/*
-	 * si hay cupo , resta un cupo disponible , para simular la reservacion
+	 * si hay cupo , resta un cupo disponible en las atracciones involucradas.
 	 */
 	public void reservarCupo();
 	
