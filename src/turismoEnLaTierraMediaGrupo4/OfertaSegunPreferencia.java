@@ -35,7 +35,8 @@ public class OfertaSegunPreferencia implements Comparator<Ofertable> {
 		if (o1.getTipo() == tipo || o2.getTipo() == tipo){
 			if (o1.getTipo() == tipo){
 				return -1;
-			} if (o2.getTipo() == tipo) {
+			} 
+			if (o2.getTipo() == tipo) {
 				return 1;
 			}
 		}

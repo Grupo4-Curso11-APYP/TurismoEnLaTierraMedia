@@ -23,7 +23,7 @@ public class SistemaTest {
 		sistema = new Sistema();
         
 		// usuario
-		sistema.agregarUsuario(new Usuario("Moria", 8, 10, TipoAtraccion.AVENTURA));
+		sistema.usuarios.add(new Usuario("Moria", 8, 10, TipoAtraccion.AVENTURA));
        //atracion
 		Atraccion [] atraccion1= new Atraccion[2];
 		Atraccion [] atraccion2 = new Atraccion[2];
@@ -58,7 +58,7 @@ public class SistemaTest {
 
 		Usuario u1 = new Usuario("Eowyn", 8, 10, TipoAtraccion.AVENTURA);
 
-		sistema.agregarUsuario(u1);
+		sistema.usuarios.add(u1);
 
 		assertEquals(true, u1.equals(sistema.getUsuarios().get(1)));
 

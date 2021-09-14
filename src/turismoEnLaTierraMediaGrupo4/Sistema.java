@@ -70,14 +70,6 @@ public class Sistema {
 	}
 
 	/*
-	 * @Param usuario se pasa por parametro un usuario el cual se va a agregar a la
-	 * lista
-	 */
-	public void agregarUsuario(Usuario usuario) {
-		usuarios.add(usuario);
-	}
-
-	/*
 	 * Carga los usuarios en sistema
 	 */
 	public void agregarUsuariosDesdeArchivo() {
