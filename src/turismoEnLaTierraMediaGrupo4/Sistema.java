@@ -86,7 +86,7 @@ public class Sistema {
 	/*
 	 * Carga las atracciones en sistema
 	 */
-	public void agregarAtraccion() {
+	public void agregarAtracciones() {
 		this.ofertableList.addAll(ManejadorArchivos.obtenerAtraccionesPorAchivo());
 	}
 
@@ -138,7 +138,7 @@ public class Sistema {
 	 */
 	public static void main(String[] args) throws IOException {
 		Sistema sistema = new Sistema();
-		sistema.agregarAtraccion();
+		sistema.agregarAtracciones();
 		sistema.agregarPromociones();
 		sistema.agregarUsuariosDesdeArchivo();
 		sistema.sugerir();
