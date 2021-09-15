@@ -14,7 +14,7 @@ public abstract class ManejadorArchivos {
 	 * Instancia usuarios a partir de esos datos
 	 * Devuelve esos usuarios
 	 */
-	public static List<Usuario> obtenerUsuarioDesdeArchivo() {
+	public static List<Usuario> obtenerUsuarioDesdeArchivo() throws Exception {
 		File archivo = null;
 		FileReader fr = null;
 		BufferedReader br = null;
@@ -63,7 +63,7 @@ public abstract class ManejadorArchivos {
 	 * Instancia atracciones a partir de esos datos
 	 * Devuelve esas atracciones
 	 */
-	public static List<Ofertable> obtenerAtraccionesPorAchivo() {
+	public static List<Ofertable> obtenerAtraccionesPorAchivo() throws Exception {
 		String path = new File("entrada/Atraccion.txt").getAbsolutePath();
 		File archivo = null;
 		FileReader fr = null;

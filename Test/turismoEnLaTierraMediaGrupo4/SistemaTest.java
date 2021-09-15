@@ -19,7 +19,7 @@ public class SistemaTest {
 	PromocionAxB p3;
 
 	@Before
-	public void preparacion() {
+	public void preparacion() throws Exception {
 		sistema = new Sistema();
         
 		// usuario
@@ -54,7 +54,7 @@ public class SistemaTest {
 	}
 
 	@Test
-	public void agregarNuevoUsuarioAlSistema() {
+	public void agregarNuevoUsuarioAlSistema() throws Exception {
 
 		Usuario u1 = new Usuario("Eowyn", 8, 10, TipoAtraccion.AVENTURA);
 

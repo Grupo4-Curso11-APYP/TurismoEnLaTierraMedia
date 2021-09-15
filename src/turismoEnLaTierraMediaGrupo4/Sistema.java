@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Sistema {
 
 	protected List<Usuario> usuarios;
-	protected List<Ofertable> ofertableList; //contiene atracciones y promos.
+	protected List<Ofertable> ofertableList; // contiene atracciones y promos.
 
 	/*
 	 * Se inicializan las listas en ArrayList<>
@@ -22,35 +22,33 @@ public class Sistema {
 	}
 
 	/*
-	 * metodo sugerir utiliza el comparator para ordenar los ofertables que va
-	 * a sugerir a cada usuario del sistema hasta que al mismo no le quede dinero
-	 * o tiempo, siempre y cuando las atracciones tengan cupo y sin ofrecer un
-	 * ofertable de nuevo que ya haya sido adquirido. El usuario acepta mediante
-	 * una entrada de teclado y la sugerencia se guarda en su lista de ofertables
-	 * Se muestra itinerario y se genera un archivo de salida para cada usuario. 
+	 * metodo sugerir utiliza el comparator para ordenar los ofertables que va a
+	 * sugerir a cada usuario del sistema hasta que al mismo no le quede dinero o
+	 * tiempo, siempre y cuando las atracciones tengan cupo y sin ofrecer un
+	 * ofertable de nuevo que ya haya sido adquirido. El usuario acepta mediante una
+	 * entrada de teclado y la sugerencia se guarda en su lista de ofertables Se
+	 * muestra itinerario y se genera un archivo de salida para cada usuario.
 	 */
 	public void sugerir() throws IOException {
 		for (Usuario usuario : usuarios) {
 			ordenarOfertasSegunPreferencia(usuario.getTipoFavorito());
 			for (Ofertable ofertable : ofertableList) {
 
-				if (ofertable.hayCupo()
-						&& usuario.getPresupuesto() >= ofertable.getCosto()
+				if (ofertable.hayCupo() && usuario.getPresupuesto() >= ofertable.getCosto()
 						&& usuario.getTiempoDisponible() >= ofertable.getTiempo()
 						&& !(usuario.getOfertables().contains(ofertable))) {
-					System.out.println("Sugerencia diaria de " +
-						usuario.getNombre() + ":");
+					System.out.println("Sugerencia diaria de " + usuario.getNombre() + ":");
 					System.out.println(ofertable);
+					System.out.println("Pulse S  para aceptar la sugerencia o");
+					System.out.println("cualquier otra letra para continuar y luego Enter");
 					Scanner sc = new Scanner(System.in);
-					System.out.println("Pulse S para aceptar la sugerencia o"
-							+ "cualquier otra letra para continuar");
 					char ingreso = sc.next().charAt(0);
 					if (ingreso == 's' || ingreso == 'S') {
 						usuario.comprarOfertable(ofertable);
 						ofertable.reservarCupo();
-						
-				}
-				
+
+					}
+
 				}
 
 			}
@@ -60,10 +58,9 @@ public class Sistema {
 	}
 
 	/*
-	 * @Param favorita permite pasar el tipo de atraccion favorita del
-	 * usuario.
-	 * ordena la lista de ofertables segun preferencia del usuario y  otros 
-	 * criterios del comparator.
+	 * @Param favorita permite pasar el tipo de atraccion favorita del usuario.
+	 * ordena la lista de ofertables segun preferencia del usuario y otros criterios
+	 * del comparator.
 	 */
 	public void ordenarOfertasSegunPreferencia(TipoAtraccion favorita) {
 		Collections.sort(ofertableList, new OfertaSegunPreferencia(favorita));
@@ -72,7 +69,7 @@ public class Sistema {
 	/*
 	 * Carga los usuarios en sistema
 	 */
-	public void agregarUsuariosDesdeArchivo() {
+	public void agregarUsuariosDesdeArchivo() throws Exception {
 		this.usuarios = ManejadorArchivos.obtenerUsuarioDesdeArchivo();
 	}
 
@@ -86,7 +83,7 @@ public class Sistema {
 	/*
 	 * Carga las atracciones en sistema
 	 */
-	public void agregarAtracciones() {
+	public void agregarAtraccion() throws Exception {
 		this.ofertableList.addAll(ManejadorArchivos.obtenerAtraccionesPorAchivo());
 	}
 
@@ -136,9 +133,9 @@ public class Sistema {
 	/*
 	 * metodo main ejecuta el programa.
 	 */
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws Exception {
 		Sistema sistema = new Sistema();
-		sistema.agregarAtracciones();
+		sistema.agregarAtraccion();
 		sistema.agregarPromociones();
 		sistema.agregarUsuariosDesdeArchivo();
 		sistema.sugerir();

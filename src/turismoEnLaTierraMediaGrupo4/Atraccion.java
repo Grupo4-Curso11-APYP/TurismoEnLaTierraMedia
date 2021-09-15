@@ -13,20 +13,45 @@ public class Atraccion implements Ofertable {
 	 * @Param nombre , costo, tiempo , cupoDisponible y tipo se inicializan todos
 	 * los atributos de la atraccion
 	 */
-	public Atraccion(String nombre, double costo, double tiempo, int cupoDisponible, TipoAtraccion tipo) {
+	public Atraccion(String nombre, double costo, double tiempo, int cupoDisponible, TipoAtraccion tipo) throws Exception {
 		this.nombre = nombre;
-		this.costo = costo;
-		this.tiempo = tiempo;
-		this.cupoDisponible = cupoDisponible;
+		validandoCosto(costo);
+		validandoTiempo(tiempo);
+		validandoCupo(cupoDisponible);
 		this.tipoAtraccion = tipo;
 	}
-	
+
+	/*
+	 * validación para evitar costo negativo, si lo es, lanza una excepción
+	 */
+	private void validandoCosto(double costo) throws Exception {
+		if (costo < 0.0)
+			throw new CostoNegativoExcepcion();
+		this.costo = costo;
+	}
+	/*
+	 * validación para evitar tiempo negativo, si lo es, lanza una excepción
+	 */
+	private void validandoTiempo(double tiempo) throws Exception {
+		if (tiempo < 0.0)
+			throw new SinTiempoDisponible();
+		this.tiempo = tiempo;
+	}
+	/*
+	 * validación para evitar cupo negativo, si lo es, lanza una excepción
+	 */
+	private void validandoCupo(int cupoDisponible) throws Exception {
+		if (cupoDisponible < 0)
+			throw new CupoNegativoException();
+		this.cupoDisponible = cupoDisponible;
+	}
+
 	/*
 	 * @param nombre permite pasar un nombre para inicializar el atributo nombre
 	 * Constructor auxiliar usado para comparar con el nombre de la lista de
 	 * ofertables.
 	 */
-	public Atraccion(String nombre ) {
+	public Atraccion(String nombre) {
 		this.nombre = nombre;
 	}
 
@@ -110,13 +135,13 @@ public class Atraccion implements Ofertable {
 	}
 
 	/*
-	 * aplica toString a las atracciones para que se muestren en el formato 
+	 * aplica toString a las atracciones para que se muestren en el formato
 	 * requerido. Aplica un salto de línea con \n para mayor legibilidad.
 	 */
 	@Override
 	public String toString() {
-		return getNombre() + ": " + "precio: " + getCosto() + ", duracion: " 
-				+ getTiempo() + ", tipo: " + getTipo() + '\n';
+		return getNombre() + ": " + "precio: " + getCosto() + ", duracion: " + getTiempo() + ", tipo: " + getTipo()
+				+ '\n';
 	}
-	
+
 }

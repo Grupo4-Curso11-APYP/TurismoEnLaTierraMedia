@@ -8,6 +8,7 @@ import org.junit.Test;
 public class UsuarioTest {
 
 	Usuario u1;
+	Usuario u2;
 	Atraccion a1;
 	Atraccion a5;
 	Atraccion a6;
@@ -36,7 +37,7 @@ public class UsuarioTest {
 	}
 	
 	@Test
-	public void toStringMuestraLosDatosCorrectamente() {
+	public void toStringMuestraLosDatosCorrectamente() throws Exception {
 		a5 = new Atraccion("Minas Tirith", 5, 2.5, 25, TipoAtraccion.PAISAJE);
 		a6 = new Atraccion("Abismo de Helm", 5, 2, 15, TipoAtraccion.PAISAJE);
 		aGratis = new Atraccion("Erebor", 12, 3, 32, TipoAtraccion.PAISAJE);
@@ -63,6 +64,16 @@ public class UsuarioTest {
 		assertEquals(esperado, u1.toString());
 		System.out.println(u1.toString());
 		
+	}
+	
+	@Test(expected=SinMontoDisponible.class)
+	public void deberiaDeLanzarExcepcionPorMontoNegativo() throws Exception {
+		u2 = new Usuario("Pepe", -8, 10, TipoAtraccion.AVENTURA);
+	}
+	
+	@Test(expected=SinTiempoDisponible.class)
+	public void deberiaDeLanzarExcepcionPorTiempoNegativo() throws Exception {
+		u2 = new Usuario("Tita", 8, -10, TipoAtraccion.AVENTURA);
 	}
 
 }
