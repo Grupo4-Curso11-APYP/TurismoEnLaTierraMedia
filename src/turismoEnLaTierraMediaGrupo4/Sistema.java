@@ -11,6 +11,9 @@ public class Sistema {
 
 	protected List<Usuario> usuarios;
 	protected List<Ofertable> ofertableList; // contiene atracciones y promos.
+						// Mejorar con TreeSet con param del
+						//comparator, que lo use en la
+						// construccion del TreeSet
 
 	/*
 	 * Se inicializan las listas en ArrayList<>
