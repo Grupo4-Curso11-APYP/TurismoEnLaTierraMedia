@@ -9,6 +9,7 @@ public class Usuario {
 	private double tiempoDisponible;
 	private TipoAtraccion tipoFavorito;
 	private List<Ofertable> ofertables; // Las sugerencias que va aceptando.
+					   //Mejorar con linkedHashSet
 
 	public Usuario(String nombre, double presupuesto, double tiempoDisponible, TipoAtraccion tipoFavorito)
 			throws Exception {
@@ -21,7 +22,7 @@ public class Usuario {
 	}
 
 	/*
-	 * validación para evitar presupuesto negativo, si lo es, lanza una excepción
+	 * validaciÃ³n para evitar presupuesto negativo, si lo es, lanza una excepciÃ³n
 	 */
 	private void validandoPresupuesto(double presupuesto) throws Exception {
 		if (presupuesto < 0.0)
@@ -30,7 +31,7 @@ public class Usuario {
 	}
 
 	/*
-	 * validación para evitar tiempo negativo, si lo es, lanza una excepción
+	 * validaciÃ³n para evitar tiempo negativo, si lo es, lanza una excepciÃ³n
 	 */
 	private void validandoTiempoDisponible(double tiempo) throws Exception {
 		if (tiempo < 0.0)
@@ -89,7 +90,7 @@ public class Usuario {
 
 		var aux = '\n' + "Usuario: " + nombre + ", presupuesto: " + presupuesto + ", tiempo disponible: "
 				+ tiempoDisponible + ", tipo favorito: " + tipoFavorito + '\n'
-				+ "Su itinerario final le tomará un total " + "de: " + horas + " horas; con un costo final de: "
+				+ "Su itinerario final le tomarÃ¡ un total " + "de: " + horas + " horas; con un costo final de: "
 				+ (int) costoFinal + " monedas." + '\n' + "Sugerencias incluidas:\n";
 
 		for (Ofertable ofertable : ofertables) {
