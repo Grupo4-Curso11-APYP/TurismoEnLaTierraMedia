@@ -63,7 +63,7 @@ public class SistemaTest {
 		assertEquals(true, u1.equals(sistema.getUsuarios().get(1)));
 
 	}
-
+/*
 	@Test
 	public void comparadorOrdenaPorTipoLuegoClaseLuegoCostoLuegoTiempo() {
 		sistema.ofertableList.add(a1);
@@ -79,8 +79,15 @@ public class SistemaTest {
 		assertEquals(true, p2.equals(sistema.getOfertableList().get(2))); //3ro promo 2
 		assertEquals(true, p3.equals(sistema.getOfertableList().get(3))); //4to promo 3
 		assertEquals(true, a1.equals(sistema.getOfertableList().get(4))); //5to atracciÃ³n 1
+		}
+*/
+	@Test
+	public void queOrdenarOfertasSegunPreferenciaOrdenaPorComparator() {
+		sistema.ofertableList.add(a1);
+		sistema.ofertableList.add(a2);
+		sistema.ofertableList.add(p3);
+		sistema.ofertableList.add(p1);
 		
-	
+		//faltaría un assert;
 	}
-
 }

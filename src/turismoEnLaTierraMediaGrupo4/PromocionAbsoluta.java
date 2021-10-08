@@ -1,7 +1,5 @@
 package turismoEnLaTierraMediaGrupo4;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
 public class PromocionAbsoluta extends PromocionBase {
@@ -50,6 +48,11 @@ public class PromocionAbsoluta extends PromocionBase {
 			return false;
 		PromocionAbsoluta other = (PromocionAbsoluta) obj;
 		return Double.doubleToLongBits(monto) == Double.doubleToLongBits(other.monto);
+	}
+
+	@Override
+	public int compareTo(Ofertable otro) {
+		return -this.getCosto().compareTo(otro.getCosto());
 	}
 
 }

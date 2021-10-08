@@ -1,11 +1,9 @@
 package turismoEnLaTierraMediaGrupo4;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
-public abstract class PromocionBase implements Ofertable {
+public abstract class PromocionBase implements Ofertable, Comparable<Ofertable> {
 
 	private String nombre;
 	protected Atraccion[] packAtracciones;

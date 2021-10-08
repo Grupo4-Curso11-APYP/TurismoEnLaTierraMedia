@@ -1,7 +1,5 @@
 package turismoEnLaTierraMediaGrupo4;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
 public class PromocionAxB extends PromocionBase {
@@ -100,6 +98,11 @@ public class PromocionAxB extends PromocionBase {
 		}
 		aux += "Atracción gratis: " + atraccionGratis;
 		return aux;
+	}
+
+	@Override
+	public int compareTo(Ofertable otro) {
+		return -this.getCosto().compareTo(otro.getCosto());
 	}
 
 }
