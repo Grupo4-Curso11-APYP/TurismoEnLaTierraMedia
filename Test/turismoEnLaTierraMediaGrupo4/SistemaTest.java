@@ -89,10 +89,15 @@ public class SistemaTest {
 		sistema.ofertableList.add(a2);
 		sistema.ofertableList.add(p3);
 		sistema.ofertableList.add(p1);
+
 	
 		//faltaría un assert;
 		assertEquals(((TreeSet<Ofertable>) sistema.ofertableList).first(), a1);
 		assertEquals(((TreeSet<Ofertable>) sistema.ofertableList).last(), a1);
 		assertEquals( sistema.ofertableList.size(), 4);
 }
+
+		
+		//faltaría un assert;
+	
 }

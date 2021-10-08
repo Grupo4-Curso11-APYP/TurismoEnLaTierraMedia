@@ -2,26 +2,27 @@ package turismoEnLaTierraMediaGrupo4;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Sistema {
 
 	protected List<Usuario> usuarios;
-	protected List<Ofertable> ofertableList; // contiene atracciones y promos.
-						// Mejorar con TreeSet con param del
-						//comparator, que lo use en la
-						// construccion del TreeSet
+	protected Set<Ofertable> ofertableList; // contiene atracciones y promos.
+											// Mejorar con TreeSet con param del
+											//comparator, que lo use en la
+											// construccion del TreeSet
 
 	/*
 	 * Se inicializan las listas en ArrayList<>
 	 */
 	public Sistema() {
 
-		this.ofertableList = new ArrayList<>();
-		this.usuarios = new ArrayList<>();
+		this.ofertableList = new TreeSet<Ofertable>();
+		this.usuarios = new ArrayList<Usuario>();
 	}
 
 	/*
@@ -34,7 +35,7 @@ public class Sistema {
 	 */
 	public void sugerir() throws IOException {
 		for (Usuario usuario : usuarios) {
-			ordenarOfertasSegunPreferencia(usuario.getTipoFavorito());
+			this.ofertableList = ordenarOfertasSegunPreferencia(usuario.getTipoFavorito());
 			for (Ofertable ofertable : ofertableList) {
 
 				if (ofertable.hayCupo() && usuario.getPresupuesto() >= ofertable.getCosto()
@@ -65,8 +66,12 @@ public class Sistema {
 	 * ordena la lista de ofertables segun preferencia del usuario y otros criterios
 	 * del comparator.
 	 */
-	public void ordenarOfertasSegunPreferencia(TipoAtraccion favorita) {
-		Collections.sort(ofertableList, new OfertaSegunPreferencia(favorita));
+	public Set<Ofertable> ordenarOfertasSegunPreferencia(TipoAtraccion favorita) {
+		Set<Ofertable> ofertasAOrdenar = new TreeSet<Ofertable>(new OfertaSegunPreferencia(favorita));
+		ofertasAOrdenar.addAll(this.ofertableList);
+		return ofertasAOrdenar;
+		
+		//this.ofertableList = this.ofertasAOrdenar;
 	}
 
 	/*
@@ -117,7 +122,7 @@ public class Sistema {
 	/*
 	 * devuelve la lista de ofertables
 	 */
-	public List<Ofertable> getOfertableList() {
+	public Set<Ofertable> getOfertableList() {
 		return ofertableList;
 	}
 

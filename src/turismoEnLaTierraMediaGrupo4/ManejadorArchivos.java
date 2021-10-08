@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public abstract class ManejadorArchivos {
 
@@ -114,7 +115,7 @@ public abstract class ManejadorArchivos {
 	 * Instancia las diferentes promociones a partir de esos datos
 	 * Devuelve esas promociones
 	 */
-	public static List<Ofertable> cargarPromociones(List<Ofertable> ofertables){
+	public static List<Ofertable> cargarPromociones(Set<Ofertable> ofertableList){
 
 		String path  = new File("entrada/Promociones.txt").getAbsolutePath();
 		File archivo = null;
@@ -143,7 +144,7 @@ public abstract class ManejadorArchivos {
 					atracciones[0] = new Atraccion(atraccionesString[0]);
 					atracciones[1] = new Atraccion(atraccionesString[1]);
 					for (int i = 0; i < atraccionesString.length; i++) {
-						for (var ofertable: ofertables) {
+						for (var ofertable: ofertableList) {
 
 							if(ofertable.getNombre().equals(atracciones[i].getNombre()))
 							{
@@ -169,7 +170,7 @@ public abstract class ManejadorArchivos {
 					atracciones[0] = new Atraccion(atraccionesString[0]);
 					atracciones[1] = new Atraccion(atraccionesString[1]);
 					for (int i = 0; i < atraccionesString.length; i++) {
-						for (var ofertable: ofertables) {
+						for (var ofertable: ofertableList) {
 
 							if(ofertable.getNombre().equals(atracciones[i].getNombre()))
 							{
@@ -195,7 +196,7 @@ public abstract class ManejadorArchivos {
 					atracciones[1] = new Atraccion(atraccionesString[1]);
 
 					for (int i = 0; i < atraccionesString.length; i++) {
-						for (var ofertable: ofertables) {
+						for (var ofertable: ofertableList) {
 
 							if(ofertable.getNombre().equals(atracciones[i].getNombre()))
 							{
@@ -209,7 +210,7 @@ public abstract class ManejadorArchivos {
 
 					Atraccion atracGratis = new Atraccion(nombreG);
 
-					for (var ofertable: ofertables) {
+					for (var ofertable: ofertableList) {
 						if (ofertable.getNombre().equals(atracGratis.getNombre()))
 							atracGratis = (Atraccion) ofertable;
 					}

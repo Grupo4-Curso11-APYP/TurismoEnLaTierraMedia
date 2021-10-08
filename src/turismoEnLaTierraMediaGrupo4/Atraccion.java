@@ -2,7 +2,7 @@ package turismoEnLaTierraMediaGrupo4;
 
 import java.util.Objects;
 
-public class Atraccion implements Ofertable {
+public class Atraccion implements Ofertable, Comparable<Ofertable> {
 	protected double costo;
 	protected double tiempo;
 	protected int cupoDisponible;
@@ -142,6 +142,11 @@ public class Atraccion implements Ofertable {
 	public String toString() {
 		return getNombre() + ": " + "precio: " + getCosto() + ", duracion: " + getTiempo() + ", tipo: " + getTipo()
 				+ '\n';
+	}
+
+	@Override
+	public int compareTo(Ofertable otro) {
+		return -this.getCosto().compareTo(otro.getCosto());
 	}
 
 }
