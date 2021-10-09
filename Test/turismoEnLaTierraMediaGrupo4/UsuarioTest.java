@@ -2,6 +2,9 @@ package turismoEnLaTierraMediaGrupo4;
 
 import static org.junit.Assert.*;
 
+import java.util.LinkedHashSet;
+import java.util.TreeSet;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -33,7 +36,9 @@ public class UsuarioTest {
 		u1.comprarOfertable(a1);
 		assertEquals(3, u1.getPresupuesto(), 0);
 		assertEquals(7.5, u1.getTiempoDisponible(), 0);
-		assertEquals(true, a1.equals(u1.getOfertables().get(0)));
+//		assertEquals(true, a1.equals(u1.getOfertables().get(0)));
+		assertEquals(true, u1.getOfertables().contains(a1));
+		
 	}
 	
 	@Test
@@ -53,7 +58,7 @@ public class UsuarioTest {
 		System.out.println(u1.toString());
 		String esperado =  "\nUsuario: Eowyn, presupuesto: -7.0, tiempo "
 				+ "disponible: 0.0, tipo favorito: AVENTURA\n" 
-				+ "Su itinerario final le tomará un total "
+				+ "Su itinerario final le tomara un total "
 				+ "de: 10.0 horas; con un costo final de: 15 monedas.\n" 
 				+ "Sugerencias incluidas:\n" + "Minas Tirith: precio: 5.0,"
 				+ " duracion: 2.5, tipo: PAISAJE\n" + "\nPack paisajes: "

@@ -61,7 +61,7 @@ public class SistemaTest {
 
 		sistema.usuarios.add(u1);
 
-		assertEquals(true, u1.equals(sistema.getUsuarios().get(1)));
+		assertEquals(true, sistema.getUsuarios().contains(u1));
 
 	}
 

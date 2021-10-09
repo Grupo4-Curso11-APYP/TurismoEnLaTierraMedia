@@ -1,14 +1,16 @@
 package turismoEnLaTierraMediaGrupo4;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Usuario {
 	private String nombre;
 	private double presupuesto;
 	private double tiempoDisponible;
 	private TipoAtraccion tipoFavorito;
-	private List<Ofertable> ofertables; // Las sugerencias que va aceptando.
+	private Set<Ofertable> ofertables; // Las sugerencias que va aceptando.
 					   //Mejorar con linkedHashSet
 
 	public Usuario(String nombre, double presupuesto, double tiempoDisponible, TipoAtraccion tipoFavorito)
@@ -17,7 +19,7 @@ public class Usuario {
 		validandoPresupuesto(presupuesto);
 		validandoTiempoDisponible(tiempoDisponible);
 		this.tipoFavorito = tipoFavorito;
-		this.ofertables = new ArrayList<>();
+		this.ofertables = new LinkedHashSet<>();
 
 	}
 
@@ -70,7 +72,7 @@ public class Usuario {
 	/*
 	 * se espera que devuelva una lista de ofertables
 	 */
-	public List<Ofertable> getOfertables() {
+	public Set<Ofertable> getOfertables() {
 		return this.ofertables;
 	}
 
@@ -90,7 +92,7 @@ public class Usuario {
 
 		var aux = '\n' + "Usuario: " + nombre + ", presupuesto: " + presupuesto + ", tiempo disponible: "
 				+ tiempoDisponible + ", tipo favorito: " + tipoFavorito + '\n'
-				+ "Su itinerario final le tomará un total " + "de: " + horas + " horas; con un costo final de: "
+				+ "Su itinerario final le tomara un total " + "de: " + horas + " horas; con un costo final de: "
 				+ (int) costoFinal + " monedas." + '\n' + "Sugerencias incluidas:\n";
 
 		for (Ofertable ofertable : ofertables) {

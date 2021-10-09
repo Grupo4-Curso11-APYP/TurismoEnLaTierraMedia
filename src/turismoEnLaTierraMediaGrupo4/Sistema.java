@@ -2,6 +2,7 @@ package turismoEnLaTierraMediaGrupo4;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
@@ -10,7 +11,7 @@ import java.util.TreeSet;
 
 public class Sistema {
 
-	protected List<Usuario> usuarios;
+	protected Set<Usuario> usuarios;
 	protected Set<Ofertable> ofertables; // contiene atracciones y promos.
 											// Mejorar con TreeSet con param del
 											//comparator, que lo use en la
@@ -22,7 +23,7 @@ public class Sistema {
 	public Sistema() {
 
 		this.ofertables = new TreeSet<Ofertable>();
-		this.usuarios = new ArrayList<Usuario>();
+		this.usuarios = new LinkedHashSet<Usuario>();
 	}
 
 	/*
@@ -40,7 +41,7 @@ public class Sistema {
 
 				if (ofertable.hayCupo() && usuario.getPresupuesto() >= ofertable.getCosto()
 						&& usuario.getTiempoDisponible() >= ofertable.getTiempo()
-						&& !(usuario.getOfertables().contains(ofertable))) {
+						) {
 					System.out.println("Sugerencia diaria de " + usuario.getNombre() + ":");
 					System.out.println(ofertable);
 					System.out.println("Pulse S  para aceptar la sugerencia o");
@@ -76,7 +77,7 @@ public class Sistema {
 	 * Carga los usuarios en sistema
 	 */
 	public void agregarUsuariosDesdeArchivo() throws Exception {
-		this.usuarios = ManejadorArchivos.cargarUsuarios();
+		this.usuarios.addAll(  ManejadorArchivos.cargarUsuarios());
 	}
 
 	/*
@@ -113,7 +114,7 @@ public class Sistema {
 	/*
 	 * devuelve la lista de usuarios
 	 */
-	public List<Usuario> getUsuarios() {
+	public Set<Usuario> getUsuarios() {
 		return usuarios;
 	}
 
