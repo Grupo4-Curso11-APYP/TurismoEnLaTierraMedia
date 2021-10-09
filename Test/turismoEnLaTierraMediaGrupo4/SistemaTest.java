@@ -65,22 +65,23 @@ public class SistemaTest {
 
 	}
 
-	/*
-	 * @Test public void comparadorOrdenaPorTipoLuegoClaseLuegoCostoLuegoTiempo() {
-	 * sistema.ofertableList.add(a1); sistema.ofertableList.add(a2);
-	 * sistema.ofertableList.add(p1); sistema.ofertableList.add(p2);
-	 * sistema.ofertableList.add(p3);
-	 * 
-	 * sistema.ordenarOfertasSegunPreferencia(TipoAtraccion.AVENTURA);
-	 * 
-	 * assertEquals(true, p1.equals(sistema.getOfertableList().get(0))); //primero
-	 * promo 1 assertEquals(true, a2.equals(sistema.getOfertableList().get(1)));
-	 * //2do atracción 2 assertEquals(true,
-	 * p2.equals(sistema.getOfertableList().get(2))); //3ro promo 2
-	 * assertEquals(true, p3.equals(sistema.getOfertableList().get(3))); //4to promo
-	 * 3 assertEquals(true, a1.equals(sistema.getOfertableList().get(4))); //5to
-	 * atracción 1 }
-	 */
+	@Test
+	public void comparadorOrdenaPorTipoLuegoClaseLuegoCostoLuegoTiempo() {
+		sistema.ofertables.add(a1);
+		sistema.ofertables.add(a2);
+		sistema.ofertables.add(p1);
+		sistema.ofertables.add(p2);
+		sistema.ofertables.add(p3);
+
+		assertEquals(((TreeSet<Ofertable>) 
+				sistema.ordenarOfertasSegunPreferencia(TipoAtraccion.AVENTURA)).first(), p1);
+
+		assertEquals(((TreeSet<Ofertable>) 
+				sistema.ordenarOfertasSegunPreferencia(TipoAtraccion.AVENTURA)).last(), a1);
+
+		assertEquals(sistema.ofertables.size(), 5);
+	}
+
 	@Test
 	public void queOrdenarOfertasSegunPreferenciaOrdenaPorComparator() {
 		sistema.ofertables.add(a1);
@@ -88,12 +89,10 @@ public class SistemaTest {
 		sistema.ofertables.add(p3);
 		sistema.ofertables.add(p1);
 
-		assertEquals(((TreeSet<Ofertable>) 
-				sistema.ordenarOfertasSegunPreferencia(TipoAtraccion.AVENTURA)).first(), p1);
-		
-		assertEquals(((TreeSet<Ofertable>) 
-				sistema.ordenarOfertasSegunPreferencia(TipoAtraccion.AVENTURA)).last(), a1);
-		
+		assertEquals(((TreeSet<Ofertable>) sistema.ordenarOfertasSegunPreferencia(TipoAtraccion.AVENTURA)).first(), p1);
+
+		assertEquals(((TreeSet<Ofertable>) sistema.ordenarOfertasSegunPreferencia(TipoAtraccion.AVENTURA)).last(), a1);
+
 		assertEquals(sistema.ofertables.size(), 4);
 	}
 
