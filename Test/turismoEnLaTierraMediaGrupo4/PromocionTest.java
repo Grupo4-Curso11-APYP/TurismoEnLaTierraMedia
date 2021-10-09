@@ -7,9 +7,9 @@ import org.junit.Test;
 
 public class PromocionTest {
 
-	PromocionBase aventuraPorcentual;
-	PromocionBase degustacionAbsoluta;
-	PromocionBase paisajeAxB;
+	Promocion aventuraPorcentual;
+	Promocion degustacionAbsoluta;
+	Promocion paisajeAxB;
 	Atraccion a1;
 	Atraccion a2;
 	Atraccion a3;

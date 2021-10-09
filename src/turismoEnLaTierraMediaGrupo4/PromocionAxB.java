@@ -2,7 +2,7 @@ package turismoEnLaTierraMediaGrupo4;
 
 import java.util.Objects;
 
-public class PromocionAxB extends PromocionBase {
+public class PromocionAxB extends Promocion {
 
 	private Atraccion atraccionGratis;
 

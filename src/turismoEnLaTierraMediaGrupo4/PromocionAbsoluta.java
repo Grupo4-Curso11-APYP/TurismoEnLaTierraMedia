@@ -2,7 +2,7 @@ package turismoEnLaTierraMediaGrupo4;
 
 import java.util.Objects;
 
-public class PromocionAbsoluta extends PromocionBase {
+public class PromocionAbsoluta extends Promocion {
 
 	private double monto;
 

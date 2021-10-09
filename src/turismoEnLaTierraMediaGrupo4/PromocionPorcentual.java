@@ -2,7 +2,7 @@ package turismoEnLaTierraMediaGrupo4;
 
 import java.util.Objects;
 
-public class PromocionPorcentual extends PromocionBase {
+public class PromocionPorcentual extends Promocion {
 
 	private int descuento;
 

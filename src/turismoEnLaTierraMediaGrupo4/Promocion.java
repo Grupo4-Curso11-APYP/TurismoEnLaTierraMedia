@@ -3,7 +3,7 @@ package turismoEnLaTierraMediaGrupo4;
 import java.util.Arrays;
 import java.util.Objects;
 
-public abstract class PromocionBase implements Ofertable, Comparable<Ofertable> {
+public abstract class Promocion implements Ofertable, Comparable<Ofertable> {
 
 	private String nombre;
 	protected Atraccion[] packAtracciones;
@@ -12,7 +12,7 @@ public abstract class PromocionBase implements Ofertable, Comparable<Ofertable> 
 
 	
 	
-	public PromocionBase(String nombre, Atraccion[] atraccion, TipoAtraccion tipo) {
+	public Promocion(String nombre, Atraccion[] atraccion, TipoAtraccion tipo) {
 		this.packAtracciones = atraccion;
 		this.nombre = nombre;
 		this.tipo = tipo;
@@ -81,7 +81,7 @@ public abstract class PromocionBase implements Ofertable, Comparable<Ofertable> 
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		PromocionBase other = (PromocionBase) obj;
+		Promocion other = (Promocion) obj;
 		return Objects.equals(nombre, other.nombre) && Arrays.equals(packAtracciones, other.packAtracciones)
 				&& Double.doubleToLongBits(tiempo) == Double.doubleToLongBits(other.tiempo) && tipo == other.tipo;
 	}

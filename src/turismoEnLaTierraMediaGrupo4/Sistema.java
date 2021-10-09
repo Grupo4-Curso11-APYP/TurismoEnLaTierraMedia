@@ -11,7 +11,7 @@ import java.util.TreeSet;
 public class Sistema {
 
 	protected List<Usuario> usuarios;
-	protected Set<Ofertable> ofertableList; // contiene atracciones y promos.
+	protected Set<Ofertable> ofertables; // contiene atracciones y promos.
 											// Mejorar con TreeSet con param del
 											//comparator, que lo use en la
 											// construccion del TreeSet
@@ -21,7 +21,7 @@ public class Sistema {
 	 */
 	public Sistema() {
 
-		this.ofertableList = new TreeSet<Ofertable>();
+		this.ofertables = new TreeSet<Ofertable>();
 		this.usuarios = new ArrayList<Usuario>();
 	}
 
@@ -35,8 +35,8 @@ public class Sistema {
 	 */
 	public void sugerir() throws IOException {
 		for (Usuario usuario : usuarios) {
-			this.ofertableList = ordenarOfertasSegunPreferencia(usuario.getTipoFavorito());
-			for (Ofertable ofertable : ofertableList) {
+			this.ofertables = ordenarOfertasSegunPreferencia(usuario.getTipoFavorito());
+			for (Ofertable ofertable : ofertables) {
 
 				if (ofertable.hayCupo() && usuario.getPresupuesto() >= ofertable.getCosto()
 						&& usuario.getTiempoDisponible() >= ofertable.getTiempo()
@@ -68,36 +68,34 @@ public class Sistema {
 	 */
 	public Set<Ofertable> ordenarOfertasSegunPreferencia(TipoAtraccion favorita) {
 		Set<Ofertable> ofertasAOrdenar = new TreeSet<Ofertable>(new OfertaSegunPreferencia(favorita));
-		ofertasAOrdenar.addAll(this.ofertableList);
+		ofertasAOrdenar.addAll(this.ofertables);
 		return ofertasAOrdenar;
-		
-		//this.ofertableList = this.ofertasAOrdenar;
 	}
 
 	/*
 	 * Carga los usuarios en sistema
 	 */
 	public void agregarUsuariosDesdeArchivo() throws Exception {
-		this.usuarios = ManejadorArchivos.obtenerUsuarioDesdeArchivo();
+		this.usuarios = ManejadorArchivos.cargarUsuarios();
 	}
 
 	/*
 	 * Carga las promociones en sistema
 	 */
 	public void agregarPromociones() {
-		this.ofertableList.addAll(ManejadorArchivos.cargarPromociones(this.ofertableList));
+		this.ofertables.addAll(ManejadorArchivos.cargarPromociones(this.ofertables));
 	}
 
 	/*
 	 * Carga las atracciones en sistema
 	 */
 	public void agregarAtraccion() throws Exception {
-		this.ofertableList.addAll(ManejadorArchivos.obtenerAtraccionesPorAchivo());
+		this.ofertables.addAll(ManejadorArchivos.cargarAtracciones());
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(ofertableList, usuarios);
+		return Objects.hash(ofertables, usuarios);
 	}
 
 	@Override
@@ -109,7 +107,7 @@ public class Sistema {
 		if (getClass() != obj.getClass())
 			return false;
 		Sistema other = (Sistema) obj;
-		return Objects.equals(ofertableList, other.ofertableList) && Objects.equals(usuarios, other.usuarios);
+		return Objects.equals(ofertables, other.ofertables) && Objects.equals(usuarios, other.usuarios);
 	}
 
 	/*
@@ -123,7 +121,7 @@ public class Sistema {
 	 * devuelve la lista de ofertables
 	 */
 	public Set<Ofertable> getOfertableList() {
-		return ofertableList;
+		return ofertables;
 	}
 
 	/*
@@ -132,7 +130,7 @@ public class Sistema {
 	@Override
 	public String toString() {
 		var aux = "Sistema ofertas: \n";
-		for (var ofertable : ofertableList) {
+		for (var ofertable : ofertables) {
 			aux += ofertable.toString();
 		}
 		return aux;

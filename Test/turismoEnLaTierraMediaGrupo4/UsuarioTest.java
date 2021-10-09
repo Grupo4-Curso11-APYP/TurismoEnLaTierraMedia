@@ -13,7 +13,7 @@ public class UsuarioTest {
 	Atraccion a5;
 	Atraccion a6;
 	Atraccion aGratis;
-	PromocionBase paisajeAxB;
+	Promocion paisajeAxB;
 
 	@Before
 	public void setUp() throws Exception {
