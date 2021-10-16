@@ -1,9 +1,7 @@
 package turismoEnLaTierraMediaGrupo4;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.Set;
@@ -47,12 +45,8 @@ public class Sistema {
 					System.out.println("Pulse S  para aceptar la sugerencia o");
 					System.out.println("cualquier otra letra para continuar y luego Enter");
 					Scanner sc = new Scanner(System.in);
-					// la linea de abajo estaba originalmente
-					//char ingreso = sc.next().charAt(0);
-					String ingreso = sc.nextLine().toLowerCase();
-					// lo de abajo estaba originalmente
-					//if (ingreso == 's' || ingreso == 'S') {
-					while(ingreso == "s") {
+					char ingreso = sc.next().charAt(0);
+					if (ingreso == 's' || ingreso == 'S') {
 						usuario.comprarOfertable(ofertable);
 						ofertable.reservarCupo();
 
