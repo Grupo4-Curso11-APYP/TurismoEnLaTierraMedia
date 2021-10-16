@@ -1,7 +1,9 @@
 package turismoEnLaTierraMediaGrupo4;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.Set;
@@ -134,8 +136,7 @@ public class Sistema {
 		}
 		return aux;
 	}
-	
-	
+
 	/*
 	 * metodo main ejecuta el programa.
 	 */
@@ -146,7 +147,5 @@ public class Sistema {
 		sistema.agregarUsuariosDesdeArchivo();
 		sistema.sugerir();
 	}
-	
-	//Holi
 
 }
