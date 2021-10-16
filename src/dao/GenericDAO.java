@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 import com.sun.tools.javac.util.List;
 
-public interface GenericDAO {
+public interface GenericDAO {//sujeto a revision
 	public List<T> findAll() throws SQLException;
 
 	public int contarTodo() throws SQLException;

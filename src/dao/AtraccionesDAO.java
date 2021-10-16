@@ -23,7 +23,7 @@ public class AtraccionesDAO {
 		statement.setDouble(2, atraccion.getCosto());
 		statement.setDouble(3, atraccion.getTiempo());
 		statement.setInt(4, atraccion.getCupoDisponible());
-		statement.setLong(5, atraccion.getTipo());
+		statement.setLong(5, atraccion.getTipo());//esto no me parece correcto, tengo que revizarlo, estuve dando vueltas, y me parece que no es así
 		
 		int rows = statement.executeUpdate();
 		
