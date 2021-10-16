@@ -135,10 +135,7 @@ public class Sistema {
 		return aux;
 	}
 	
-	public int suma(int num1 , int num2) {
-		return num1 + num2;
-	}
-
+	
 	/*
 	 * metodo main ejecuta el programa.
 	 */
