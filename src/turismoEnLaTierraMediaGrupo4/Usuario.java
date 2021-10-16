@@ -5,6 +5,8 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+//dao atracciones ------------ yo
+
 public class Usuario {
 	private String nombre;
 	private double presupuesto;
