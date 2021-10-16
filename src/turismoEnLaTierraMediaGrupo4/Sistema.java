@@ -47,8 +47,12 @@ public class Sistema {
 					System.out.println("Pulse S  para aceptar la sugerencia o");
 					System.out.println("cualquier otra letra para continuar y luego Enter");
 					Scanner sc = new Scanner(System.in);
-					char ingreso = sc.next().charAt(0);
-					if (ingreso == 's' || ingreso == 'S') {
+					// la linea de abajo estaba originalmente
+					//char ingreso = sc.next().charAt(0);
+					String ingreso = sc.nextLine().toLowerCase();
+					// lo de abajo estaba originalmente
+					//if (ingreso == 's' || ingreso == 'S') {
+					while(ingreso == "s") {
 						usuario.comprarOfertable(ofertable);
 						ofertable.reservarCupo();
 
