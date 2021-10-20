@@ -82,12 +82,12 @@ public class PromocionDAOImplt implements PromocionDAO {
 		return total;
 	}
 
-	public List<Ofertable> findAll() throws SQLException {
-		String sql = "SELECT * FROM USERS";
+	public List<Ofertable> findByTipoPromo(String tipo_promocion) throws SQLException {
+		String sql = "SELECT * FROM PROMOCION WHERE tipo_promocion = "+ tipo_promocion;
 		Connection conn = ConnectionProvider.getConnection();
 		PreparedStatement statement = conn.prepareStatement(sql);
 		ResultSet resultados = statement.executeQuery();
-
+		
 		List<Ofertable> promocion = new LinkedList<Ofertable>();
 		while (resultados.next()) {
 			promocion.add(toPromo(resultados));
@@ -98,8 +98,19 @@ public class PromocionDAOImplt implements PromocionDAO {
 
 	private Promocion toPromo(ResultSet resultados) throws SQLException {
 	
-		
+		Atraccion atraccion1 = getAtraccionById(resultados.getInt(6));
+		Atraccion atraccion2 = getAtraccionById(resultados.getInt(7));
 		return new  PromocionAbsoluta(resultados.getString(3), resultados.getArray(2), resultados.getObject(4),resultados.getDouble(5));
 	}
-
+	/*
+	getAtraccionesById(integer id) {
+		String sql = "SELECT * FROM PROMOCION WHERE tipo_promocion = "+ tipo_promocion;
+		Connection conn = ConnectionProvider.getConnection();
+		PreparedStatement statement = conn.prepareStatement(sql);
+		ResultSet resultados = statement.executeQuery();
+		
+	Atraccion atraccion1 = new Atraccion(resultados.getString(3), resultados.getArray(2), resultados.getObject(4),resultados.getDouble(5));
+	return atraccion1;
+	}
+	*/
 }
