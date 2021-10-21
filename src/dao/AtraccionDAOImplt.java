@@ -1,22 +1,78 @@
 package dao;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
+import jdbc.ConnectionProvider;
 import turismoEnLaTierraMediaGrupo4.Atraccion;
+import turismoEnLaTierraMediaGrupo4.TipoAtraccion;
 
-public class AtraccionDAOImplt implements AtraccionDAO{
+public class AtraccionDAOImpl implements AtraccionDAO{
 
 	@Override
 	public List<Atraccion> findAll() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		try {
+			String sql = "SELECT Atraccion.ID_Atraccion, Atraccion.Nombre, Atraccion.Cupo_Disponible,"
+					+ " Atraccion.Costo, Atraccion.Tiempo,"
+					+ " TipoAtraccion.id_tipoAtraccion"
+					+ " FROM Atraccion INNER JOIN TipoAtraccion "  
+					+ " ON Atraccion.TipoDeAtraccion = TipoAtraccion.id_tipoAtraccion";
 
+			Connection conn = DriverManager.getConnection("jdbc:Sqlite:TurismoTierraMediaBD.db");
+			PreparedStatement statement = conn.prepareStatement(sql);
+			ResultSet resultados = statement.executeQuery();
+
+			ArrayList<Atraccion> atracciones = new ArrayList<Atraccion>();
+			while (resultados.next()) {
+				atracciones.add(a_Atraccion(resultados));
+			}
+		
+			return atracciones;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
+	
+	private Atraccion a_Atraccion(ResultSet resultados) throws Exception {
+		
+		//Long ID_Atraccion = resultados.getLong(1);//No usamos el ID_Atracciones de la bd en el constructor de atracciones
+		String nombre = resultados.getString(2);
+		int cupoDisponible = resultados.getInt(3);
+		double costo = resultados.getDouble(4);
+		double tiempo = resultados.getInt(5);
+		TipoAtraccion tipo =  TipoAtraccion.valueOf(resultados.getString(8).toUpperCase());
+		
+		return new Atraccion(nombre, costo, tiempo, cupoDisponible, tipo);
+	
+		
+	}
+	
 	@Override
 	public int countAll() throws SQLException {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	public int actualizarCupo(Atraccion atraccion) {
+		try {
+			String sql = "UPDATE Atraccion SET Cupo_Disponible = ? WHERE ID_Atraccion = ?";
+			Connection conn = ConnectionProvider.getConnection();
+
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setInt(1, atraccion.getCupoDisponible());
+			//statement.setLong(2, atraccion.getIdAtraccion());//aca estoy con un inconveniente, no tenemos ese id de atraccion en en metodo que lo genera en la declaracion de atraccion
+			
+			int rows = statement.executeUpdate();
+
+			return rows;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
 	}
 
 	@Override
@@ -38,11 +94,30 @@ public class AtraccionDAOImplt implements AtraccionDAO{
 	}
 
 	@Override
-	public Atraccion buscarPorId(Long id) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public Atraccion buscarPorId(Long IdAtraccion) {
+		try {
+			String sql = "SELECT Atraccion.ID_Atraccion, Atraccion.Nombre, Atraccion.Cupo_Disponible,"
+					+ " Atraccion.Costo, Atraccion.Tiempo,"
+					+ " TipoAtraccion.id_tipoAtraccion"
+					+ " FROM Atraccion INNER JOIN TipoAtraccion "  
+					+ " ON Atraccion.TipoAtraccion = TipoAtraccion.id_tipoAtraccion "
+					+ " WHERE Atraccion.Id_Atraccion = ?";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setLong(1, IdAtraccion);
+			ResultSet resultados = statement.executeQuery();
 
+			Atraccion atraccion = null;
+
+			if (resultados.next()) {
+				atraccion = a_Atraccion(resultados);
+			}
+
+			return atraccion;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
 	
 	
 	
