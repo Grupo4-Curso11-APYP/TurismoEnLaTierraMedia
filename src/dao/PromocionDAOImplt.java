@@ -105,9 +105,11 @@ public class PromocionDAOImplt implements PromocionDAO {
 
 	private Atraccion[] atraccionesDeLaPromocion(ResultSet resultados) throws Exception {
 		try {
+			// no me convence lo de id_Atraccion , consultar en la clase 
+			//quizas una tabla intermedia de atracciones sea buena tambien  
 			String sql = "select Atraccion.nombre" + "from Promocion"
 					+ "INNER JOIN Atraccion on Atraccion.ID_Atraccion = Promocion.ID_Atraccion";
-			Connection conn = DriverManager.getConnection("jdbc:Sqlite:PruebaDAOBD.db");
+			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setLong(2, resultados.getLong(2));
 			ResultSet result = statement.executeQuery();
@@ -115,8 +117,14 @@ public class PromocionDAOImplt implements PromocionDAO {
 			AtraccionDAO atraccionDAO = DAOfactory.getAtraccionDAO();
 
 			Atraccion[] packs = new Atraccion[10];
+			
+		
 			while (result.next()) {
-				packs[0] = atraccionDAO.buscarPorId(result.getLong(1));
+				
+				for (int i = 0; i < packs.length; i++) {
+					packs[i] = atraccionDAO.buscarPorId(result.getLong(1));
+				}
+				
 			}
 
 			return packs;
