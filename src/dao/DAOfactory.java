@@ -1,12 +1,11 @@
 package dao;
-import turismoEnLaTierraMediaGrupo4.*;
 public class DAOfactory {
 	public static PromocionDAO getPromocionDAO() {
-        return new  PromocionDAOImplt();
+        return new  PromocionDAOImpl();
 	}
 	
 	public static AtraccionDAO getAtraccionDAO() {
-       return new  AtraccionDAOImplt();
+       return new  AtraccionDAOImpl();
 	}
 	
 	

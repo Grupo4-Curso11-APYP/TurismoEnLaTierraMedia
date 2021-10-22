@@ -7,6 +7,10 @@ import turismoEnLaTierraMediaGrupo4.Usuario;
 
 public class ItinerarioDAOImpl implements ItinerarioDAO {
 
+	private AtraccionDAOImpl atraccionDAO;
+	private PromocionDAOImpl promocionDAO;
+	private UsuarioDaoImpl usuarioDAO;
+	
 	@Override
 	public List<ManejadorArchivos> findAll() {
 		return null;

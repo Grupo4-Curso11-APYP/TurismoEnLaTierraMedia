@@ -12,20 +12,24 @@ import jdbc.ConnectionProvider;
 
 import turismoEnLaTierraMediaGrupo4.*;
 
-public class PromocionDAOImplt implements PromocionDAO {
+public class PromocionDAOImpl implements PromocionDAO {
 
+	private AtraccionDAOImpl atraccionDao;
 	
 	
-	
+	public PromocionDAOImpl() {
+		this.atraccionDao = new AtraccionDAOImpl();
+	}
+
 	@Override
 	public int insert(Promocion t) throws SQLException {
 		String sql = "INSERT INTO Promocion  (ID_Atraccion,Nombre,Tipo,Monto,Tiempo,AtraccionGratis,Descuento) VALUES (?,?,?,?,?,?,?,?)";
 		Connection conn = ConnectionProvider.getConnection();
-		ResultSet rs = (ResultSet) new PromocionDAOImplt();
+		
 		PreparedStatement statement = conn.prepareStatement(sql);
 		statement.setLong(2, t.getId_Atraccion());
 		statement.setString(3, t.getNombre());
-		statement.setObject(4, TipoAtraccion.valueOf(rs.getString(4)));
+		statement.setObject(4, t.getTipo());
 
 		statement.setDouble(5, t.getCosto());
 		statement.setDouble(6, t.getTiempo());
@@ -88,14 +92,14 @@ public class PromocionDAOImplt implements PromocionDAO {
 		double tiempo = resultados.getDouble(6);
 		Atraccion gratis = new Atraccion(resultados.getString(7));
 		int descuento = resultados.getInt(8);
-
+		String PromocionTipo = resultados.getString(10);
 		Atraccion[] packAtracciones = atraccionesDeLaPromocion(resultados);
 		Promocion promo = null;
-		if (nombre.equals("AxB")) {
+		if (PromocionTipo.equals("AxB")) {
 			promo = new PromocionAxB(nombre, packAtracciones, tipoAtraccion, gratis);
-		} else if (nombre.equals("PORCENTUAL")) {
+		} else if (PromocionTipo.equals("PORCENTUAL")) {
 			promo = new PromocionPorcentual(nombre, packAtracciones, tipoAtraccion, descuento);
-		} else if (nombre.equals("ABSOLUTA")) {
+		} else if (PromocionTipo.equals("ABSOLUTA")) {
 			promo = new PromocionAbsoluta(nombre, packAtracciones, tipoAtraccion, monto);
 		}
 
@@ -107,8 +111,9 @@ public class PromocionDAOImplt implements PromocionDAO {
 		try {
 			// no me convence lo de id_Atraccion , consultar en la clase 
 			//quizas una tabla intermedia de atracciones sea buena tambien  
-			String sql = "select Atraccion.nombre" + "from Promocion"
-					+ "INNER JOIN Atraccion on Atraccion.ID_Atraccion = Promocion.ID_Atraccion";
+			String sql = "select ID_Atraccion1.Nombre, ID_Atraccion2.Nombre\r\n"
+					+ "from Promocion\r\n"
+					+ "WHERE Promocion.Nombre = " + resultados.getString(3);
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setLong(2, resultados.getLong(2));
@@ -116,14 +121,13 @@ public class PromocionDAOImplt implements PromocionDAO {
 
 			AtraccionDAO atraccionDAO = DAOfactory.getAtraccionDAO();
 
-			Atraccion[] packs = new Atraccion[10];
+			Atraccion[] packs = new Atraccion[2];
 			
 		
 			while (result.next()) {
 				
-				for (int i = 0; i < packs.length; i++) {
-					packs[i] = atraccionDAO.buscarPorId(result.getLong(1));
-				}
+				packs[0] = atraccionDao.buscarPorId(resultados.getLong(0));
+				packs[1] = atraccionDao.buscarPorId(resultados.getLong(1));
 				
 			}
 
@@ -154,13 +158,37 @@ public class PromocionDAOImplt implements PromocionDAO {
 	}
 
 	
+	/*
+	public List<Ofertable> findByTipoPromo(String tipo_promocion) throws SQLException {
+		String sql = "SELECT * FROM PROMOCION WHERE tipo_promocion = "+ tipo_promocion;
+		Connection conn = ConnectionProvider.getConnection();
+		PreparedStatement statement = conn.prepareStatement(sql);
+		ResultSet resultados = statement.executeQuery();
+		
+		List<Ofertable> promocion = new LinkedList<Ofertable>();
+		while (resultados.next()) {
+			promocion.add(toPromo(resultados));
+		}
 
-	
-
-	@Override
-	public Promocion buscarPorIdAtraccion(Long id) throws SQLException {
-
-		return null;
+		return promocion;
 	}
+
+	private Promocion toPromo(ResultSet resultados) throws SQLException {
+	
+		Atraccion atraccion1 = getAtraccionById(resultados.getInt(6));
+		Atraccion atraccion2 = getAtraccionById(resultados.getInt(7));
+		return new  PromocionAbsoluta(resultados.getString(3), resultados.getArray(2), resultados.getObject(4),resultados.getDouble(5));
+	}
+	
+	getAtraccionesById(integer id) {
+		String sql = "SELECT * FROM PROMOCION WHERE tipo_promocion = "+ tipo_promocion;
+		Connection conn = ConnectionProvider.getConnection();
+		PreparedStatement statement = conn.prepareStatement(sql);
+		ResultSet resultados = statement.executeQuery();
+		
+	Atraccion atraccion1 = new Atraccion(resultados.getString(3), resultados.getArray(2), resultados.getObject(4),resultados.getDouble(5));
+	return atraccion1;
+	}
+	*/
 
 }

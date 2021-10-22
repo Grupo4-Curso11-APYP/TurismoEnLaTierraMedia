@@ -60,12 +60,12 @@ public class AtraccionDAOImpl implements AtraccionDAO{
 	
 	public int actualizarCupo(Atraccion atraccion) {
 		try {
-			String sql = "UPDATE Atraccion SET Cupo_Disponible = ? WHERE ID_Atraccion = ?";
+			String sql = "UPDATE Atraccion SET Cupo_Disponible = ? WHERE Nombre = ?";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setInt(1, atraccion.getCupoDisponible());
-			//statement.setLong(2, atraccion.getIdAtraccion());//aca estoy con un inconveniente, no tenemos ese id de atraccion en en metodo que lo genera en la declaracion de atraccion
+			statement.setString(2, atraccion.getNombre());
 			
 			int rows = statement.executeUpdate();
 

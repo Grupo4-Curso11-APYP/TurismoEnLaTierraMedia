@@ -8,12 +8,14 @@ import java.util.LinkedList;
 import java.util.List;
 
 import jdbc.ConnectionProvider;
+import turismoEnLaTierraMediaGrupo4.TipoAtraccion;
 import turismoEnLaTierraMediaGrupo4.Usuario;
 
 public class UsuarioDaoImpl implements UsuarioDAO {
 
 	@Override
 	public List<Usuario> findAll() throws SQLException {
+		try {
 		String sql = "SELECT * FROM USUARIO";
 		Connection conn = ConnectionProvider.getConnection();
 		PreparedStatement statement = conn.prepareStatement(sql);
@@ -24,6 +26,9 @@ public class UsuarioDaoImpl implements UsuarioDAO {
 			usuarios.add(toUser(resultados));
 		}
 		return usuarios;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
 	}
 
 	@Override
@@ -42,7 +47,7 @@ public class UsuarioDaoImpl implements UsuarioDAO {
 	@Override
 	public int insert(Usuario usuario) throws SQLException {
 		String sql = "INSERT INTO USUARIO (NOMBRE, PRESUPUESTO,TIEMPODISPONIBLE,"
-				+ "TIPOFAVORITO, OFERTABLE) VALUES (?, ?)";
+				+ "TIPOFAVORITO, OFERTABLE) VALUES (?, ?, ?, ?, ?)";
 		Connection conn = ConnectionProvider.getConnection();
 
 		PreparedStatement statement = conn.prepareStatement(sql);
@@ -87,6 +92,7 @@ public class UsuarioDaoImpl implements UsuarioDAO {
 
 	@Override
 	public Usuario findByNombre(String nombre) throws SQLException {
+		try {
 		String sql = "SELECT * FROM USUARIO WHERE NOMBRE = ?";
 		Connection conn = ConnectionProvider.getConnection();
 		PreparedStatement statement = conn.prepareStatement(sql);
@@ -99,13 +105,14 @@ public class UsuarioDaoImpl implements UsuarioDAO {
 			usuario = toUser(resultados);
 		}
 		return usuario;
-
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
 	}
 
-	private Usuario toUser(ResultSet resultados) throws SQLException {
+	private Usuario toUser(ResultSet resultados) throws Exception {
 		return new Usuario(resultados.getString(1), resultados.getDouble(2),
-				resultados.getDouble(3), resultados.getString(4), 
-				resultados.getString(5));
+				resultados.getDouble(3),TipoAtraccion.valueOf(resultados.getString(4)));
 	}
 
 
