@@ -19,17 +19,18 @@ public class ItinerarioDAOImpl implements ItinerarioDAO {
 	private UsuarioDaoImpl usuarioDAO;
 
 	@Override
-	public int insert(EscribirItinerarios itinerario)  {
+	public int insert(Usuario usuario, Ofertable o)  {
 		try {
-			String sql = "INSERT INTO Itinerario (ID_Promocion, ID_Itinerario, ID_Usuario, ID_Atraccion) VALUES (?,?,?,?)";
+			String sql = "INSERT INTO Itinerario (ID_Promocion, ID_Usuario, ID_Atraccion) VALUES (?,?,?,?)";
 			Connection conn;
 			conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
-
-			statement.setInt(1, 0);
+			if (o instanceof Promocion) {
+				
+			}
+			statement.setInt(1, o.);
 			statement.setInt(2, 0);
 			statement.setInt(3, 0);
-			statement.setInt(4, 0);
 
 			return 0;
 		} catch (Exception e) {
