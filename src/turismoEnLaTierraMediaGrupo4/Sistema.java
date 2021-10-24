@@ -10,6 +10,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import dao.AtraccionDAOImpl;
+import dao.PromocionDAOImpl;
 import dao.UsuarioDaoImpl;
 
 public class Sistema {
@@ -153,7 +154,8 @@ public class Sistema {
 		*/
 		AtraccionDAOImpl aDAO = new AtraccionDAOImpl();
 		UsuarioDaoImpl uDAO = new UsuarioDaoImpl();
-		System.out.println(uDAO.findAll());
+		PromocionDAOImpl pDAO = new PromocionDAOImpl();
+		System.out.println(pDAO.findAll());
 	}
 
 }

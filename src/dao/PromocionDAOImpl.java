@@ -85,13 +85,13 @@ public class PromocionDAOImpl implements PromocionDAO {
 
 	private Promocion toPromo(ResultSet resultados) throws Exception {
 
-		Long idAtraccion = resultados.getLong(2);
-		String nombre = resultados.getString(3);
-		TipoAtraccion tipoAtraccion = TipoAtraccion.valueOf(resultados.getString(4));
-		double monto = resultados.getInt(5);
-		double tiempo = resultados.getDouble(6);
-		Atraccion gratis = new Atraccion(resultados.getString(7));
-		int descuento = resultados.getInt(8);
+		Long idAtraccion = resultados.getLong(1);
+		String nombre = resultados.getString(4);
+		TipoAtraccion tipoAtraccion = TipoAtraccion.valueOf(resultados.getString(5));
+		double monto = resultados.getInt(6);
+		double tiempo = resultados.getDouble(7);
+		Atraccion gratis = new Atraccion(resultados.getString(8));
+		int descuento = resultados.getInt(9);
 		String PromocionTipo = resultados.getString(10);
 		Atraccion[] packAtracciones = atraccionesDeLaPromocion(resultados);
 		Promocion promo = null;
@@ -109,25 +109,21 @@ public class PromocionDAOImpl implements PromocionDAO {
 
 	private Atraccion[] atraccionesDeLaPromocion(ResultSet resultados) throws Exception {
 		try {
-			// no me convence lo de id_Atraccion , consultar en la clase 
-			//quizas una tabla intermedia de atracciones sea buena tambien  
-			String sql = "select ID_Atraccion1.Nombre, ID_Atraccion2.Nombre\r\n"
-					+ "from Promocion\r\n"
-					+ "WHERE Promocion.Nombre = " + resultados.getString(3);
+			String sql = "select ID_Atraccion1, ID_Atraccion2"
+					+ "from Promocion"
+					+ "WHERE Promocion.Nombre = ?";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
-			statement.setLong(2, resultados.getLong(2));
+			statement.setString(1, resultados.getString(4));
 			ResultSet result = statement.executeQuery();
-
-			AtraccionDAO atraccionDAO = DAOfactory.getAtraccionDAO();
 
 			Atraccion[] packs = new Atraccion[2];
 			
 		
 			while (result.next()) {
 				
-				packs[0] = atraccionDao.buscarPorId(resultados.getLong(0));
-				packs[1] = atraccionDao.buscarPorId(resultados.getLong(1));
+				packs[0] = atraccionDao.buscarPorId(resultados.getLong(1));
+				packs[1] = atraccionDao.buscarPorId(resultados.getLong(2));
 				
 			}
 
