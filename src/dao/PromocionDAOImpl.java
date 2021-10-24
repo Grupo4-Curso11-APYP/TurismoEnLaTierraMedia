@@ -111,8 +111,10 @@ public class PromocionDAOImpl implements PromocionDAO {
 		try {
 			String sql = "select Atraccion.ID_Atraccion, Atraccion.Nombre, "
 					+ "Atraccion.Cupo_Disponible, Atraccion.Costo, Atraccion.Tiempo, "
-					+ "Atraccion.TipoDeAtraccion"
-					+ "from Promocion INNER JOIN Atraccion"
+					+ " TipoAtraccion.id_tipoAtraccion"
+					+ "from Promocion INNER JOIN TipoAtraccion"
+					+ " ON Promocion.Tipo = TipoAtraccion.id_tipoAtraccion"
+					+ "INNER JOIN Atraccion"
 					+ "ON Promocion.ID_Atraccion1 = Atraccion.ID_Atraccion"
 					+ "WHERE Promocion.Nombre = 'Pack Aventura'";
 			Connection conn = ConnectionProvider.getConnection();
@@ -131,8 +133,10 @@ public class PromocionDAOImpl implements PromocionDAO {
 			
 			String sql2 = "select Atraccion.ID_Atraccion, Atraccion.Nombre, "
 					+ "Atraccion.Cupo_Disponible, Atraccion.Costo, Atraccion.Tiempo, "
-					+ "Atraccion.TipoDeAtraccion"
-					+ "from Promocion INNER JOIN Atraccion"
+					+ "TipoAtraccion.id_tipoAtraccion"
+					+ "from Promocion INNER JOIN TipoAtraccion"
+					+ "ON Promocion.Tipo = TipoAtraccion.id_tipoAtraccion"
+					+ "INNER JOIN Atraccion"
 					+ "ON Promocion.ID_Atraccion2 = Atraccion.ID_Atraccion"
 					+ "WHERE Promocion.Nombre = 'Pack Aventura'";
 			conn = ConnectionProvider.getConnection();
