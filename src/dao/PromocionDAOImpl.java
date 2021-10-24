@@ -135,10 +135,10 @@ public class PromocionDAOImpl implements PromocionDAO {
 					+ "from Promocion INNER JOIN Atraccion"
 					+ "ON Promocion.ID_Atraccion2 = Atraccion.ID_Atraccion"
 					+ "WHERE Promocion.Nombre = 'Pack Aventura'";
-			Connection conn2 = ConnectionProvider.getConnection();
-			PreparedStatement statement2 = conn2.prepareStatement(sql2);
+			conn = ConnectionProvider.getConnection();
+			statement = conn.prepareStatement(sql2);
 			statement.setString(1, resultados.getString(4));
-			ResultSet result2 = statement2.executeQuery();
+			result = statement.executeQuery();
 			
 			while (result.next()) {
 				
