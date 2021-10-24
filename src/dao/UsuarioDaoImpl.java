@@ -113,8 +113,11 @@ public class UsuarioDaoImpl implements UsuarioDAO {
 	}
 
 	private Usuario toUser(ResultSet resultados) throws Exception {
-		return new Usuario(resultados.getString(1), resultados.getDouble(2),
-				resultados.getDouble(3),TipoAtraccion.valueOf(resultados.getString(4)));
+		String nombre = resultados.getString(2);
+		Double presupuesto = resultados.getDouble(3);
+		Double tiempoDisponible = resultados.getDouble(4);
+		TipoAtraccion tipoFavorito = TipoAtraccion.valueOf(resultados.getString(5));
+		return new Usuario(nombre, presupuesto, tiempoDisponible, tipoFavorito);
 	}
 
 
