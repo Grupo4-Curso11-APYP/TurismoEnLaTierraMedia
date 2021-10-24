@@ -107,7 +107,7 @@ public class PromocionDAOImpl implements PromocionDAO {
 
 	}
 
-	private Atraccion[] atraccionesDeLaPromocion(ResultSet resultados) throws Exception {
+	private Atraccion[] atraccionesDeLaPromocion(ResultSet nombre) throws Exception {
 		try {
 			String sql = "select Atraccion.ID_Atraccion, Atraccion.Nombre, "
 					+ "Atraccion.Cupo_Disponible, Atraccion.Costo, Atraccion.Tiempo, "
@@ -117,7 +117,7 @@ public class PromocionDAOImpl implements PromocionDAO {
 					+ "WHERE Promocion.Nombre = 'Pack Aventura'";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
-			statement.setString(1, resultados.getString(4));
+			statement.setString(1, nombre.getString(4));
 			ResultSet result = statement.executeQuery();
 
 			Atraccion[] packs = new Atraccion[2];
@@ -125,7 +125,7 @@ public class PromocionDAOImpl implements PromocionDAO {
 		
 			while (result.next()) {
 				
-				packs[0] = atraccionDao.buscarPorId(resultados.getLong(1));
+				packs[0] = atraccionDao.buscarPorId(result.getLong(1));
 				
 			}
 			
@@ -137,12 +137,12 @@ public class PromocionDAOImpl implements PromocionDAO {
 					+ "WHERE Promocion.Nombre = 'Pack Aventura'";
 			conn = ConnectionProvider.getConnection();
 			statement = conn.prepareStatement(sql2);
-			statement.setString(1, resultados.getString(4));
+			statement.setString(1, nombre.getString(4));
 			result = statement.executeQuery();
 			
 			while (result.next()) {
 				
-				packs[1] = atraccionDao.buscarPorId(resultados.getLong(2));
+				packs[1] = atraccionDao.buscarPorId(result.getLong(2));
 				
 			}
 
