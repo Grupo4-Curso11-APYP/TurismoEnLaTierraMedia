@@ -64,14 +64,16 @@ public class UsuarioDaoImpl implements UsuarioDAO {
 
 	@Override
 	public int update(Usuario usuario) throws SQLException {
-		String sql = "UPDATE USUARIO SET PRESUPUESTO = ? WHERE NOMBRE = ?";
+		String sql = "UPDATE USUARIO SET PRESUPUESTO = ?, TIEMPODISPONIBLE = ?, "
+				+ "OFERTABLE = ? WHERE NOMBRE = ?";
 		Connection conn = ConnectionProvider.getConnection();
 
 		PreparedStatement statement = conn.prepareStatement(sql);
 		statement.setDouble(1, usuario.getPresupuesto());
-		statement.setString(2, usuario.getNombre());
+		statement.setDouble(2, usuario.getTiempoDisponible());
+		statement.setObject(3, usuario.getOfertables());
+		statement.setString(4, usuario.getNombre());
 		int rows = statement.executeUpdate();
-		//Faltan resto de atributos
 
 		return rows;
 
