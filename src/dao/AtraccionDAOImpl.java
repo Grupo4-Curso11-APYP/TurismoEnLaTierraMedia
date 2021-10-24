@@ -40,12 +40,11 @@ public class AtraccionDAOImpl implements AtraccionDAO{
 	
 	private Atraccion a_Atraccion(ResultSet resultados) throws Exception {
 		
-		//Long ID_Atraccion = resultados.getLong(1);//No usamos el ID_Atracciones de la bd en el constructor de atracciones
 		String nombre = resultados.getString(2);
 		int cupoDisponible = resultados.getInt(3);
 		double costo = resultados.getDouble(4);
 		double tiempo = resultados.getInt(5);
-		TipoAtraccion tipo =  TipoAtraccion.valueOf(resultados.getString(8).toUpperCase());
+		TipoAtraccion tipo =  TipoAtraccion.valueOf(resultados.getString(6).toUpperCase());
 		
 		return new Atraccion(nombre, costo, tiempo, cupoDisponible, tipo);
 	

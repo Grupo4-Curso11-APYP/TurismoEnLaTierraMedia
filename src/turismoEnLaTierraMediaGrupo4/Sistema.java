@@ -9,6 +9,8 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
 
+import dao.AtraccionDAOImpl;
+
 public class Sistema {
 
 	protected Set<Usuario> usuarios;
@@ -142,11 +144,14 @@ public class Sistema {
 	 */
 	public static void main(String[] args) throws Exception {
 		Sistema sistema = new Sistema();
-		
+		/*
 		sistema.agregarAtraccion();
 		sistema.agregarPromociones();
 		sistema.agregarUsuariosDesdeArchivo();
 		sistema.sugerir();
+		*/
+		AtraccionDAOImpl aDAO = new AtraccionDAOImpl();
+		System.out.println(aDAO.findAll());
 	}
 
 }
