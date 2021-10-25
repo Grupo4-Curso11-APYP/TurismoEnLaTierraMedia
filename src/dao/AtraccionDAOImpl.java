@@ -38,7 +38,7 @@ public class AtraccionDAOImpl implements AtraccionDAO{
 		}
 	}
 	
-	private Atraccion a_Atraccion(ResultSet resultados) throws Exception {
+	public Atraccion a_Atraccion(ResultSet resultados) throws Exception {
 		
 		String nombre = resultados.getString(2);
 		int cupoDisponible = resultados.getInt(3);

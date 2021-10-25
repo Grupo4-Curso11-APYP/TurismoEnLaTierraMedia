@@ -85,68 +85,55 @@ public class PromocionDAOImpl implements PromocionDAO {
 
 	private Promocion toPromo(ResultSet resultados) throws Exception {
 
-		Long idAtraccion = resultados.getLong(1);
-		String nombre = resultados.getString(4);
 		TipoAtraccion tipoAtraccion = TipoAtraccion.valueOf(resultados.getString(5));
-		double monto = resultados.getInt(6);
-		double tiempo = resultados.getDouble(7);
-		Atraccion gratis = new Atraccion(resultados.getString(8));
-		int descuento = resultados.getInt(9);
-		String PromocionTipo = resultados.getString(10);
-		Atraccion[] packAtracciones = atraccionesDeLaPromocion(resultados);
+		Atraccion[] packAtracciones = atraccionesDeLaPromocion(resultados.getLong(2), resultados.getLong(3));
+		String nombre = resultados.getString(4);
+		String promocionTipo = resultados.getString(10);
 		Promocion promo = null;
-		if (PromocionTipo.equals("AxB")) {
+		if (promocionTipo.equals("AxB")) {
+			Atraccion gratis = atraccionDao.buscarPorId(resultados.getLong(8));
 			promo = new PromocionAxB(nombre, packAtracciones, tipoAtraccion, gratis);
-		} else if (PromocionTipo.equals("PORCENTUAL")) {
+		} else if (promocionTipo.equals("PORCENTUAL")) {
+			int descuento = resultados.getInt(9);
 			promo = new PromocionPorcentual(nombre, packAtracciones, tipoAtraccion, descuento);
-		} else if (PromocionTipo.equals("ABSOLUTA")) {
+		} else if (promocionTipo.equals("ABSOLUTA")) {
+			double monto = resultados.getInt(6);
 			promo = new PromocionAbsoluta(nombre, packAtracciones, tipoAtraccion, monto);
 		}
-
 		return promo;
 
 	}
 
-	private Atraccion[] atraccionesDeLaPromocion(ResultSet nombre) throws Exception {
+	private Atraccion[] atraccionesDeLaPromocion(Long atraccion1, Long atraccion2) throws Exception {
+		Atraccion[] packs = new Atraccion[2];
 		try {
-			String sql = "select Atraccion.ID_Atraccion, Atraccion.Nombre, "
-					+ "Atraccion.Cupo_Disponible, Atraccion.Costo, Atraccion.Tiempo, "
-					+ " TipoAtraccion.id_tipoAtraccion"
-					+ "from Promocion INNER JOIN TipoAtraccion"
-					+ " ON Promocion.Tipo = TipoAtraccion.id_tipoAtraccion"
-					+ "INNER JOIN Atraccion"
-					+ "ON Promocion.ID_Atraccion1 = Atraccion.ID_Atraccion"
-					+ "WHERE Promocion.Nombre = 'Pack Aventura'";
+			String sql = "select *"
+					+ "from Atraccion WHERE ID_Atraccion = ?";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
-			statement.setString(1, nombre.getString(4));
+			statement.setLong(1, atraccion1);
 			ResultSet result = statement.executeQuery();
 
-			Atraccion[] packs = new Atraccion[2];
 			
 		
 			while (result.next()) {
 				
-				packs[0] = atraccionDao.buscarPorId(result.getLong(1));
+				packs[0] = atraccionDao.a_Atraccion(result);
+						//buscarPorId(result.getLong(1));
 				
 			}
 			
-			String sql2 = "select Atraccion.ID_Atraccion, Atraccion.Nombre, "
-					+ "Atraccion.Cupo_Disponible, Atraccion.Costo, Atraccion.Tiempo, "
-					+ "TipoAtraccion.id_tipoAtraccion"
-					+ "from Promocion INNER JOIN TipoAtraccion"
-					+ "ON Promocion.Tipo = TipoAtraccion.id_tipoAtraccion"
-					+ "INNER JOIN Atraccion"
-					+ "ON Promocion.ID_Atraccion2 = Atraccion.ID_Atraccion"
-					+ "WHERE Promocion.Nombre = 'Pack Aventura'";
-			conn = ConnectionProvider.getConnection();
-			statement = conn.prepareStatement(sql2);
-			statement.setString(1, nombre.getString(4));
-			result = statement.executeQuery();
-			
-			while (result.next()) {
+			String sql2 = "select *"
+					+ "from Atraccion WHERE ID_Atraccion = ?";
+			Connection conn2 = ConnectionProvider.getConnection();
+			PreparedStatement statement2 = conn.prepareStatement(sql2);
+			statement.setLong(1, atraccion2);
+			ResultSet result2 = statement.executeQuery();		
+		
+			while (result2.next()) {
 				
-				packs[1] = atraccionDao.buscarPorId(result.getLong(2));
+				packs[1] = atraccionDao.a_Atraccion(result2);
+						//buscarPorId(result.getLong(1));
 				
 			}
 
