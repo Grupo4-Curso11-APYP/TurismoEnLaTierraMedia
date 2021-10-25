@@ -1,8 +1,10 @@
 package dao;
 
-import turismoEnLaTierraMediaGrupo4.EscribirItinerarios;
+import turismoEnLaTierraMediaGrupo4.Usuario;
 
 
-public interface ItinerarioDAO extends GenericDAO<EscribirItinerarios>{
-	public abstract EscribirItinerarios findByID_Usuario() ;
+public interface ItinerarioDAO extends GenericDAO<Usuario>{
+	public abstract Usuario findByID_Usuario() ;
+
+	Usuario findByID_Usuario(Long id);
 }

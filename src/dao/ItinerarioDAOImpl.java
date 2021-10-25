@@ -1,18 +1,17 @@
 package dao;
 
 import java.io.IOException;
+import java.sql.Array;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import jdbc.ConnectionProvider;
-import turismoEnLaTierraMediaGrupo4.EscribirItinerarios;
-import turismoEnLaTierraMediaGrupo4.Ofertable;
 import turismoEnLaTierraMediaGrupo4.*;
-
-
 
 public class ItinerarioDAOImpl implements ItinerarioDAO {
 
@@ -20,28 +19,36 @@ public class ItinerarioDAOImpl implements ItinerarioDAO {
 	private PromocionDAOImpl promocionDAO;
 	private UsuarioDaoImpl usuarioDAO;
 
-	public int insert(Usuario usuario, Ofertable o)  {
+	@Override
+	public int insert(Usuario usuario) {
 		try {
-			String sql = "INSERT INTO Itinerario (ID_Promocion, ID_Usuario, ID_Atraccion) VALUES (?,?,?,?)";
+			String sql = "INSERT INTO Itinerario (ID_Usuario, ID_Promocion, ID_Atraccion) VALUES (?,?,?)";
 			Connection conn;
 			conn = ConnectionProvider.getConnection();
-			PreparedStatement statement = conn.prepareStatement(sql);
-			if (o instanceof Promocion) {
-				
-			}
-			statement.setInt(1, 0);
-			statement.setInt(2, 0);
-			statement.setInt(3, 0);
 
-			return 0;
+			PreparedStatement statement = conn.prepareStatement(sql);
+
+			for (int i = 0; i < usuario.getOfertables().size(); i++) {
+				if (usuario.getOfertables() instanceof Promocion) {
+					statement.setString(1, usuario.getNombre());
+					statement.setObject(2, usuario.getOfertables());
+				} else {
+					statement.setString(1, usuario.getNombre());
+					statement.setObject(3, usuario.getOfertables());
+				}
+			}
+
+			int rows = statement.executeUpdate();
+			return rows;
+
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
-		
+
 	}
 
 	@Override
-	public int update(EscribirItinerarios itinerario) throws SQLException {
+	public int update(Usuario itinerario) {
 		try {
 			String sql = "UPDATE ITINERARIO SET ID = ? WHERE ID = ?";
 			Connection conn = ConnectionProvider.getConnection();
@@ -58,10 +65,9 @@ public class ItinerarioDAOImpl implements ItinerarioDAO {
 			throw new MissingDataException(e);
 		}
 	}
-	
 
 	@Override
-	public int delete(EscribirItinerarios itinerario) {
+	public int delete(Usuario itinerario) {
 		try {
 			String sql = "DELETE FROM ITINERARIO WHERE ID = ?";
 			Connection conn = ConnectionProvider.getConnection();
@@ -76,10 +82,9 @@ public class ItinerarioDAOImpl implements ItinerarioDAO {
 		}
 	}
 
-
 	@Override
-	public List<EscribirItinerarios> findAll() {
-		return null;
+	public List<Usuario> findAll() {
+		return null;		
 	}
 
 	@Override
@@ -88,15 +93,18 @@ public class ItinerarioDAOImpl implements ItinerarioDAO {
 	}
 
 	@Override
-	public EscribirItinerarios findByID_Usuario() {
+	public Usuario findByID_Usuario(Long ID_Usuario) {
 		try {
-			String sql = "SELECT * FROM ITINERARIO WHERE ID = ?";
+			String sql = "SELECT Usuario.ID_Usuario, Usuario.Nombre, Usuario.Presupuesto, Usuario.TiempoDisponible,"
+					+ "Usuario.TipoFavorito"
+					+ " FROM Usuario"
+					+ " WHERE Usuario.ID_Usuario = ?";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
-			statement.setInt(1, 0);
+			statement.setLong(1, ID_Usuario);
 			ResultSet resultados = statement.executeQuery();
 
-			EscribirItinerarios itinerario = null;
+			Usuario itinerario = null;
 
 			if (resultados.next()) {
 				itinerario = toIty(resultados);
@@ -108,14 +116,15 @@ public class ItinerarioDAOImpl implements ItinerarioDAO {
 		}
 	}
 
-	private EscribirItinerarios toIty(ResultSet resultados) throws IOException {
-		return (EscribirItinerarios) (resultados);
+	private Usuario toIty(ResultSet resultados) throws IOException {
+		Long ID;
+		return null;
 	}
 
 	@Override
-	public int insert(EscribirItinerarios t) throws SQLException {
+	public Usuario findByID_Usuario() {
 		// TODO Auto-generated method stub
-		return 0;
+		return null;
 	}
 
 }
