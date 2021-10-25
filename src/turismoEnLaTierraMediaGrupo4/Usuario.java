@@ -23,6 +23,8 @@ public class Usuario {
 
 	}
 
+
+	
 	/*
 	 * validación para evitar presupuesto negativo, si lo es, lanza una excepción
 	 */

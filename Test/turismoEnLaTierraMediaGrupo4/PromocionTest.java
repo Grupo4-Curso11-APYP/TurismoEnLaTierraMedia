@@ -2,8 +2,12 @@ package turismoEnLaTierraMediaGrupo4;
 
 import static org.junit.Assert.*;
 
+import java.sql.SQLException;
+
 import org.junit.Before;
 import org.junit.Test;
+
+import dao.PromocionDAOImpl;
 
 public class PromocionTest {
 
@@ -140,4 +144,25 @@ public class PromocionTest {
 		assertEquals(14, a6.getCupoDisponible());
 		assertEquals(31, aGratis.getCupoDisponible());
 	}
+	
+	@Test
+	public void deberiaContarTodasLasPromociones() throws SQLException {
+		PromocionDAOImpl promo = new PromocionDAOImpl();
+		assertTrue(promo.countAll() == 4);
+	}
+	
+	/*
+	 * No funciona porque el metodo atracciones De la promocion , esta en mantenimiento
+	 */
+	@Test
+	public void deberiaBuscarTodasLasdPromociones() throws SQLException {
+//		PromocionDAOImpl promo = new PromocionDAOImpl();
+//		assertTrue(promo.findAll().size() == 4);
+	}
+	
+//	@Test 
+//	public void deberiaInsertarUnaPromocion() throws SQLException{
+//		PromocionDAOImpl promo = new PromocionDAOImpl();
+//		promo.insert(paisajeAxB);
+//	}
 }

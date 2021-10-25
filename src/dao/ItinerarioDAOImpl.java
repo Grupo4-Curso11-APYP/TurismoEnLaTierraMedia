@@ -9,6 +9,8 @@ import java.util.List;
 
 import jdbc.ConnectionProvider;
 import turismoEnLaTierraMediaGrupo4.EscribirItinerarios;
+import turismoEnLaTierraMediaGrupo4.Ofertable;
+import turismoEnLaTierraMediaGrupo4.*;
 
 
 
@@ -18,7 +20,6 @@ public class ItinerarioDAOImpl implements ItinerarioDAO {
 	private PromocionDAOImpl promocionDAO;
 	private UsuarioDaoImpl usuarioDAO;
 
-	@Override
 	public int insert(Usuario usuario, Ofertable o)  {
 		try {
 			String sql = "INSERT INTO Itinerario (ID_Promocion, ID_Usuario, ID_Atraccion) VALUES (?,?,?,?)";
@@ -28,7 +29,7 @@ public class ItinerarioDAOImpl implements ItinerarioDAO {
 			if (o instanceof Promocion) {
 				
 			}
-			statement.setInt(1, o.);
+			statement.setInt(1, 0);
 			statement.setInt(2, 0);
 			statement.setInt(3, 0);
 
@@ -109,6 +110,12 @@ public class ItinerarioDAOImpl implements ItinerarioDAO {
 
 	private EscribirItinerarios toIty(ResultSet resultados) throws IOException {
 		return (EscribirItinerarios) (resultados);
+	}
+
+	@Override
+	public int insert(EscribirItinerarios t) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

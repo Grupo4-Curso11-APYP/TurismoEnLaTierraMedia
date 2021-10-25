@@ -58,7 +58,7 @@ public class UsuarioDaoImpl implements UsuarioDAO {
 		statement.setObject(5, usuario.getOfertables());
 		
 		int rows = statement.executeUpdate();
-
+         
 		return rows;
 	}
 

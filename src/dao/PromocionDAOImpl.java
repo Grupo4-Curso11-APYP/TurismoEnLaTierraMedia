@@ -174,6 +174,6 @@ public class PromocionDAOImpl implements PromocionDAO {
 			}
 		}
 		return promo;
-	}
+	}}
 
-}
+

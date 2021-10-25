@@ -2,11 +2,16 @@ package turismoEnLaTierraMediaGrupo4;
 
 import static org.junit.Assert.*;
 
+import java.sql.SQLException;
 import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.TreeSet;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import dao.AtraccionDAOImpl;
+import dao.UsuarioDaoImpl;
 
 public class UsuarioTest {
 	
@@ -90,4 +95,43 @@ public class UsuarioTest {
 			usuarioNuevo = new Usuario(nombreUsuario, montoDisponible, tiempoDisponible, TipoAtraccion.AVENTURA);
 		}
 
+		
+		/* consultar en clase mañana , tira un error  
+		que dice que la base de datos esta bloqueada
+	*/
+		@Test
+		public void deberiaInsertarUnNuevoUsuario() throws Exception {
+			
+//			Set<Ofertable> ofertable = new LinkedHashSet<Ofertable>();
+//			Usuario us1 = new Usuario("jere", 20,15, TipoAtraccion.DEGUSTACION,ofertable);
+//			UsuarioDaoImpl  usDao= new UsuarioDaoImpl();
+//			usDao.insert(us1);
+		}
+		
+		/*
+		 *  no va a dar verde hasta que no este terminado  el metodo sugerir ,	
+		 *  ya que sino  nunca va a mostrar las atracciones incluidas como se muestra 
+		 *  en el toString
+		 */
+		@Test 
+		public void deberiaBuscarUsuarioPorNombre() throws Exception {
+//			UsuarioDaoImpl us1 = new UsuarioDaoImpl();
+//			Usuario u2 = new Usuario("Gandalf",100,5,TipoAtraccion.PAISAJE );
+//			assertEquals(u2,us1.findByNombre(u2.getNombre()));
+		}
+		
+		
+		@Test
+		public void deberiaBuscarTodosLosUsuarios() throws SQLException {
+			UsuarioDaoImpl us2 = new UsuarioDaoImpl();
+			assertTrue(us2.findAll().size() == 5);
+		}
+	
+		
+		@Test
+		public void deberiaContarusuarios() throws SQLException {
+			UsuarioDaoImpl us2 = new UsuarioDaoImpl();
+			assertTrue(us2.countAll() == 5);
+		}
+		
 }

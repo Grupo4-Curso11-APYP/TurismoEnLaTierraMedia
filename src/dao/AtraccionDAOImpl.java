@@ -53,8 +53,15 @@ public class AtraccionDAOImpl implements AtraccionDAO{
 	
 	@Override
 	public int countAll() throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		String sql = "SELECT COUNT(1) AS TOTAL FROM Atraccion";
+		Connection conn = ConnectionProvider.getConnection();
+		PreparedStatement statement = conn.prepareStatement(sql);
+		ResultSet resultados = statement.executeQuery();
+
+		resultados.next();
+		int total = resultados.getInt("TOTAL");
+
+		return total;
 	}
 	
 	public int actualizarCupo(Atraccion atraccion) {
@@ -97,9 +104,8 @@ public class AtraccionDAOImpl implements AtraccionDAO{
 		try {
 			String sql = "SELECT Atraccion.ID_Atraccion, Atraccion.Nombre, Atraccion.Cupo_Disponible,"
 					+ " Atraccion.Costo, Atraccion.Tiempo,"
-					+ " TipoAtraccion.id_tipoAtraccion"
-					+ " FROM Atraccion INNER JOIN TipoAtraccion "  
-					+ " ON Atraccion.TipoAtraccion = TipoAtraccion.id_tipoAtraccion "
+					+ "  Atraccion.TipoDeAtraccion"
+					+ " FROM Atraccion"
 					+ " WHERE Atraccion.Id_Atraccion = ?";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
