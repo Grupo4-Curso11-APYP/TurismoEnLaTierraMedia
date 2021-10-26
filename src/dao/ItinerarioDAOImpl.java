@@ -127,4 +127,11 @@ public class ItinerarioDAOImpl implements ItinerarioDAO {
 		return null;
 	}
 
+	@Override
+	public int insertarAtrac(String nombre, int costo, int tiempo, int cupoDisponible, String tipoAtraccion)
+			throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

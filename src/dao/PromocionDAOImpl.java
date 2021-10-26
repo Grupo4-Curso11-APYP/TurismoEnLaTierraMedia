@@ -153,4 +153,11 @@ public class PromocionDAOImpl implements PromocionDAO {
 		}
 		return promo;
 	}
+
+	@Override
+	public int insertarAtrac(String nombre, int costo, int tiempo, int cupoDisponible, String tipoAtraccion)
+			throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
