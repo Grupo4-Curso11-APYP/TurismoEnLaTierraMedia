@@ -80,11 +80,29 @@ public class AtraccionDAOImpl implements AtraccionDAO{
 			throw new MissingDataException(e);
 		}
 	}
-
+	
 	@Override
-	public int insert(Atraccion t) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insertarAtrac(String nombre, int costo, int tiempo, int cupoDisponible, String tipoAtraccion) throws SQLException {
+	//	public int insert(Atraccion atraccion) throws SQLException {
+		String sql = "INSERT INTO ATRACCION (NOMBRE, COSTO, TIEMPO, CUPO_DISPONIBLE, TIPODEATRACCION) VALUES (?,?,?,?,?)";
+		//String nombre, double costo, double tiempo, int cupoDisponible, TipoAtraccion tipo
+		
+		Connection conn = ConnectionProvider.getConnection();
+		PreparedStatement statement = conn.prepareStatement(sql);
+//		statement.setString(1, atraccion.getNombre());
+//		statement.setDouble(2, atraccion.getCosto());
+//		statement.setDouble(3, atraccion.getTiempo());
+//		statement.setInt(4, atraccion.getCupoDisponible());
+//		statement.setString(5, atraccion.getTipo());//esto no me parece correcto, tengo que revizarlo, estuve dando vueltas, y me parece que no es así
+		statement.setString(1,nombre);
+		statement.setDouble(2,costo);
+		statement.setDouble(3,tiempo);
+		statement.setDouble(4,cupoDisponible);
+		statement.setString(5,tipoAtraccion);
+		
+		int rows = statement.executeUpdate();
+		
+		return rows;
 	}
 
 	@Override
@@ -122,6 +140,12 @@ public class AtraccionDAOImpl implements AtraccionDAO{
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
+	}
+
+	@Override
+	public int insert(Atraccion t) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 	

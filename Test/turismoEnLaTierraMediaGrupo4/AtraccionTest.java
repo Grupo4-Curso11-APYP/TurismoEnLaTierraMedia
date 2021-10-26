@@ -91,9 +91,12 @@ public class AtraccionTest {
 
 	}
 	
-//	@Test
-//	public void deberiaInsertarUnaAtraccion() throws Exception{
-//		AtraccionDAOImpl  atrac= new AtraccionDAOImpl();
-//		atrac.insert((new Atraccion("Calabozo", 120, 15, 8, TipoAtraccion.AVENTURA)));
-//	}
+	@Test
+	public void deberiaInsertarUnaAtraccion() throws Exception{
+		AtraccionDAOImpl  atrac= new AtraccionDAOImpl();
+		//atrac.insert((new Atraccion("Calabozo", 120, 15, 8, TipoAtraccion.AVENTURA)));
+		atrac.insertarAtrac("Calabozo", 120, 15, 8, "AVENTURA");
+		System.out.println(atrac.countAll());
+		assertTrue(atrac.countAll()==9);
+	}
 }
