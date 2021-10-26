@@ -71,7 +71,7 @@ public class AtraccionTest {
 	public void deberiaBuscarTodasLasAtracciones() throws SQLException {
 		AtraccionDAOImpl atraccion = new AtraccionDAOImpl();
 		assertNotNull(atraccion.findAll());
-		assertTrue(atraccion.findAll().size() == 8);
+		assertTrue(atraccion.findAll().size() == 9);//esto esta sujeto a rever cuando se hagan nuevos inserts
 
 	}
 
