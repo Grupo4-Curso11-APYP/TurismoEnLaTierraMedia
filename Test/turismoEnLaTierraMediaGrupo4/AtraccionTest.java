@@ -90,4 +90,10 @@ public class AtraccionTest {
 		assertTrue(atraccion.countAll() == 8);
 
 	}
+	
+//	@Test
+//	public void deberiaInsertarUnaAtraccion() throws Exception{
+//		AtraccionDAOImpl  atrac= new AtraccionDAOImpl();
+//		atrac.insert((new Atraccion("Calabozo", 120, 15, 8, TipoAtraccion.AVENTURA)));
+//	}
 }

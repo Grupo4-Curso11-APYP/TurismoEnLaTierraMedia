@@ -29,7 +29,7 @@ public class AtraccionDAOImpl implements AtraccionDAO{
 
 			ArrayList<Atraccion> atracciones = new ArrayList<Atraccion>();
 			while (resultados.next()) {
-				atracciones.add(a_Atraccion(resultados));
+				atracciones.add(toAtraccion(resultados));
 			}
 		
 			return atracciones;
@@ -38,7 +38,7 @@ public class AtraccionDAOImpl implements AtraccionDAO{
 		}
 	}
 	
-	public Atraccion a_Atraccion(ResultSet resultados) throws Exception {
+	public Atraccion toAtraccion(ResultSet resultados) throws Exception {
 		
 		String nombre = resultados.getString(2);
 		int cupoDisponible = resultados.getInt(3);
@@ -115,7 +115,7 @@ public class AtraccionDAOImpl implements AtraccionDAO{
 			Atraccion atraccion = null;
 
 			if (resultados.next()) {
-				atraccion = a_Atraccion(resultados);
+				atraccion = toAtraccion(resultados);
 			}
 
 			return atraccion;

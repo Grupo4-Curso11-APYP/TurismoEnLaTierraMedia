@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public abstract class Promocion implements Ofertable, Comparable<Ofertable> {
     
-	private int id_Atraccion;
+
 	private String nombre;
 	protected Atraccion[] packAtracciones;
 	private TipoAtraccion tipo;
@@ -48,9 +48,7 @@ public abstract class Promocion implements Ofertable, Comparable<Ofertable> {
 		return tipo;
 	}
 	
-	public int getId_Atraccion() {
-		return id_Atraccion;
-	}
+
 	/*
 	 * pregunta si hay cupo disponible
 	 */

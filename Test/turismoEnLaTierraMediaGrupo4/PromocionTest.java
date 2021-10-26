@@ -148,21 +148,16 @@ public class PromocionTest {
 	@Test
 	public void deberiaContarTodasLasPromociones() throws SQLException {
 		PromocionDAOImpl promo = new PromocionDAOImpl();
-		assertTrue(promo.countAll() == 4);
+		assertTrue(promo.countAll() >= 4);
 	}
 	
-	/*
-	 * No funciona porque el metodo atracciones De la promocion , esta en mantenimiento
-	 */
+	
 	@Test
 	public void deberiaBuscarTodasLasdPromociones() throws SQLException {
-//		PromocionDAOImpl promo = new PromocionDAOImpl();
-//		assertTrue(promo.findAll().size() == 4);
+		PromocionDAOImpl promo = new PromocionDAOImpl();
+		assertTrue(promo.findAll().size() >= 4);
+		System.out.println(promo.findAll());
 	}
 	
-//	@Test 
-//	public void deberiaInsertarUnaPromocion() throws SQLException{
-//		PromocionDAOImpl promo = new PromocionDAOImpl();
-//		promo.insert(paisajeAxB);
-//	}
+
 }

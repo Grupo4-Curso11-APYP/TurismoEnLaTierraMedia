@@ -15,40 +15,39 @@ import turismoEnLaTierraMediaGrupo4.*;
 public class PromocionDAOImpl implements PromocionDAO {
 
 	private AtraccionDAOImpl atraccionDao;
-	
-	
+
 	public PromocionDAOImpl() {
 		this.atraccionDao = new AtraccionDAOImpl();
 	}
 
 	@Override
 	public int insert(Promocion t) throws SQLException {
-		String sql = "INSERT INTO Promocion  (ID_Atraccion,Nombre,Tipo,Monto,Tiempo,AtraccionGratis,Descuento) VALUES (?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO Promocion  (nombre ,Tipo,monto,Tiempo,AtraccionGratis,Descuento) VALUES "
+				+ "(?,?,?,?,?,?)";
 		Connection conn = ConnectionProvider.getConnection();
-		
-		PreparedStatement statement = conn.prepareStatement(sql);
-		statement.setLong(2, t.getId_Atraccion());
-		statement.setString(3, t.getNombre());
-		statement.setObject(4, t.getTipo());
 
-		statement.setDouble(5, t.getCosto());
-		statement.setDouble(6, t.getTiempo());
-		statement.setObject(7, ((PromocionAxB) t).getAtraccionGratis());
-		statement.setDouble(8, ((PromocionPorcentual) t).getDescuento());
+		PreparedStatement statement = conn.prepareStatement(sql);
+		statement.setString(4, t.getNombre());
+		statement.setObject(5, t.getTipo());
+		statement.setDouble(6, t.getCosto());
+		statement.setDouble(7, t.getTiempo());
+		statement.setObject(8, ((PromocionAxB) t).getAtraccionGratis());
+		statement.setDouble(9, ((PromocionPorcentual) t).getDescuento());
+
 		int rows = statement.executeUpdate();
 
 		return rows;
 
 	}
-	
+
 	@Override
 	public int update(Promocion t) throws SQLException {
-		String sql = "UPDATE Promocion SET Nombre = ? WHERE ID_Atraccion  = ?";
+		String sql = "UPDATE Promocion SET Nombre = ? WHERE Tipo  = ?";
 		Connection conn = ConnectionProvider.getConnection();
 
 		PreparedStatement statement = conn.prepareStatement(sql);
-		statement.setString(3, t.getNombre());
-		statement.setInt(2, t.getId_Atraccion());
+		statement.setString(4, t.getNombre());
+		statement.setObject(5, t.getTipo());
 		int rows = statement.executeUpdate();
 
 		return rows;
@@ -67,10 +66,7 @@ public class PromocionDAOImpl implements PromocionDAO {
 		return rows;
 
 	}
-	
-	
-	
-	
+
 	public int countAll() throws SQLException {
 		String sql = "SELECT COUNT(1) AS TOTAL FROM Promocion";
 		Connection conn = ConnectionProvider.getConnection();
@@ -90,6 +86,13 @@ public class PromocionDAOImpl implements PromocionDAO {
 		String nombre = resultados.getString(4);
 		String promocionTipo = resultados.getString(10);
 		Promocion promo = null;
+		promo = creacionPromo(resultados, tipoAtraccion, packAtracciones, nombre, promocionTipo, promo);
+		return promo;
+
+	}
+
+	private Promocion creacionPromo(ResultSet resultados, TipoAtraccion tipoAtraccion, Atraccion[] packAtracciones,
+			String nombre, String promocionTipo, Promocion promo) throws SQLException {
 		if (promocionTipo.equals("AxB")) {
 			Atraccion gratis = atraccionDao.buscarPorId(resultados.getLong(8));
 			promo = new PromocionAxB(nombre, packAtracciones, tipoAtraccion, gratis);
@@ -101,51 +104,39 @@ public class PromocionDAOImpl implements PromocionDAO {
 			promo = new PromocionAbsoluta(nombre, packAtracciones, tipoAtraccion, monto);
 		}
 		return promo;
-
 	}
 
 	private Atraccion[] atraccionesDeLaPromocion(Long atraccion1, Long atraccion2) throws Exception {
 		Atraccion[] packs = new Atraccion[2];
 		try {
-			String sql = "select *"
-					+ "from Atraccion WHERE ID_Atraccion = ?";
+
 			Connection conn = ConnectionProvider.getConnection();
-			PreparedStatement statement = conn.prepareStatement(sql);
+			PreparedStatement statement = conn.prepareStatement(sqlAtraccion());
 			statement.setLong(1, atraccion1);
 			ResultSet result = statement.executeQuery();
 
-			
-		
 			while (result.next()) {
-				
-				packs[0] = atraccionDao.a_Atraccion(result);
-						//buscarPorId(result.getLong(1));
-				
+				packs[0] = atraccionDao.toAtraccion(result);
 			}
-			
-			String sql2 = "select *"
-					+ "from Atraccion WHERE ID_Atraccion = ?";
-			Connection conn2 = ConnectionProvider.getConnection();
-			PreparedStatement statement2 = conn.prepareStatement(sql2);
 			statement.setLong(1, atraccion2);
-			ResultSet result2 = statement.executeQuery();		
-		
+			ResultSet result2 = statement.executeQuery();
 			while (result2.next()) {
-				
-				packs[1] = atraccionDao.a_Atraccion(result2);
-						//buscarPorId(result.getLong(1));
-				
+				packs[1] = atraccionDao.toAtraccion(result2);
 			}
-
 			return packs;
 		} catch (Exception e) {
 			throw new Exception();
 		}
 	}
 
+	private String sqlAtraccion() {
+		String sql = "select *" + "from Atraccion WHERE ID_Atraccion = ?";
+		return sql;
+	}
+
 	@Override
 	public List<Promocion> findAll() throws SQLException {
-	
+
 		String sql = "SELECT * FROM Promocion";
 		Connection conn = ConnectionProvider.getConnection();
 		PreparedStatement statement = conn.prepareStatement(sql);
@@ -156,11 +147,10 @@ public class PromocionDAOImpl implements PromocionDAO {
 			try {
 				promo.add(toPromo(resultados));
 			} catch (Exception e) {
-				
+
 				throw new MissingDataException(e);
 			}
 		}
 		return promo;
-	}}
-
-
+	}
+}
