@@ -10,6 +10,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import dao.AtraccionDAOImpl;
+import dao.ItinerarioDAOImpl;
 import dao.PromocionDAOImpl;
 import dao.UsuarioDaoImpl;
 
@@ -155,7 +156,8 @@ public class Sistema {
 		AtraccionDAOImpl aDAO = new AtraccionDAOImpl();
 		UsuarioDaoImpl uDAO = new UsuarioDaoImpl();
 		PromocionDAOImpl pDAO = new PromocionDAOImpl();
-		System.out.println(pDAO.findAll());
+		ItinerarioDAOImpl iDAO = new ItinerarioDAOImpl();
+		System.out.println(iDAO.findByID_Usuario((long) 1));
 	}
 
 }

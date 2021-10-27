@@ -5,7 +5,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
 import jdbc.ConnectionProvider;
 import turismoEnLaTierraMediaGrupo4.*;
@@ -43,7 +46,7 @@ public class ItinerarioDAOImpl implements ItinerarioDAO {
 		}
 	}
 
-	//busca el usuario por nombre y devuelve el id
+	/*busca el usuario por nombre y devuelve el id
 	private Long findByID_Usuario(String nombre) {
 		try {
 			String sql = "SELECT Usuario.ID_Usuario"
@@ -61,7 +64,7 @@ public class ItinerarioDAOImpl implements ItinerarioDAO {
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
-	}
+	} */
 
 	//Este update no nos sirve a menos que tengamos una clase Itinerario
 	@Override
@@ -114,21 +117,33 @@ public class ItinerarioDAOImpl implements ItinerarioDAO {
 	}
 
 	@Override
-	public Usuario findByID_Usuario(Long ID_Usuario) {
+	public List<Itinerario> findByID_Usuario(Long ID_Usuario) throws SQLException {
 		try {
-			String sql = "SELECT Usuario.ID_Usuario, Usuario.Nombre, Usuario.Presupuesto, Usuario.TiempoDisponible,"
-					+ "Usuario.TipoFavorito"
-					+ " FROM Usuario"
-					+ " WHERE Usuario.ID_Usuario = ?";
+			String sql = "SELECT \r\n"
+					+ "	Usuario.Nombre AS \"Usuario\", Usuario.Presupuesto, Usuario.TiempoDisponible, Usuario.TipoFavorito, \r\n"
+					+ "	Promocion.Nombre AS \"Nombre promo\", a1.Nombre AS \"Atraccion 1 \", a2.Nombre AS \"Atraccion 2 \", Promocion.AtraccionGratis, Promocion.Tipo,\r\n"
+					+ "	Atraccion.Nombre AS \"Nombre atraccion\", Atraccion.Costo, Atraccion.Tiempo, Atraccion.TipoDeAtraccion\r\n"
+					+ "FROM Itinerario\r\n"
+					+ "LEFT JOIN Usuario\r\n"
+					+ "ON Itinerario.ID_Usuario = Usuario.ID_Usuario\r\n"
+					+ "LEFT JOIN Atraccion\r\n"
+					+ "ON Itinerario.ID_Atraccion = Atraccion.ID_Atraccion\r\n"
+					+ "LEFT JOIN Promocion\r\n"
+					+ "ON Itinerario.ID_Promocion = Promocion.ID_Promocion\r\n"
+					+ "LEFT JOIN Atraccion AS a1\r\n"
+					+ "ON Promocion.ID_Atraccion1 = a1.ID_Atraccion\r\n"
+					+ "LEFT JOIN Atraccion AS a2\r\n"
+					+ "ON Promocion.ID_Atraccion2 = a2.ID_Atraccion\r\n"
+					+ "WHERE Itinerario.ID_Usuario = ?";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setLong(1, ID_Usuario);
 			ResultSet resultados = statement.executeQuery();
 
-			Usuario itinerario = null;
+			List<Itinerario> itinerario = new LinkedList<Itinerario>();
 
-			if (resultados.next()) {
-				itinerario = toIty(resultados);
+			while (resultados.next()) {
+				itinerario.add(toItinerario(resultados));
 			}
 
 			return itinerario;
@@ -137,9 +152,23 @@ public class ItinerarioDAOImpl implements ItinerarioDAO {
 		}
 	}
 
-	private Usuario toIty(ResultSet resultados) throws IOException {
-		Long ID;
-		return null;
+	private Itinerario toItinerario(ResultSet resultados) throws SQLException {
+		String usuario = resultados.getString(1);
+		Double presupuesto = resultados.getDouble(2); //min
+		Double tiempoDisponible = resultados.getDouble(3); //min
+		TipoAtraccion tipoFav = TipoAtraccion.valueOf(resultados.getString(4));
+		String nombrePromo = resultados.getString(5);
+		int atraccion1 = resultados.getInt(6);
+		int atraccion2 = resultados.getInt(7);
+		int atraccionGratis = resultados.getInt(8);
+		TipoAtraccion tipo = TipoAtraccion.valueOf(resultados.getString(9));
+		String nombreAtraccion = resultados.getString(10);
+		Double costo = resultados.getDouble(11);
+		Double tiempo = resultados.getDouble(12);
+		TipoAtraccion tipoAtraccion = TipoAtraccion.valueOf(resultados.getString(13));
+		return new Itinerario(usuario, presupuesto, tiempoDisponible, tipoFav,
+				nombrePromo, atraccion1,atraccion2,atraccionGratis, tipo,
+				nombreAtraccion, costo, tiempo, tipoAtraccion);
 	}
 
 }
