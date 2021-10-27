@@ -47,6 +47,7 @@ public class ItinerarioDAOImpl implements ItinerarioDAO {
 
 	}
 
+	//Este update no nos sirve a menos que tengamos una clase Itinerario
 	@Override
 	public int update(Usuario itinerario) {
 		try {
@@ -66,6 +67,7 @@ public class ItinerarioDAOImpl implements ItinerarioDAO {
 		}
 	}
 
+	//Este delete no nos sirve a menos que tengamos una clase Itinerario
 	@Override
 	public int delete(Usuario itinerario) {
 		try {
