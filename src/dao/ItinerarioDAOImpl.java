@@ -83,8 +83,16 @@ public class ItinerarioDAOImpl implements ItinerarioDAO {
 	}
 
 	@Override
-	public int countAll() {
-		return 0;
+	public int countAll() throws SQLException {
+		String sql = "SELECT COUNT(2) AS TOTAL FROM Itinerario";
+		Connection conn = ConnectionProvider.getConnection();
+		PreparedStatement statement = conn.prepareStatement(sql);
+		ResultSet resultados = statement.executeQuery();
+
+		resultados.next();
+		int total = resultados.getInt("TOTAL");
+
+		return total;
 	}
 
 	@Override
