@@ -16,17 +16,23 @@ public class PromocionDAOImpl implements PromocionDAO {
 
 	private AtraccionDAOImpl atraccionDao;
 
+	private int ID_Promocion, ID_Atraccion1, ID_Atraccion2;
+
 	public PromocionDAOImpl() {
 		this.atraccionDao = new AtraccionDAOImpl();
 	}
 
 	@Override
 	public int insert(Promocion t) throws SQLException {
-		String sql = "INSERT INTO Promocion  (nombre ,Tipo,monto,Tiempo,AtraccionGratis,Descuento) VALUES "
+		String sql = "INSERT INTO Promocion  (ID_Promocion, ID_Atraccion1. ID_Atraccion2, nombre ,Tipo,monto,Tiempo,AtraccionGratis,Descuento) VALUES "
 				+ "(?,?,?,?,?,?)";
 		Connection conn = ConnectionProvider.getConnection();
 
 		PreparedStatement statement = conn.prepareStatement(sql);
+		statement.setInt(1, consultarID_Promo());// hay que ver como los mejoramos a estos metodos
+		statement.setObject(2, consultarID_Atraccion());// 
+		statement.setDouble(3, consultarID_Atraccion());// 
+
 		statement.setString(4, t.getNombre());
 		statement.setObject(5, t.getTipo());
 		statement.setDouble(6, t.getCosto());
@@ -38,6 +44,42 @@ public class PromocionDAOImpl implements PromocionDAO {
 
 		return rows;
 
+	}
+
+	private int consultarID_Promo(int promo) throws SQLException {
+		String sql = "SELECT * FROM Promocion WHERE ID_Promocion=?";// el problema con este metodo y el siguiente es que
+																	// dependen de valores estaticos como parametros,
+																	// tenemos que averiguar como obtenerlos sin tener
+																	// que pasarselos, esto nos va a ayudar a eviatr a
+																	// que se rompa el insert
+
+		Connection conn = ConnectionProvider.getConnection();
+		PreparedStatement statement = conn.prepareStatement(sql);
+
+		statement.setInt(1, promo);
+
+		int rows = statement.executeUpdate();
+
+		return rows;
+	}
+
+	private int consultarID_Atraccion(int atrac1, int atrac2) throws SQLException {
+		String sql = "SELECT * FROM Promocion WHERE ID_Atraccion1=? AND ID_Atraccion2=? VALUES (?,?)";// el problema con  este metodo y
+																										// el siguiente es que
+																										// dependen de valores estaticos como parametros,
+																										// tenemos que averiguar como obtenerlos sin tener
+																										// que pasarselos, esto nos va a ayudar a eviatr a
+																										// que se rompa el insert
+
+		Connection conn = ConnectionProvider.getConnection();
+		PreparedStatement statement = conn.prepareStatement(sql);
+
+		statement.setInt(1, atrac1);
+		statement.setInt(2, atrac2);
+
+		int rows = statement.executeUpdate();
+
+		return rows;
 	}
 
 	@Override
@@ -157,7 +199,7 @@ public class PromocionDAOImpl implements PromocionDAO {
 	@Override
 	public int insertarAtrac(String nombre, int costo, int tiempo, int cupoDisponible, String tipoAtraccion)
 			throws SQLException {
-		// TODO Auto-generated method stub
+		// Este metodo no tiene uso aquí
 		return 0;
 	}
 }
