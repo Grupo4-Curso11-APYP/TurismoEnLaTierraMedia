@@ -83,11 +83,6 @@ public class ItinerarioDAOImpl implements ItinerarioDAO {
 	}
 
 	@Override
-	public List<Usuario> findAll() {
-		return null;		
-	}
-
-	@Override
 	public int countAll() {
 		return 0;
 	}
@@ -119,19 +114,6 @@ public class ItinerarioDAOImpl implements ItinerarioDAO {
 	private Usuario toIty(ResultSet resultados) throws IOException {
 		Long ID;
 		return null;
-	}
-
-	@Override
-	public Usuario findByID_Usuario() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int insertarAtrac(String nombre, int costo, int tiempo, int cupoDisponible, String tipoAtraccion)
-			throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 }

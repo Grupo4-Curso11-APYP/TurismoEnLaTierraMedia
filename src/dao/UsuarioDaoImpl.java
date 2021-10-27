@@ -120,12 +120,4 @@ public class UsuarioDaoImpl implements UsuarioDAO {
 		return new Usuario(nombre, presupuesto, tiempoDisponible, tipoFavorito);
 	}
 
-	@Override
-	public int insertarAtrac(String nombre, int costo, int tiempo, int cupoDisponible, String tipoAtraccion)
-			throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-
 }

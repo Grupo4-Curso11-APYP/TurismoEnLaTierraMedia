@@ -186,10 +186,4 @@ public class PromocionDAOImpl implements PromocionDAO {
 		return promo;
 	}
 
-	@Override
-	public int insertarAtrac(String nombre, int costo, int tiempo, int cupoDisponible, String tipoAtraccion)
-			throws SQLException {
-		// Este metodo no tiene uso aqu�
-		return 0;
-	}
 }
