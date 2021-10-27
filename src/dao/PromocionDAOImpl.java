@@ -24,14 +24,14 @@ public class PromocionDAOImpl implements PromocionDAO {
 
 	@Override
 	public int insert(Promocion t) throws SQLException {
-		String sql = "INSERT INTO Promocion  (ID_Promocion, ID_Atraccion1. ID_Atraccion2, nombre ,Tipo,monto,Tiempo,AtraccionGratis,Descuento) VALUES "
-				+ "(?,?,?,?,?,?)";
+		String sql = "INSERT INTO Promocion  ( ID_Atraccion1, ID_Atraccion2, nombre ,Tipo,monto,Tiempo,AtraccionGratis,Descuento) VALUES "
+				+ "(?,?,?,?,?,?,?,?)";
 		Connection conn = ConnectionProvider.getConnection();
 
 		PreparedStatement statement = conn.prepareStatement(sql);
-		statement.setInt(1, consultarID_Promo());// hay que ver como los mejoramos a estos metodos
-		statement.setObject(2, consultarID_Atraccion());// 
-		statement.setDouble(3, consultarID_Atraccion());// 
+//		statement.setInt(1, consultarID_Promo(1));// hay que ver como los mejoramos a estos metodos
+		statement.setObject(2, atraccionDao.buscarPorId((long) 2));// 
+		statement.setObject(3,  atraccionDao.buscarPorId((long) 3));// 
 
 		statement.setString(4, t.getNombre());
 		statement.setObject(5, t.getTipo());
@@ -46,7 +46,8 @@ public class PromocionDAOImpl implements PromocionDAO {
 
 	}
 
-	private int consultarID_Promo(int promo) throws SQLException {
+	public Promocion consultarID_Promo(int promo) throws SQLException {
+		try {
 		String sql = "SELECT * FROM Promocion WHERE ID_Promocion=?";// el problema con este metodo y el siguiente es que
 																	// dependen de valores estaticos como parametros,
 																	// tenemos que averiguar como obtenerlos sin tener
@@ -55,32 +56,21 @@ public class PromocionDAOImpl implements PromocionDAO {
 
 		Connection conn = ConnectionProvider.getConnection();
 		PreparedStatement statement = conn.prepareStatement(sql);
-
 		statement.setInt(1, promo);
-
-		int rows = statement.executeUpdate();
-
-		return rows;
+        ResultSet rows = statement.executeQuery();
+       Promocion pr = null;
+	  
+      while(rows.next()) {
+    	  pr = toPromo(rows);
+      }
+		return pr;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
 	}
+	
 
-	private int consultarID_Atraccion(int atrac1, int atrac2) throws SQLException {
-		String sql = "SELECT * FROM Promocion WHERE ID_Atraccion1=? AND ID_Atraccion2=? VALUES (?,?)";// el problema con  este metodo y
-																										// el siguiente es que
-																										// dependen de valores estaticos como parametros,
-																										// tenemos que averiguar como obtenerlos sin tener
-																										// que pasarselos, esto nos va a ayudar a eviatr a
-																										// que se rompa el insert
-
-		Connection conn = ConnectionProvider.getConnection();
-		PreparedStatement statement = conn.prepareStatement(sql);
-
-		statement.setInt(1, atrac1);
-		statement.setInt(2, atrac2);
-
-		int rows = statement.executeUpdate();
-
-		return rows;
-	}
+	
 
 	@Override
 	public int update(Promocion t) throws SQLException {
@@ -199,7 +189,7 @@ public class PromocionDAOImpl implements PromocionDAO {
 	@Override
 	public int insertarAtrac(String nombre, int costo, int tiempo, int cupoDisponible, String tipoAtraccion)
 			throws SQLException {
-		// Este metodo no tiene uso aquí
+		// Este metodo no tiene uso aquï¿½
 		return 0;
 	}
 }

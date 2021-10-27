@@ -41,9 +41,9 @@ public class AtraccionDAOImpl implements AtraccionDAO{
 	public Atraccion toAtraccion(ResultSet resultados) throws Exception {
 		
 		String nombre = resultados.getString(2);
-		int cupoDisponible = resultados.getInt(3);
-		double costo = resultados.getDouble(4);
-		double tiempo = resultados.getInt(5);
+		double costo = resultados.getDouble(3);
+		double tiempo = resultados.getInt(4);
+		int cupoDisponible = resultados.getInt(5);
 		TipoAtraccion tipo =  TipoAtraccion.valueOf(resultados.getString(6).toUpperCase());
 		
 		return new Atraccion(nombre, costo, tiempo, cupoDisponible, tipo);
@@ -93,7 +93,7 @@ public class AtraccionDAOImpl implements AtraccionDAO{
 //		statement.setDouble(2, atraccion.getCosto());
 //		statement.setDouble(3, atraccion.getTiempo());
 //		statement.setInt(4, atraccion.getCupoDisponible());
-//		statement.setString(5, atraccion.getTipo());//esto no me parece correcto, tengo que revizarlo, estuve dando vueltas, y me parece que no es así
+//		statement.setString(5, atraccion.getTipo());//esto no me parece correcto, tengo que revizarlo, estuve dando vueltas, y me parece que no es asï¿½
 		statement.setString(1,nombre);
 		statement.setDouble(2,costo);
 		statement.setDouble(3,tiempo);

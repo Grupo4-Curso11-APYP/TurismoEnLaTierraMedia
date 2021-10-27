@@ -27,13 +27,13 @@ public class PromocionTest {
 
 		a1 = new Atraccion("Bosque Negro", 3, 4, 12, TipoAtraccion.AVENTURA);
 		a2 = new Atraccion("Mordor", 25, 3, 4, TipoAtraccion.AVENTURA);
-		a3 = new Atraccion("Lothlórien", 35, 1, 30, TipoAtraccion.DEGUSTACION);
+		a3 = new Atraccion("Lothlï¿½rien", 35, 1, 30, TipoAtraccion.DEGUSTACION);
 		a4 = new Atraccion("La Comarca", 3, 6.5, 150, TipoAtraccion.DEGUSTACION);
 		a5 = new Atraccion("Minas Tirith", 5, 2.5, 25, TipoAtraccion.PAISAJE);
 		a6 = new Atraccion("Abismo de Helm", 5, 2, 15, TipoAtraccion.PAISAJE);
 		aGratis = new Atraccion("Erebor", 12, 3, 32, TipoAtraccion.PAISAJE);
 
-		// Pack de atracciones que contiene cada promoción
+		// Pack de atracciones que contiene cada promociï¿½n
 
 		Atraccion[] porcentual = new Atraccion[2];
 		porcentual[0] = a1;
@@ -51,7 +51,7 @@ public class PromocionTest {
 
 		aventuraPorcentual = new PromocionPorcentual("Pack aventura", porcentual, TipoAtraccion.AVENTURA, 20);
 
-		degustacionAbsoluta = new PromocionAbsoluta("Pack de degustación", absoluta, TipoAtraccion.DEGUSTACION, 36);
+		degustacionAbsoluta = new PromocionAbsoluta("Pack de degustaciï¿½n", absoluta, TipoAtraccion.DEGUSTACION, 36);
 
 		paisajeAxB = new PromocionAxB("Pack paisajes", aXb, TipoAtraccion.PAISAJE, aGratis);
 	}
@@ -121,7 +121,7 @@ public class PromocionTest {
 		assertEquals(149, a4.getCupoDisponible());
 	}
 
-	// Prueba particular para promos AxB debido a que sobreescribe métodos.
+	// Prueba particular para promos AxB debido a que sobreescribe mï¿½todos.
 
 	@Test
 	public void laPromocionAxBSinCupoDisponibleSabeQueNoHayCupo() {
@@ -148,16 +148,30 @@ public class PromocionTest {
 	@Test
 	public void deberiaContarTodasLasPromociones() throws SQLException {
 		PromocionDAOImpl promo = new PromocionDAOImpl();
-		assertTrue(promo.countAll() >= 4);
+		assertTrue(promo.countAll() > 0);
 	}
 	
 	
 	@Test
 	public void deberiaBuscarTodasLasdPromociones() throws SQLException {
 		PromocionDAOImpl promo = new PromocionDAOImpl();
-		assertTrue(promo.findAll().size() >= 4);
+		assertTrue(promo.findAll().size() > 0);
 		System.out.println(promo.findAll());
 	}
 	
+	@Test
+	public void deberiaInsertarUnaPromocionPorcentual()throws SQLException{
+		PromocionDAOImpl promo = new PromocionDAOImpl();
+//		promo.insert(degustacionAbsoluta);
+//		promo.insert(aventuraPorcentual);
+		
+	}
 
+	@Test
+	public void deberiaBuscarUnaPromocionPorID()throws SQLException{
+//		PromocionDAOImpl promo = new PromocionDAOImpl();
+//		promo.consultarID_Promo(2);
+//		assertEquals(aventuraPorcentual,promo.consultarID_Promo(2));
+	}
+	
 }
