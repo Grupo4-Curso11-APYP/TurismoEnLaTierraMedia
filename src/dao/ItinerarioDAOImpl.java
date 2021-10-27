@@ -1,14 +1,11 @@
 package dao;
 
 import java.io.IOException;
-import java.sql.Array;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 import jdbc.ConnectionProvider;
 import turismoEnLaTierraMediaGrupo4.*;
@@ -30,7 +27,7 @@ public class ItinerarioDAOImpl implements ItinerarioDAO {
 
 			for (int i = 0; i < usuario.getOfertables().size(); i++) {
 				if (usuario.getOfertables() instanceof Promocion) {
-					statement.setString(1, usuario.getNombre());
+					statement.setLong(1, findByID_Usuario(usuario.getNombre())); //metodo en linea 46
 					statement.setObject(2, usuario.getOfertables());
 				} else {
 					statement.setString(1, usuario.getNombre());
@@ -44,7 +41,26 @@ public class ItinerarioDAOImpl implements ItinerarioDAO {
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
+	}
 
+	//busca el usuario por nombre y devuelve el id
+	private Long findByID_Usuario(String nombre) {
+		try {
+			String sql = "SELECT Usuario.ID_Usuario"
+					+ " FROM Usuario"
+					+ " WHERE Usuario.Nombre = ?";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setString(1, nombre);
+			ResultSet resultados = statement.executeQuery();
+
+			Long ID_Usuario = null;
+
+			return ID_Usuario;
+					
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
 	}
 
 	//Este update no nos sirve a menos que tengamos una clase Itinerario
