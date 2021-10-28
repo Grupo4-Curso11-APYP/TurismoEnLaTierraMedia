@@ -23,7 +23,7 @@ public class PromocionDAOImpl implements PromocionDAO {
 	}
 
 	@Override
-	public int insert(Promocion t) throws SQLException {
+	public int insert(Promocion promocion) throws SQLException {
 		String sql = "INSERT INTO Promocion  ( ID_Atraccion1, ID_Atraccion2, nombre ,Tipo,monto,Tiempo,AtraccionGratis,Descuento) VALUES "
 				+ "(?,?,?,?,?,?,?,?)";
 		Connection conn = ConnectionProvider.getConnection();
@@ -33,12 +33,12 @@ public class PromocionDAOImpl implements PromocionDAO {
 		statement.setObject(2, atraccionDao.buscarPorId((long) 2));// 
 		statement.setObject(3,  atraccionDao.buscarPorId((long) 3));// 
 
-		statement.setString(4, t.getNombre());
-		statement.setObject(5, t.getTipo());
-		statement.setDouble(6, t.getCosto());
-		statement.setDouble(7, t.getTiempo());
-		statement.setObject(8, ((PromocionAxB) t).getAtraccionGratis());
-		statement.setDouble(9, ((PromocionPorcentual) t).getDescuento());
+		statement.setString(4, promocion.getNombre());
+		statement.setObject(5, promocion.getTipo());
+		statement.setDouble(6, promocion.getCosto());
+		statement.setDouble(7, promocion.getTiempo());
+		statement.setObject(8, ((PromocionAxB) promocion).getAtraccionGratis());
+		statement.setDouble(9, ((PromocionPorcentual) promocion).getDescuento());
 
 		int rows = statement.executeUpdate();
 
@@ -73,13 +73,13 @@ public class PromocionDAOImpl implements PromocionDAO {
 	
 
 	@Override
-	public int update(Promocion t) throws SQLException {
+	public int update(Promocion promocion) throws SQLException {
 		String sql = "UPDATE Promocion SET Nombre = ? WHERE Tipo  = ?";
 		Connection conn = ConnectionProvider.getConnection();
 
 		PreparedStatement statement = conn.prepareStatement(sql);
-		statement.setString(4, t.getNombre());
-		statement.setObject(5, t.getTipo());
+		statement.setString(4, promocion.getNombre());
+		statement.setObject(5, promocion.getTipo());
 		int rows = statement.executeUpdate();
 
 		return rows;
@@ -87,12 +87,12 @@ public class PromocionDAOImpl implements PromocionDAO {
 	}
 
 	@Override
-	public int delete(Promocion t) throws SQLException {
+	public int delete(Promocion promocion) throws SQLException {
 		String sql = "DELETE FROM Promocion WHERE Nombre LIKE ?";
 		Connection conn = ConnectionProvider.getConnection();
 
 		PreparedStatement statement = conn.prepareStatement(sql);
-		statement.setString(3, t.getNombre());
+		statement.setString(3, promocion.getNombre());
 		int rows = statement.executeUpdate();
 
 		return rows;

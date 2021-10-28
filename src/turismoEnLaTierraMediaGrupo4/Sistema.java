@@ -152,12 +152,20 @@ public class Sistema {
 		sistema.agregarPromociones();
 		sistema.agregarUsuariosDesdeArchivo();
 		sistema.sugerir();
-		*/
 		AtraccionDAOImpl aDAO = new AtraccionDAOImpl();
 		UsuarioDaoImpl uDAO = new UsuarioDaoImpl();
 		PromocionDAOImpl pDAO = new PromocionDAOImpl();
-		ItinerarioDAOImpl iDAO = new ItinerarioDAOImpl();
-		System.out.println(iDAO.findByID_Usuario((long) 1));
-	}
+		System.out.println(uDAO.findAll());
 
+		ItinerarioDAOImpl i = new ItinerarioDAOImpl();
+		List<Ofertable> is = i.findByNombre("Gandalf");
+		for (Ofertable a : is) {
+			System.out.println(a.getNombre());
+		}
+		
+		i.insertar("Gandalf", "Mordor");
+		i.insertar("Gandalf", "Pack Adrenalina");
+	*/
+		
+	}
 }

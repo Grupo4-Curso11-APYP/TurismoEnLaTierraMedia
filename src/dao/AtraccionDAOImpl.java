@@ -106,13 +106,13 @@ public class AtraccionDAOImpl implements AtraccionDAO{
 	}
 
 	@Override
-	public int update(Atraccion t) throws SQLException {
+	public int update(Atraccion atraccion) throws SQLException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int delete(Atraccion t) throws SQLException {
+	public int delete(Atraccion atraccion) throws SQLException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -141,13 +141,4 @@ public class AtraccionDAOImpl implements AtraccionDAO{
 			throw new MissingDataException(e);
 		}
 	}
-
-	@Override
-	public int insert(Atraccion t) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
-	
-	
 }
