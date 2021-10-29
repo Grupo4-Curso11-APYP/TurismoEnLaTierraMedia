@@ -27,15 +27,15 @@ public class PromocionDAOImpl implements PromocionDAO {
 
 		PreparedStatement statement = conn.prepareStatement(sql);
 
+		statement.setObject(1, atraccionDao.buscarPorId((long) 1));//
 		statement.setObject(2, atraccionDao.buscarPorId((long) 2));//
-		statement.setObject(3, atraccionDao.buscarPorId((long) 3));//
 
-		statement.setString(4, promocion.getNombre());
-		statement.setObject(5, promocion.getTipo());
-		statement.setDouble(6, promocion.getCosto());
-		statement.setDouble(7, promocion.getTiempo());
-		statement.setObject(8, ((PromocionAxB) promocion).getAtraccionGratis());
-		statement.setDouble(9, ((PromocionPorcentual) promocion).getDescuento());
+		statement.setString(3, promocion.getNombre());
+		statement.setObject(4, promocion.getTipo());
+		statement.setDouble(5, promocion.getCosto());
+		statement.setDouble(6, promocion.getTiempo());
+		statement.setObject(7, ((PromocionAxB) promocion).getAtraccionGratis());
+		statement.setDouble(8, ((PromocionPorcentual) promocion).getDescuento());
 
 		int rows = statement.executeUpdate();
 
@@ -68,8 +68,8 @@ public class PromocionDAOImpl implements PromocionDAO {
 		Connection conn = ConnectionProvider.getConnection();
 
 		PreparedStatement statement = conn.prepareStatement(sql);
-		statement.setString(4, promocion.getNombre());
-		statement.setObject(5, promocion.getTipo());
+		statement.setString(1, promocion.getNombre());
+		statement.setObject(2, promocion.getTipo());
 		int rows = statement.executeUpdate();
 
 		return rows;
