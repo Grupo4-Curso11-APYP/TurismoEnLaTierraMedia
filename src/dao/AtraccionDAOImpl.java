@@ -113,7 +113,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 	}
 
 	@Override
-	public Atraccion buscarPorId(Long IdAtraccion) {
+	public Atraccion buscarPorId(Long IdAtraccion) { 
 		try {
 			String sql = "SELECT Atraccion.ID_Atraccion, Atraccion.Nombre,Atraccion.Costo ,"
 					+ " Atraccion.Tiempo, Atraccion.Cupo_Disponible," + "  Atraccion.TipoDeAtraccion" + " FROM Atraccion"

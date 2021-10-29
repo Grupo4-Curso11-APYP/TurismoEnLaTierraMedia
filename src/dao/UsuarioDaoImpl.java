@@ -69,14 +69,13 @@ public class UsuarioDaoImpl implements UsuarioDAO {
 
 	@Override
 	public int update(Usuario usuario) throws SQLException {
-		String sql = "UPDATE USUARIO SET PRESUPUESTO = ?, TIEMPODISPONIBLE = ?, " + "OFERTABLE = ? WHERE NOMBRE = ?";
+		String sql = "UPDATE USUARIO SET PRESUPUESTO = ?, TIEMPODISPONIBLE = ?  WHERE NOMBRE = ?";
 		Connection conn = ConnectionProvider.getConnection();
 
 		PreparedStatement statement = conn.prepareStatement(sql);
 		statement.setDouble(1, usuario.getPresupuesto());
 		statement.setDouble(2, usuario.getTiempoDisponible());
-		statement.setObject(3, usuario.getOfertables());
-		statement.setString(4, usuario.getNombre());
+		statement.setString(3, usuario.getNombre()); 
 		int rows = statement.executeUpdate();
 
 		return rows;
@@ -123,7 +122,5 @@ public class UsuarioDaoImpl implements UsuarioDAO {
 		TipoAtraccion tipoFavorito = TipoAtraccion.valueOf(resultados.getString(5));
 		return new Usuario(nombre, presupuesto, tiempoDisponible, tipoFavorito);
 	}
-
-
 
 }
