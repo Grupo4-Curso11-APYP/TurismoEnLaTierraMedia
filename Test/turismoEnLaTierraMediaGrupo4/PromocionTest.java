@@ -49,7 +49,7 @@ public class PromocionTest {
 
 		// Promociones
 
-		aventuraPorcentual = new PromocionPorcentual("Pack aventura", porcentual, TipoAtraccion.AVENTURA, 20);
+		aventuraPorcentual = new PromocionPorcentual("Pack Aventura", porcentual, TipoAtraccion.AVENTURA, 20);
 
 		degustacionAbsoluta = new PromocionAbsoluta("Pack de degustaci�n", absoluta, TipoAtraccion.DEGUSTACION, 36);
 
@@ -169,9 +169,9 @@ public class PromocionTest {
 
 	@Test
 	public void deberiaBuscarUnaPromocionPorID()throws SQLException{
-//		PromocionDAOImpl promo = new PromocionDAOImpl();
-//		promo.consultarID_Promo(2);
-//		assertEquals(aventuraPorcentual,promo.consultarID_Promo(2));
+		PromocionDAOImpl promo = new PromocionDAOImpl();
+//		promo.consultarID_Promo(1);
+		assertEquals(aventuraPorcentual,promo.consultarID_Promo(1));
 	}
 	
 }

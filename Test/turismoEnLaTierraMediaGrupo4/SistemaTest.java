@@ -2,10 +2,14 @@ package turismoEnLaTierraMediaGrupo4;
 
 import static org.junit.Assert.*;
 
+import java.sql.SQLException;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.TreeSet;
 
 import org.junit.Before;
 import org.junit.Test;
+import dao.*;
 
 public class SistemaTest {
 	Sistema sistema;
@@ -19,11 +23,11 @@ public class SistemaTest {
 	PromocionPorcentual p1;
 	PromocionAbsoluta p2;
 	PromocionAxB p3;
-
+    ItinerarioDAOImpl it;
 	@Before
 	public void preparacion() throws Exception {
 		sistema = new Sistema();
-
+         it = new ItinerarioDAOImpl();
 		// usuario
 		sistema.usuarios.add(new Usuario("Moria", 8, 10, TipoAtraccion.AVENTURA));
 		// atracion
@@ -73,11 +77,9 @@ public class SistemaTest {
 		sistema.ofertables.add(p2);
 		sistema.ofertables.add(p3);
 
-		assertEquals(((TreeSet<Ofertable>) 
-				sistema.ordenarOfertasSegunPreferencia(TipoAtraccion.AVENTURA)).first(), p1);
+		assertEquals(((TreeSet<Ofertable>) sistema.ordenarOfertasSegunPreferencia(TipoAtraccion.AVENTURA)).first(), p1);
 
-		assertEquals(((TreeSet<Ofertable>) 
-				sistema.ordenarOfertasSegunPreferencia(TipoAtraccion.AVENTURA)).last(), a1);
+		assertEquals(((TreeSet<Ofertable>) sistema.ordenarOfertasSegunPreferencia(TipoAtraccion.AVENTURA)).last(), a1);
 
 		assertEquals(sistema.ofertables.size(), 5);
 	}
@@ -105,4 +107,45 @@ public class SistemaTest {
 
 		assertEquals(sistema.ofertables.size(), 2);
 	}
+
+	@Test
+	public void deberiaContarTodosLosDatosDeItinerario() throws SQLException {
+		
+		assertTrue(it.countAll() > 0);
+	}
+
+	@Test
+	public void deberiaBuscarTodosLosDatosDeItinerarioPorNombreDeUsuario() throws SQLException {
+
+		Set<Ofertable> iti;
+
+		assertEquals(iti = it.findByNombre("Gandalf"), iti);
+//     System.out.println(it.findByNombre("Gandalf"));
+//     System.out.println(iti);
+	}
+
+	@Test
+	public void deberiaInsertarUnItinerario() throws SQLException {
+		
+
+		assertEquals(1,it.insertar("Gandalf", "Pack Adrenalina"));
+		
+	}
+	
+	@Test
+	public void deberiaEliminarUnItinerario() throws SQLException {
+		
+       assertEquals(1, it.delete(10));
+	}
+	
+	
+	@Test
+	public void deberiaActualizarItinerario() throws SQLException{
+		assertEquals(1,it.update(2, 1, 2, 12));
+	}
+	
+	
+	
+	
+	
 }

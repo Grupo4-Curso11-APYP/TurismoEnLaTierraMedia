@@ -25,6 +25,16 @@ public class Usuario {
 
 
 	
+	public Usuario(String string,double i, double j, TipoAtraccion tipo, Set<Ofertable> object) throws Exception {
+		this.nombre =string;
+		validandoPresupuesto(i);
+		validandoTiempoDisponible(j);
+		this.tipoFavorito = tipo;
+		this.ofertables = new LinkedHashSet<>();
+	}
+
+
+
 	/*
 	 * validación para evitar presupuesto negativo, si lo es, lanza una excepción
 	 */

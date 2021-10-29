@@ -1,7 +1,6 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,8 +15,6 @@ public class PromocionDAOImpl implements PromocionDAO {
 
 	private AtraccionDAOImpl atraccionDao;
 
-	private int ID_Promocion, ID_Atraccion1, ID_Atraccion2;
-
 	public PromocionDAOImpl() {
 		this.atraccionDao = new AtraccionDAOImpl();
 	}
@@ -29,9 +26,9 @@ public class PromocionDAOImpl implements PromocionDAO {
 		Connection conn = ConnectionProvider.getConnection();
 
 		PreparedStatement statement = conn.prepareStatement(sql);
-//		statement.setInt(1, consultarID_Promo(1));// hay que ver como los mejoramos a estos metodos
-		statement.setObject(2, atraccionDao.buscarPorId((long) 2));// 
-		statement.setObject(3,  atraccionDao.buscarPorId((long) 3));// 
+
+		statement.setObject(2, atraccionDao.buscarPorId((long) 2));//
+		statement.setObject(3, atraccionDao.buscarPorId((long) 3));//
 
 		statement.setString(4, promocion.getNombre());
 		statement.setObject(5, promocion.getTipo());
@@ -48,29 +45,22 @@ public class PromocionDAOImpl implements PromocionDAO {
 
 	public Promocion consultarID_Promo(int promo) throws SQLException {
 		try {
-		String sql = "SELECT * FROM Promocion WHERE ID_Promocion=?";// el problema con este metodo y el siguiente es que
-																	// dependen de valores estaticos como parametros,
-																	// tenemos que averiguar como obtenerlos sin tener
-																	// que pasarselos, esto nos va a ayudar a eviatr a
-																	// que se rompa el insert
+			String sql = "SELECT * FROM Promocion WHERE ID_Promocion=?";
 
-		Connection conn = ConnectionProvider.getConnection();
-		PreparedStatement statement = conn.prepareStatement(sql);
-		statement.setInt(1, promo);
-        ResultSet rows = statement.executeQuery();
-       Promocion pr = null;
-	  
-      while(rows.next()) {
-    	  pr = toPromo(rows);
-      }
-		return pr;
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setInt(1, promo);
+			ResultSet rows = statement.executeQuery();
+			Promocion pr = null;
+
+			while (rows.next()) {
+				pr = toPromo(rows);
+			}
+			return pr;
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
 	}
-	
-
-	
 
 	@Override
 	public int update(Promocion promocion) throws SQLException {

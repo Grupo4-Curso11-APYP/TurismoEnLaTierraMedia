@@ -17,10 +17,7 @@ import dao.UsuarioDaoImpl;
 public class Sistema {
 
 	protected Set<Usuario> usuarios;
-	protected Set<Ofertable> ofertables; // contiene atracciones y promos.
-											// Mejorar con TreeSet con param del
-											//comparator, que lo use en la
-											// construccion del TreeSet
+	protected Set<Ofertable> ofertables;
 
 	/*
 	 * Se inicializan las listas en ArrayList<>
@@ -45,8 +42,7 @@ public class Sistema {
 			for (Ofertable ofertable : ofertables) {
 
 				if (ofertable.hayCupo() && usuario.getPresupuesto() >= ofertable.getCosto()
-						&& usuario.getTiempoDisponible() >= ofertable.getTiempo()
-						) {
+						&& usuario.getTiempoDisponible() >= ofertable.getTiempo()) {
 					System.out.println("Sugerencia diaria de " + usuario.getNombre() + ":");
 					System.out.println(ofertable);
 					System.out.println("Pulse S  para aceptar la sugerencia o");
@@ -82,7 +78,7 @@ public class Sistema {
 	 * Carga los usuarios en sistema
 	 */
 	public void agregarUsuariosDesdeArchivo() throws Exception {
-		this.usuarios.addAll(  ManejadorArchivos.cargarUsuarios());
+		this.usuarios.addAll(ManejadorArchivos.cargarUsuarios());
 	}
 
 	/*
@@ -146,26 +142,25 @@ public class Sistema {
 	 * metodo main ejecuta el programa.
 	 */
 	public static void main(String[] args) throws Exception {
-		Sistema sistema = new Sistema();
-		/*
-		sistema.agregarAtraccion();
-		sistema.agregarPromociones();
-		sistema.agregarUsuariosDesdeArchivo();
-		sistema.sugerir();
-		AtraccionDAOImpl aDAO = new AtraccionDAOImpl();
-		UsuarioDaoImpl uDAO = new UsuarioDaoImpl();
-		PromocionDAOImpl pDAO = new PromocionDAOImpl();
-		System.out.println(uDAO.findAll());
+//		Sistema sistema = new Sistema();
+//
+//		sistema.agregarAtraccion();
+//		sistema.agregarPromociones();
+//		sistema.agregarUsuariosDesdeArchivo();
+//		sistema.sugerir();
+//		AtraccionDAOImpl aDAO = new AtraccionDAOImpl();
+//		UsuarioDaoImpl uDAO = new UsuarioDaoImpl();
+//		PromocionDAOImpl pDAO = new PromocionDAOImpl();
+//		System.out.println(uDAO.findAll());
 
-		ItinerarioDAOImpl i = new ItinerarioDAOImpl();
-		List<Ofertable> is = i.findByNombre("Gandalf");
-		for (Ofertable a : is) {
-			System.out.println(a.getNombre());
-		}
-		
-		i.insertar("Gandalf", "Mordor");
-		i.insertar("Gandalf", "Pack Adrenalina");
-	*/
-		
+//		ItinerarioDAOImpl i = new ItinerarioDAOImpl();
+//		Set<Ofertable> is = i.findByNombre("Gandalf");
+//		for (Ofertable a : is) {
+//			System.out.println(a.getNombre());
+//		}
+
+  
+// i.insertar("Gandalf", "Mordor"); i.insertar("Gandalf", "Pack Adrenalina");
+
 	}
 }

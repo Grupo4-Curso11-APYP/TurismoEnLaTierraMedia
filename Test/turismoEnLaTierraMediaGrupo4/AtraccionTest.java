@@ -23,6 +23,7 @@ public class AtraccionTest {
 	@Before
 	public void setUp() throws Exception {
 		a1 = new Atraccion("Minas Tirith", 5, 2.0, 25, TipoAtraccion.PAISAJE);
+		a2 = new Atraccion("Calaboss", 120, 15.0, 8, TipoAtraccion.AVENTURA);
 	}
 
 	@Test
@@ -71,17 +72,17 @@ public class AtraccionTest {
 	public void deberiaBuscarTodasLasAtracciones() throws SQLException {
 		AtraccionDAOImpl atraccion = new AtraccionDAOImpl();
 		assertNotNull(atraccion.findAll());
-		assertTrue(atraccion.findAll().size() > 0);//esto esta sujeto a rever cuando se hagan nuevos inserts
-System.out.println(atraccion.findAll());
+		assertTrue(atraccion.findAll().size() > 0);
+
 	}
 
 	@Test
 	public void deberiaBuscarAtraccionesPorID() throws Exception {
-//		AtraccionDAOImpl atraccion = new AtraccionDAOImpl();
-//	Atraccion     a2 = new Atraccion("Moria" , 10.0, 2.0,6 ,TipoAtraccion.AVENTURA);
-//		assertEquals(a2 , atraccion.buscarPorId((long) 1));
-//
-//		assertNotEquals(a1, atraccion.buscarPorId((long) 1));
+		AtraccionDAOImpl atraccion = new AtraccionDAOImpl();
+	Atraccion     a2 = new Atraccion("Moria" , 10.0, 2.0,6 ,TipoAtraccion.AVENTURA);
+		assertEquals(a2 , atraccion.buscarPorId((long) 1));
+
+		assertNotEquals(a1, atraccion.buscarPorId((long) 1));
 
 	}
 
@@ -95,9 +96,24 @@ System.out.println(atraccion.findAll());
 	@Test
 	public void deberiaInsertarUnaAtraccion() throws Exception{
 		AtraccionDAOImpl  atrac= new AtraccionDAOImpl();
-		atrac.insertarAtrac("Calaboss", 120, 15, 8, "AVENTURA");//si se trata de insertar ya existente va a haber conflicto, hay que refactorizar esto
+		atrac.insertarAtrac("Calaboss", 120, 15, 8, "AVENTURA");
 		System.out.println(atrac.countAll());
-		// antes de insertar siempre cerrar la base de datos y volverla abrir 
+		
 		
 	}
+	
+	@Test
+	public void deberiaActualizarUnaAtraccion() throws SQLException{
+	AtraccionDAOImpl atrac = new AtraccionDAOImpl();
+	assertEquals(1,atrac.update(a1));
+		
+	}
+	@Test
+	public void deberiaEliminarUnaAtraccion() throws SQLException{
+	AtraccionDAOImpl atrac = new AtraccionDAOImpl();
+	
+	assertEquals(1,atrac.delete(a2));
+		
+	}
+
 }

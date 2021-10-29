@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import turismoEnLaTierraMediaGrupo4.Atraccion;
-import turismoEnLaTierraMediaGrupo4.Usuario;
+
 
 public interface AtraccionDAO extends GenericDAO<Atraccion> {
 	
