@@ -145,10 +145,5 @@ public class UsuarioTest {
 		   assertEquals(1, us2.delete(u3));
 		}
 		
-		@Test
-		public void elUsuarioPuedeBuscarseAtraccionesQuePuedeConsumir() throws SQLException{
-			UsuarioDaoImpl usB = new UsuarioDaoImpl();
-			System.out.println(usB.buscarAtraccionParaElUsuario("Sam").toString());
-			//assertTrue(usB.buscarAtraccionParaElUsuario("Sam")>1);
-		}
+	
 }
