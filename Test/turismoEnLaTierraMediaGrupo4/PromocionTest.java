@@ -99,7 +99,7 @@ public class PromocionTest {
 	 */
 
 	@Test
-	public void laPromocionBaseSinCupoDisponibleSabeQueNoHayCupo() {
+	public void laPromocionBaseSinCupoDisponibleSabeQueNoHayCupo() throws SQLException {
 		for (int i = 0; i < 180; i++) {
 			degustacionAbsoluta.reservarCupo();
 		}
@@ -107,7 +107,7 @@ public class PromocionTest {
 	}
 
 	@Test
-	public void laPromoBaseCon170CuposDisponiblesSabeQueTieneCupo() {
+	public void laPromoBaseCon170CuposDisponiblesSabeQueTieneCupo() throws SQLException {
 		for (int i = 0; i < 10; i++) {
 			degustacionAbsoluta.reservarCupo();
 		}
@@ -115,7 +115,7 @@ public class PromocionTest {
 	}
 
 	@Test
-	public void queReservarCupoEnPromoBaseRestaCuposDisponiblesAAtracciones() {
+	public void queReservarCupoEnPromoBaseRestaCuposDisponiblesAAtracciones() throws SQLException {
 		degustacionAbsoluta.reservarCupo();
 		assertEquals(29, a3.getCupoDisponible());
 		assertEquals(149, a4.getCupoDisponible());
@@ -124,7 +124,7 @@ public class PromocionTest {
 	// Prueba particular para promos AxB debido a que sobreescribe m�todos.
 
 	@Test
-	public void laPromocionAxBSinCupoDisponibleSabeQueNoHayCupo() {
+	public void laPromocionAxBSinCupoDisponibleSabeQueNoHayCupo() throws SQLException {
 		for (int i = 0; i < 32; i++) {
 			paisajeAxB.reservarCupo();
 		}
@@ -132,13 +132,13 @@ public class PromocionTest {
 	}
 
 	@Test
-	public void laPromoAxBConCuposDisponiblesSabeQueTieneCupo() {
+	public void laPromoAxBConCuposDisponiblesSabeQueTieneCupo() throws SQLException {
 		paisajeAxB.reservarCupo();
 		assertTrue(paisajeAxB.hayCupo());
 	}
 
 	@Test
-	public void queReservarCupoEnPromoAxBRestaCuposDisponiblesAAtracciones() {
+	public void queReservarCupoEnPromoAxBRestaCuposDisponiblesAAtracciones() throws SQLException {
 		paisajeAxB.reservarCupo();
 		assertEquals(24, a5.getCupoDisponible());
 		assertEquals(14, a6.getCupoDisponible());

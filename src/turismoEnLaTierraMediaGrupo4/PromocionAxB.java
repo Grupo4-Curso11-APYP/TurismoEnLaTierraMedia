@@ -1,6 +1,9 @@
 package turismoEnLaTierraMediaGrupo4;
 
+import java.sql.SQLException;
 import java.util.Objects;
+
+import dao.AtraccionDAOImpl;
 
 public class PromocionAxB extends Promocion {
 
@@ -61,10 +64,11 @@ public class PromocionAxB extends Promocion {
 	 * si hay cupo disponible en la atraccion gratis se resta un cupo
 	 */
 	@Override
-	public void reservarCupo() {
+	public void reservarCupo() throws SQLException {
+		AtraccionDAOImpl aDAO = new AtraccionDAOImpl();
 		for (Atraccion atraccion : packAtracciones) {
 			atraccion.cupoDisponible -= 1;
-
+			aDAO.update(atraccion);
 		}
 		atraccionGratis.cupoDisponible -= 1;
 	}
@@ -91,12 +95,12 @@ public class PromocionAxB extends Promocion {
 
 	@Override
 	public String toString() {
-		var aux = '\n' + getNombre() + ": " + "precio: " + getCosto() + ", duracion: " 
-				+ getTiempo() + ", tipo: " + getTipo() + ", atracciones incluidas: \n";
+		var aux = '\n' + getNombre() + ": " + "precio: " + getCosto() + ", duracion: " + getTiempo() + ", tipo: "
+				+ getTipo() + ", atracciones incluidas: \n";
 		for (Atraccion atraccion : packAtracciones) {
 			aux += atraccion.toString();
 		}
-		aux += "Atracción gratis: " + atraccionGratis;
+		aux += "Atracciï¿½n gratis: " + atraccionGratis;
 		return aux;
 	}
 

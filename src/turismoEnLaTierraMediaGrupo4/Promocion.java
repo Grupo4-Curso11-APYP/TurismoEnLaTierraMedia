@@ -1,7 +1,10 @@
 package turismoEnLaTierraMediaGrupo4;
 
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Objects;
+
+import dao.AtraccionDAOImpl;
 
 public abstract class Promocion implements Ofertable, Comparable<Ofertable> {
     
@@ -60,9 +63,11 @@ public abstract class Promocion implements Ofertable, Comparable<Ofertable> {
 	}
 
 	@Override
-	public void  reservarCupo() {
+	public void  reservarCupo() throws SQLException {
+		AtraccionDAOImpl aDAO = new AtraccionDAOImpl();
 		for (Atraccion atraccion : packAtracciones) {
 			atraccion.cupoDisponible -= 1;
+			aDAO.update(atraccion);
 			}
 	}
 
