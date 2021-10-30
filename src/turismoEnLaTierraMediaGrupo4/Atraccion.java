@@ -1,6 +1,9 @@
 package turismoEnLaTierraMediaGrupo4;
 
+import java.sql.SQLException;
 import java.util.Objects;
+
+import dao.AtraccionDAOImpl;
 
 public class Atraccion implements Ofertable, Comparable<Ofertable> {
 	protected double costo;
@@ -22,7 +25,7 @@ public class Atraccion implements Ofertable, Comparable<Ofertable> {
 	}
 
 	/*
-	 * validación para evitar costo negativo, si lo es, lanza una excepción
+	 * validaciï¿½n para evitar costo negativo, si lo es, lanza una excepciï¿½n
 	 */
 	private void validandoCosto(double costo) throws Exception {
 		if (costo < 0.0)
@@ -30,7 +33,7 @@ public class Atraccion implements Ofertable, Comparable<Ofertable> {
 		this.costo = costo;
 	}
 	/*
-	 * validación para evitar tiempo negativo, si lo es, lanza una excepción
+	 * validaciï¿½n para evitar tiempo negativo, si lo es, lanza una excepciï¿½n
 	 */
 	private void validandoTiempo(double tiempo) throws Exception {
 		if (tiempo < 0.0)
@@ -38,7 +41,7 @@ public class Atraccion implements Ofertable, Comparable<Ofertable> {
 		this.tiempo = tiempo;
 	}
 	/*
-	 * validación para evitar cupo negativo, si lo es, lanza una excepción
+	 * validaciï¿½n para evitar cupo negativo, si lo es, lanza una excepciï¿½n
 	 */
 	private void validandoCupo(int cupoDisponible) throws Exception {
 		if (cupoDisponible < 0)
@@ -92,9 +95,11 @@ public class Atraccion implements Ofertable, Comparable<Ofertable> {
 	 * Metodo reservar cupo : si todavia hay cupo de atraccion se restara un cupo
 	 * para decir que esta reservado
 	 */
-	public void reservarCupo() {
+	public void reservarCupo() throws SQLException {
+		AtraccionDAOImpl aDAO = new AtraccionDAOImpl();
 		if (this.hayCupo()) {
 			this.cupoDisponible -= 1;
+			aDAO.update(this);
 		}
 
 	}
@@ -136,7 +141,7 @@ public class Atraccion implements Ofertable, Comparable<Ofertable> {
 
 	/*
 	 * aplica toString a las atracciones para que se muestren en el formato
-	 * requerido. Aplica un salto de línea con \n para mayor legibilidad.
+	 * requerido. Aplica un salto de lï¿½nea con \n para mayor legibilidad.
 	 */
 	@Override
 	public String toString() {

@@ -5,13 +5,14 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import dao.UsuarioDaoImpl;
+
 public class Usuario {
 	private String nombre;
 	private double presupuesto;
 	private double tiempoDisponible;
 	private TipoAtraccion tipoFavorito;
 	private Set<Ofertable> ofertables; // Las sugerencias que va aceptando.
-					   //Mejorar con linkedHashSet
 
 	public Usuario(String nombre, double presupuesto, double tiempoDisponible, TipoAtraccion tipoFavorito)
 			throws Exception {
@@ -23,17 +24,13 @@ public class Usuario {
 
 	}
 
-
-	
-	public Usuario(String string,double i, double j, TipoAtraccion tipo, Set<Ofertable> object) throws Exception {
-		this.nombre =string;
+	public Usuario(String string, double i, double j, TipoAtraccion tipo, Set<Ofertable> object) throws Exception {
+		this.nombre = string;
 		validandoPresupuesto(i);
 		validandoTiempoDisponible(j);
 		this.tipoFavorito = tipo;
 		this.ofertables = new LinkedHashSet<>();
 	}
-
-
 
 	/*
 	 * validación para evitar presupuesto negativo, si lo es, lanza una excepción

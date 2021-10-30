@@ -1,5 +1,7 @@
 package turismoEnLaTierraMediaGrupo4;
 
+import java.sql.SQLException;
+
 public interface Ofertable {
 
 	/*
@@ -25,7 +27,7 @@ public interface Ofertable {
 	/*
 	 * si hay cupo , resta un cupo disponible en las atracciones involucradas.
 	 */
-	public void reservarCupo();
+	public void reservarCupo() throws SQLException;
 	
 	/*
 	 * devuelve el nombre del ofertable.

@@ -68,8 +68,8 @@ public class PromocionDAOImpl implements PromocionDAO {
 		Connection conn = ConnectionProvider.getConnection();
 
 		PreparedStatement statement = conn.prepareStatement(sql);
-		statement.setString(4, promocion.getNombre());
-		statement.setObject(5, promocion.getTipo());
+		statement.setString(1, promocion.getNombre());
+		statement.setObject(2, promocion.getTipo());
 		int rows = statement.executeUpdate();
 
 		return rows;

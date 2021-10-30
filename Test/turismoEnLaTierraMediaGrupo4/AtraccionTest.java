@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.sql.SQLException;
@@ -32,7 +31,7 @@ public class AtraccionTest {
 	}
 
 	@Test
-	public void laAtraccionSinCupoDisponibleSabeQueNoHayCupo() {
+	public void laAtraccionSinCupoDisponibleSabeQueNoHayCupo() throws SQLException {
 		for (int i = 0; i < 25; i++) {
 			a1.reservarCupo();
 		}
@@ -40,7 +39,7 @@ public class AtraccionTest {
 	}
 
 	@Test
-	public void laAtraccionCon20CuposDisponiblesSabeQueTieneCupo() {
+	public void laAtraccionCon20CuposDisponiblesSabeQueTieneCupo() throws SQLException {
 		for (int i = 0; i < 5; i++) {
 			a1.reservarCupo();
 		}
@@ -48,7 +47,7 @@ public class AtraccionTest {
 	}
 
 	@Test
-	public void queReservarCupoCon25CuposDisponiblesRestaCupoYQueda24() {
+	public void queReservarCupoCon25CuposDisponiblesRestaCupoYQueda24() throws SQLException {
 		a1.reservarCupo();
 		assertEquals(24, a1.getCupoDisponible());
 	}
