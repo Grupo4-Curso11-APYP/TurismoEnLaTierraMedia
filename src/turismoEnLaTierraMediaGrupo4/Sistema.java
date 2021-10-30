@@ -50,7 +50,11 @@ public class Sistema {
 
 		for (Usuario usuario : usuarios) {
 			this.ofertables = ordenarOfertasSegunPreferencia(usuario.getTipoFavorito());
+<<<<<<< HEAD
 //			usuario.getOfertables().addAll(iDAO.findByNombre(usuario.getNombre())); // carga de bd el itinerario del
+=======
+			usuario.getOfertables().addAll(iDAO.findByNombre(usuario.getNombre())); // carga de bd el itinerario del
+>>>>>>> 3c545db94437ba0b4dfaaac6051f25e7a97be731
 																																			  // usuario en su lista de ofertable
 																																			 // por si no es la primera vez que entro.																																			
 			for (Ofertable ofertable : ofertables) { 
@@ -83,7 +87,11 @@ public class Sistema {
 				}
 
 			}
+<<<<<<< HEAD
 //			System.out.println(usuario.toString());
+=======
+			System.out.println(usuario.toString());
+>>>>>>> 3c545db94437ba0b4dfaaac6051f25e7a97be731
 
 			/**
 			 * Se actualiza presupuesto y tiempo disponible del usuario
