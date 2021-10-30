@@ -2,9 +2,7 @@ package turismoEnLaTierraMediaGrupo4;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.Set;
@@ -25,7 +23,7 @@ public class Sistema {
 	private PromocionDAOImpl pDAO;
 
 	/*
-	 * Se inicializan las listas en ArrayList<>
+	 * Constructor inicializa los atributos
 	 */
 	public Sistema() {
 
@@ -44,19 +42,15 @@ public class Sistema {
 	 * tiempo, siempre y cuando las atracciones tengan cupo y sin ofrecer un
 	 * ofertable de nuevo que ya haya sido adquirido. El usuario acepta mediante una
 	 * entrada de teclado y la sugerencia se guarda en su lista de ofertables Se
-	 * muestra itinerario y se genera un archivo de salida para cada usuario.
+	 * muestra itinerario y se actualiza base de datos.
 	 */
 	public void sugerir() throws IOException, SQLException {
 
 		for (Usuario usuario : usuarios) {
 			this.ofertables = ordenarOfertasSegunPreferencia(usuario.getTipoFavorito());
-<<<<<<< HEAD
-//			usuario.getOfertables().addAll(iDAO.findByNombre(usuario.getNombre())); // carga de bd el itinerario del
-=======
 			usuario.getOfertables().addAll(iDAO.findByNombre(usuario.getNombre())); // carga de bd el itinerario del
->>>>>>> 3c545db94437ba0b4dfaaac6051f25e7a97be731
-																																			  // usuario en su lista de ofertable
-																																			 // por si no es la primera vez que entro.																																			
+																					// usuario en su lista de ofertable
+																					// por si no es la primera vez que entro.																																			
 			for (Ofertable ofertable : ofertables) { 
 				if (ofertable.hayCupo() && usuario.getPresupuesto() >= ofertable.getCosto()
 						&& usuario.getTiempoDisponible() >= ofertable.getTiempo()) {
@@ -70,13 +64,13 @@ public class Sistema {
 					if (ingreso == 's' || ingreso == 'S') {
 						usuario.comprarOfertable(ofertable);
 						ofertable.reservarCupo();
-						/**
-						 * Se guarda itinerario
+						/*
+						 * Se guarda itinerario en bd
 						 */
 						iDAO.insertar(usuario.getNombre(), ofertable.getNombre());
 
-						/**
-						 * Se actualiza los cupos de las atracciones
+						/*
+						 * Se actualiza los cupos de las atracciones en bd
 						 */
 						if (ofertable instanceof Promocion) {
 							pDAO.update((Promocion) ofertable);
@@ -87,14 +81,12 @@ public class Sistema {
 				}
 
 			}
-<<<<<<< HEAD
-//			System.out.println(usuario.toString());
-=======
-			System.out.println(usuario.toString());
->>>>>>> 3c545db94437ba0b4dfaaac6051f25e7a97be731
 
-			/**
-			 * Se actualiza presupuesto y tiempo disponible del usuario
+			System.out.println(usuario.toString());
+
+
+			/*
+			 * Se actualiza presupuesto y tiempo disponible del usuario en bd
 			 */
 			uDAO.update(usuario);
 
@@ -185,13 +177,10 @@ public class Sistema {
 		AtraccionDAOImpl aDAO = new AtraccionDAOImpl();
 		UsuarioDaoImpl uDAO = new UsuarioDaoImpl();
 		PromocionDAOImpl pDAO = new PromocionDAOImpl();
-		ItinerarioDAOImpl iDAO = new ItinerarioDAOImpl();
 
 		sistema.getUsuarios().addAll(uDAO.findAll());
 		sistema.getOfertableList().addAll(aDAO.findAll());
 		sistema.getOfertableList().addAll(pDAO.findAll());
-
-		// System.out.println(sistema.getOfertableList());
 
 		sistema.sugerir();
 

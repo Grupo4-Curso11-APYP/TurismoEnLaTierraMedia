@@ -14,6 +14,9 @@ import turismoEnLaTierraMediaGrupo4.TipoAtraccion;
 
 public class AtraccionDAOImpl implements AtraccionDAO {
 
+	/*
+	 * Busca y devuelve todas las atracciones de la base de datos
+	 */
 	@Override
 	public List<Atraccion> findAll() throws SQLException {
 		try {
@@ -37,6 +40,9 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 		}
 	}
 
+	/*
+	 * Instancia un objeto atracción a partir de la base de datos
+	 */
 	public Atraccion toAtraccion(ResultSet resultados) throws Exception {
 
 		String nombre = resultados.getString(2);
@@ -49,6 +55,9 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 
 	}
 
+	/*
+	 * Cuenta todas las atracciones en la base de datos
+	 */
 	@Override
 	public int countAll() throws SQLException {
 		String sql = "SELECT COUNT(1) AS TOTAL FROM Atraccion";
@@ -62,6 +71,9 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 		return total;
 	}
 
+	/*
+	 * Inserta una atracción nueva en la base de datos
+	 */
 	@Override
 	public int insertarAtrac(String nombre, int costo, int tiempo, int cupoDisponible, String tipoAtraccion)
 			throws SQLException {
@@ -82,6 +94,9 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 		return rows;
 	}
 
+	/*
+	 * Actualiza una atracción en la base de datos
+	 */
 	@Override
 	public int update(Atraccion atraccion) throws SQLException {
 		try {
@@ -100,6 +115,9 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 		}
 	}
 
+	/*
+	 * Borra una atracción en la base de datos
+	 */
 	@Override
 	public int delete(Atraccion atraccion) throws SQLException {
 		String sql = "DELETE FROM Atraccion WHERE Nombre = ?";
@@ -112,6 +130,9 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 		return rows;
 	}
 
+	/*
+	 * Busca una atracción por su ID en la base de datos
+	 */
 	@Override
 	public Atraccion buscarPorId(Long IdAtraccion) { 
 		try {

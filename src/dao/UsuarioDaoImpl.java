@@ -18,6 +18,9 @@ import turismoEnLaTierraMediaGrupo4.Usuario;
 
 public class UsuarioDaoImpl implements UsuarioDAO {
 
+	/*
+	 * Busca y devuelve todos los usuarios de la base de datos
+	 */
 	@Override
 	public Set<Usuario> findAll() throws SQLException {
 		try {
@@ -36,6 +39,9 @@ public class UsuarioDaoImpl implements UsuarioDAO {
 		}
 	}
 
+	/*
+	 * Cuenta todos los usuarios de la base de datos
+	 */
 	@Override
 	public int countAll() throws SQLException {
 		String sql = "SELECT COUNT(1) AS TOTAL FROM USUARIO";
@@ -49,6 +55,9 @@ public class UsuarioDaoImpl implements UsuarioDAO {
 		return total;
 	}
 
+	/*
+	 * Inserta un usuario nuevo en la base de datos
+	 */
 	@Override
 	public int insert(Usuario usuario) throws SQLException {
 		String sql = "INSERT INTO USUARIO (NOMBRE, PRESUPUESTO,TIEMPODISPONIBLE,"
@@ -67,6 +76,9 @@ public class UsuarioDaoImpl implements UsuarioDAO {
 		return rows;
 	}
 
+	/*
+	 * Actualiza el presupuesto y tiempoDisponible de un usuario en la base de datos
+	 */
 	@Override
 	public int update(Usuario usuario) throws SQLException {
 		String sql = "UPDATE USUARIO SET PRESUPUESTO = ?, TIEMPODISPONIBLE = ?  WHERE NOMBRE = ?";
@@ -82,6 +94,9 @@ public class UsuarioDaoImpl implements UsuarioDAO {
 
 	}
 
+	/*
+	 * Borra un usuario
+	 */
 	@Override
 	public int delete(Usuario usuario) throws SQLException {
 		String sql = "DELETE FROM USUARIO WHERE NOMBRE = ?";
@@ -95,6 +110,9 @@ public class UsuarioDaoImpl implements UsuarioDAO {
 
 	}
 
+	/*
+	 * Busca por nombre a un usuario en la base de datos y lo devuelve
+	 */
 	@Override
 	public Usuario findByNombre(String nombre) throws SQLException {
 		try {
@@ -115,6 +133,9 @@ public class UsuarioDaoImpl implements UsuarioDAO {
 		}
 	}
 
+	/*
+	 * Instancia un Usuario a partir de la base de datos
+	 */
 	private Usuario toUser(ResultSet resultados) throws Exception {
 		String nombre = resultados.getString(2);
 		Double presupuesto = resultados.getDouble(3);

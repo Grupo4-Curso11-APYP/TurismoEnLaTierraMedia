@@ -5,8 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
 
 import jdbc.ConnectionProvider;
@@ -16,7 +14,10 @@ public class ItinerarioDAOImpl implements ItinerarioDAO {
 
 	private AtraccionDAOImpl atraccionDao;
 	private PromocionDAOImpl promocionDao;
-
+	
+	/*
+	 * Busca un itinerario por nombre de usuario
+	 */
 	public Set<Ofertable> findByNombre(String nombre) {
 		try {
 			String sql = "SELECT Itinerario.ID_Promocion, Itinerario.ID_Atraccion\r\n" + "FROM Itinerario\r\n"
@@ -37,6 +38,10 @@ public class ItinerarioDAOImpl implements ItinerarioDAO {
 		}
 	}
 
+	/*
+	 * método usado por findByNombre para determinar si el ofertable de un
+	 * itinerario es una promoción o atracción.
+	 */
 	private void esPromoOesAtraccion(ResultSet resultados, Set<Ofertable> itinerario) throws SQLException {
 		while (resultados.next()) {
 			int idPromocion = resultados.getInt(1);
@@ -49,6 +54,9 @@ public class ItinerarioDAOImpl implements ItinerarioDAO {
 		}
 	}
 
+	/*
+	 * inserta un itinerario en la base de datos.
+	 */
 	public int insertar(String nombreUsuario, String nombreOfertable) {
 		try {
 			String sql = "INSERT INTO Itinerario (ID_Atraccion, ID_Usuario, ID_Promocion) VALUES ((SELECT ID_Atraccion FROM Atraccion WHERE Nombre = ?)\r\n"
@@ -66,6 +74,9 @@ public class ItinerarioDAOImpl implements ItinerarioDAO {
 		}
 	}
 
+	/*
+	 * Actualiza un itinerario en la base de datos
+	 */
 	@Override
 	public int update(int idAtraccion, int idPromocion, int idUsuario, int idItinerario) {
 		try {
@@ -86,6 +97,9 @@ public class ItinerarioDAOImpl implements ItinerarioDAO {
 		}
 	}
 
+	/*
+	 * Elimina un itinerario de la base de datos
+	 */
 	@Override
 	public int delete(int idItinerario) {
 		try {
@@ -102,6 +116,9 @@ public class ItinerarioDAOImpl implements ItinerarioDAO {
 		}
 	}
 
+	/*
+	 * Cuenta la cantidad de itinerarios que hay en la base de datos
+	 */
 	@Override
 	public int countAll() throws SQLException {
 		String sql = "SELECT COUNT(2) AS TOTAL FROM Itinerario";

@@ -19,6 +19,9 @@ public class PromocionDAOImpl implements PromocionDAO {
 		this.atraccionDao = new AtraccionDAOImpl();
 	}
 
+	/*
+	 * Inserta una promocion nueva en la base de datos
+	 */
 	@Override
 	public int insert(Promocion promocion) throws SQLException {
 		String sql = "INSERT INTO Promocion  ( ID_Atraccion1, ID_Atraccion2, nombre ,Tipo,monto,Tiempo,AtraccionGratis,Descuento) VALUES "
@@ -43,6 +46,9 @@ public class PromocionDAOImpl implements PromocionDAO {
 
 	}
 
+	/*
+	 * Busca en la base de datos y devuelve una promocion a partir de su ID
+	 */
 	public Promocion consultarID_Promo(int promo) throws SQLException {
 		try {
 			String sql = "SELECT * FROM Promocion WHERE ID_Promocion=?";
@@ -62,20 +68,26 @@ public class PromocionDAOImpl implements PromocionDAO {
 		}
 	}
 
+	/*
+	 * Actualiza el nombre de una promocion
+	 */
 	@Override
 	public int update(Promocion promocion) throws SQLException {
-		String sql = "UPDATE Promocion SET Nombre = ? WHERE Tipo  = ?";
+		String sql = "UPDATE Promocion SET Nombre = ?,  WHERE Nombre  = ?";
 		Connection conn = ConnectionProvider.getConnection();
 
 		PreparedStatement statement = conn.prepareStatement(sql);
 		statement.setString(1, promocion.getNombre());
-		statement.setObject(2, promocion.getTipo());
+		statement.setObject(2, promocion.getNombre());
 		int rows = statement.executeUpdate();
 
 		return rows;
 
 	}
 
+	/*
+	 * Borra una promocion
+	 */
 	@Override
 	public int delete(Promocion promocion) throws SQLException {
 		String sql = "DELETE FROM Promocion WHERE Nombre LIKE ?";
@@ -89,6 +101,9 @@ public class PromocionDAOImpl implements PromocionDAO {
 
 	}
 
+	/*
+	 * Cuenta todas las promociones
+	 */
 	public int countAll() throws SQLException {
 		String sql = "SELECT COUNT(1) AS TOTAL FROM Promocion";
 		Connection conn = ConnectionProvider.getConnection();
@@ -101,6 +116,9 @@ public class PromocionDAOImpl implements PromocionDAO {
 		return total;
 	}
 
+	/*
+	 * Pasa los datos para la creacion de una promocion
+	 */
 	private Promocion toPromo(ResultSet resultados) throws Exception {
 
 		TipoAtraccion tipoAtraccion = TipoAtraccion.valueOf(resultados.getString(5));
@@ -113,6 +131,9 @@ public class PromocionDAOImpl implements PromocionDAO {
 
 	}
 
+	/*
+	 * Usando los datos pasados por toPromo, instancia algun tipo de promocion
+	 */
 	private Promocion creacionPromo(ResultSet resultados, TipoAtraccion tipoAtraccion, Atraccion[] packAtracciones,
 			String nombre, String promocionTipo, Promocion promo) throws SQLException {
 		if (promocionTipo.equals("AxB")) {
@@ -128,6 +149,9 @@ public class PromocionDAOImpl implements PromocionDAO {
 		return promo;
 	}
 
+	/*
+	 * Carga las atracciones de la promocion
+	 */
 	private Atraccion[] atraccionesDeLaPromocion(Long atraccion1, Long atraccion2) throws Exception {
 		Atraccion[] packs = new Atraccion[2];
 		try {
@@ -151,11 +175,17 @@ public class PromocionDAOImpl implements PromocionDAO {
 		}
 	}
 
+	/*
+	 * sql utilizado en el método atraccionesDeLaPromocion
+	 */
 	private String sqlAtraccion() {
 		String sql = "select *" + "from Atraccion WHERE ID_Atraccion = ?";
 		return sql;
 	}
 
+	/*
+	 * Busca y devuelve todas las promociones de la base de datos
+	 */
 	@Override
 	public List<Promocion> findAll() throws SQLException {
 
