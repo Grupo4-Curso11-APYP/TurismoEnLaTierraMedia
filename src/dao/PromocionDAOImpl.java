@@ -73,7 +73,7 @@ public class PromocionDAOImpl implements PromocionDAO {
 	 */
 	@Override
 	public int update(Promocion promocion) throws SQLException {
-		String sql = "UPDATE Promocion SET Nombre = ?,  WHERE Nombre  = ?";
+		String sql = "UPDATE Promocion SET Nombre = ?  WHERE Nombre  = ?";
 		Connection conn = ConnectionProvider.getConnection();
 
 		PreparedStatement statement = conn.prepareStatement(sql);
@@ -176,7 +176,7 @@ public class PromocionDAOImpl implements PromocionDAO {
 	}
 
 	/*
-	 * sql utilizado en el método atraccionesDeLaPromocion
+	 * sql utilizado en el mï¿½todo atraccionesDeLaPromocion
 	 */
 	private String sqlAtraccion() {
 		String sql = "select *" + "from Atraccion WHERE ID_Atraccion = ?";
