@@ -141,5 +141,10 @@ public class Usuario {
 		ofertables.add(o);
 
 	}
+	
+	public boolean puedeComprar(Ofertable ofertable) {
+		return this.getPresupuesto() >= ofertable.getCosto()
+				&& this.getTiempoDisponible() >= ofertable.getTiempo();
+	}
 
 }

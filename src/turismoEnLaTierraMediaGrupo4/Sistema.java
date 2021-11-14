@@ -52,8 +52,7 @@ public class Sistema {
 																					// usuario en su lista de ofertable
 																					// por si no es la primera vez que entro.																																			
 			for (Ofertable ofertable : ofertables) { 
-				if (ofertable.hayCupo() && usuario.getPresupuesto() >= ofertable.getCosto()
-						&& usuario.getTiempoDisponible() >= ofertable.getTiempo()) {
+				if (ofertable.hayCupo() && usuario.puedeComprar(ofertable)) {
 					System.out.println("Sugerencia diaria de " + usuario.getNombre() + ":");
 					System.out.println(ofertable);
 					System.out.println("Pulse S  para aceptar la sugerencia o");

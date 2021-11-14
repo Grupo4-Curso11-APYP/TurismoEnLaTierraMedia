@@ -35,7 +35,7 @@ public class PromocionDAOImpl implements PromocionDAO {
 
 		statement.setString(3, promocion.getNombre());
 		statement.setObject(4, promocion.getTipo());
-		statement.setDouble(5, promocion.getCosto());
+		statement.setDouble(5, ((PromocionAbsoluta)promocion).getCosto());
 		statement.setDouble(6, promocion.getTiempo());
 		statement.setObject(7, ((PromocionAxB) promocion).getAtraccionGratis());
 		statement.setDouble(8, ((PromocionPorcentual) promocion).getDescuento());
