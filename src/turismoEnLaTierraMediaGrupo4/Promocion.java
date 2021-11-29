@@ -11,6 +11,11 @@ public abstract class Promocion implements Ofertable, Comparable<Ofertable> {
 
 	private String nombre;
 	protected Atraccion[] packAtracciones;
+
+	protected void setPackAtracciones(Atraccion[] packAtracciones) {
+		this.packAtracciones = packAtracciones;
+	}
+
 	private TipoAtraccion tipo;
 	private double tiempo;
 
@@ -20,6 +25,10 @@ public abstract class Promocion implements Ofertable, Comparable<Ofertable> {
 		this.packAtracciones = atraccion;
 		this.nombre = nombre;
 		this.tipo = tipo;
+	}
+	
+	public Atraccion[] getPackAtracciones() {
+		return packAtracciones;
 	}
 
 	/*

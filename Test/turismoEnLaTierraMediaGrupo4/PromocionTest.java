@@ -27,7 +27,7 @@ public class PromocionTest {
 
 		a1 = new Atraccion("Bosque Negro", 3, 4, 12, TipoAtraccion.AVENTURA);
 		a2 = new Atraccion("Mordor", 25, 3, 4, TipoAtraccion.AVENTURA);
-		a3 = new Atraccion("Lothl�rien", 35, 1, 30, TipoAtraccion.DEGUSTACION);
+		a3 = new Atraccion("Lothlórien", 35, 1, 30, TipoAtraccion.DEGUSTACION);
 		a4 = new Atraccion("La Comarca", 3, 6.5, 150, TipoAtraccion.DEGUSTACION);
 		a5 = new Atraccion("Minas Tirith", 5, 2.5, 25, TipoAtraccion.PAISAJE);
 		a6 = new Atraccion("Abismo de Helm", 5, 2, 15, TipoAtraccion.PAISAJE);
@@ -51,7 +51,7 @@ public class PromocionTest {
 
 		aventuraPorcentual = new PromocionPorcentual("Pack Aventura", porcentual, TipoAtraccion.AVENTURA, 20);
 
-		degustacionAbsoluta = new PromocionAbsoluta("Pack de degustaci�n", absoluta, TipoAtraccion.DEGUSTACION, 36);
+		degustacionAbsoluta = new PromocionAbsoluta("Pack de degustación", absoluta, TipoAtraccion.DEGUSTACION, 36);
 
 		paisajeAxB = new PromocionAxB("Pack paisajes", aXb, TipoAtraccion.PAISAJE, aGratis);
 	}

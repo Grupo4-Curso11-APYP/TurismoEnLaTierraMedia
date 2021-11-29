@@ -24,21 +24,33 @@ public class PromocionDAOImpl implements PromocionDAO {
 	 */
 	@Override
 	public int insert(Promocion promocion) throws SQLException {
-		String sql = "INSERT INTO Promocion  ( ID_Atraccion1, ID_Atraccion2, nombre ,Tipo,monto,Tiempo,AtraccionGratis,Descuento) VALUES "
-				+ "(?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO Promocion  ( ID_Atraccion1, ID_Atraccion2, nombre ,Tipo,monto,Tiempo,AtraccionGratis,Descuento,PromocionTipo) VALUES "
+				+ "((SELECT ID_Atraccion FROM Atraccion WHERE Nombre = ?),(SELECT ID_Atraccion FROM Atraccion WHERE Nombre = ?),?,?,?,?,(SELECT ID_Atraccion FROM Atraccion WHERE Nombre = ?),?,?)";
 		Connection conn = ConnectionProvider.getConnection();
 
 		PreparedStatement statement = conn.prepareStatement(sql);
 
-		statement.setObject(1, atraccionDao.buscarPorId((long) 1));//
-		statement.setObject(2, atraccionDao.buscarPorId((long) 2));//
+		statement.setObject(1, promocion.getPackAtracciones()[0].getNombre());//
+		statement.setObject(2, promocion.getPackAtracciones()[1].getNombre());//
 
 		statement.setString(3, promocion.getNombre());
 		statement.setObject(4, promocion.getTipo());
-		statement.setDouble(5, ((PromocionAbsoluta)promocion).getCosto());
 		statement.setDouble(6, promocion.getTiempo());
-		statement.setObject(7, ((PromocionAxB) promocion).getAtraccionGratis());
-		statement.setDouble(8, ((PromocionPorcentual) promocion).getDescuento());
+
+		if (promocion.getClass().getSimpleName().equals(PromocionAxB.class.getSimpleName())) {
+			statement.setObject(7, ((PromocionAxB) promocion).getAtraccionGratis().getNombre());
+			statement.setString(9, "AxB");
+		}
+		
+		if (promocion.getClass().getSimpleName().equals(PromocionPorcentual.class.getSimpleName())) {
+			statement.setObject(8, ((PromocionPorcentual) promocion).getDescuento());
+			statement.setString(9, "PORCENTUAL");
+		}
+		
+		if (promocion.getClass().getSimpleName().equals(PromocionAbsoluta.class.getSimpleName())) {
+			statement.setDouble(5, ((PromocionAbsoluta)promocion).getCosto());
+			statement.setString(9, "ABSOLUTA");
+		}
 
 		int rows = statement.executeUpdate();
 
