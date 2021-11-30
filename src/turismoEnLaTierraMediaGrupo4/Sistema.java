@@ -176,38 +176,12 @@ public class Sistema {
 		AtraccionDAOImpl aDAO = new AtraccionDAOImpl();
 		UsuarioDaoImpl uDAO = new UsuarioDaoImpl();
 		PromocionDAOImpl pDAO = new PromocionDAOImpl();
-/*
 
 		sistema.getUsuarios().addAll(uDAO.findAll());
 		sistema.getOfertableList().addAll(aDAO.findAll());
 		sistema.getOfertableList().addAll(pDAO.findAll());
 
 		sistema.sugerir();
-		 */
-		Atraccion a1 = new Atraccion("Bosque Negro", 3, 4, 12, TipoAtraccion.AVENTURA);
-		Atraccion a2 = new Atraccion("Mordor", 25, 3, 4, TipoAtraccion.AVENTURA);
-		Atraccion a3 = new Atraccion("Lothlórien", 35, 1, 30, TipoAtraccion.DEGUSTACION);
-		Atraccion a4 = new Atraccion("La Comarca", 3, 6.5, 150, TipoAtraccion.DEGUSTACION);
-		Atraccion[] aXb = new Atraccion[2];
-		Atraccion a5 = new Atraccion("Minas Tirith", 5, 2.5, 25, TipoAtraccion.PAISAJE);
-		Atraccion a6 = new Atraccion("Abismo de Helm", 5, 2, 15, TipoAtraccion.PAISAJE);
-		aXb[0] = a5;
-		aXb[1] = a6;
-		Atraccion[] porcentual = new Atraccion[2];
-		porcentual[0] = a1;
-		porcentual[1] = a2;
-
-		Atraccion[] absoluta = new Atraccion[2];
-		absoluta[0] = a3;
-		absoluta[1] = a4;
-		PromocionPorcentual aventuraPorcentual = new PromocionPorcentual("Pack Aventura", porcentual, TipoAtraccion.AVENTURA, 20);
-
-		PromocionAbsoluta degustacionAbsoluta = new PromocionAbsoluta("Pack de degustación", absoluta, TipoAtraccion.DEGUSTACION, 36);
-		Atraccion aGratis = new Atraccion("Erebor", 12, 3, 32, TipoAtraccion.PAISAJE);
-		PromocionAxB paisajeAxB = new PromocionAxB("Pack paisajes", aXb, TipoAtraccion.PAISAJE, aGratis);
-		pDAO.insert(paisajeAxB);
-		pDAO.insert(degustacionAbsoluta);
-		pDAO.insert(aventuraPorcentual);
 
 	}
 }
